@@ -16,3 +16,9 @@ class User(Document):
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+    def user_exist(self, user):
+        if self.find_one(user):
+            return True
+        else:
+            return False
