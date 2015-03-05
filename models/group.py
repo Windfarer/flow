@@ -5,6 +5,7 @@ class Group(Document):
     structure = {
         'name': str,
         'owner': str,
-        'owner_id': ObjectId
+        'owner_id': ObjectId,
+        'user_list': list
     }
     required_fields = ['name', 'owner', 'owner_id']
