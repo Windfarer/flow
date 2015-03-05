@@ -25,5 +25,7 @@ class Task(Document):
             return 'add yourself'
 
     def find_by_user(self, user):
-        self.find()
         return
+
+    def find_by_task_id(self, task_id):
+        return self.find({'_id': task_id})

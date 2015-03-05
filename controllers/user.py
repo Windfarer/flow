@@ -1,7 +1,14 @@
-def create_user():
-
-    return
+from models.user import User
 
 
-def delete_user():
+def create_user(data):
+    user = User()
+    user.username = data.username
+    user.email = data.email
+    user.set_password(data.password)
+    user.save()
+    return 'success'
+
+
+def delete_user(user):
     return

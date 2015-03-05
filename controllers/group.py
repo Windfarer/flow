@@ -1,4 +1,8 @@
-def create_group():
+from models.group import Group
+
+
+def create_group(data):
+    group = Group()
     return
 
 
