@@ -1,11 +1,10 @@
 from mongokit.document import Document
 from datetime import datetime
-from config import TaskStatus
 
 
 class Task(Document):
     use_dot_notation = True
-    __collection__ = "users"
+    __collection__ = "tasks"
     structure = {
         'title': str,
         'description': str,
@@ -13,11 +12,14 @@ class Task(Document):
         'end_time': datetime,
         'finish_time': datetime,
         'assign_list': list,
-        'status': TaskStatus,
+        'finished': bool,
+        'doing': bool,
+        'sub_tasks': list,
         'deleted': bool
     }
     required_fields = ['title']
-    default_values = {'status': TaskStatus.todo,
+    default_values = {'finished': False,
+                      'doing': False,
                       'start_time': datetime.utcnow,
                       'end_time': datetime.utcnow,
                       'deleted': False

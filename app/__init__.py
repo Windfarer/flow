@@ -1,10 +1,8 @@
 from flask import Flask, g
-from
 from .decorators import json, rate_limit
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_pyfile('config.py')
 
     from .apis import api as api_blueprint
     app.register_blueprint(api_blueprint, url_prefix="/api")
