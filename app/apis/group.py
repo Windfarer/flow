@@ -2,7 +2,7 @@ from flask import request
 
 from . import api
 from flask import request
-from ..models.group import Group
+from ..models import Group
 from ..decorators import json
 
 
@@ -19,6 +19,13 @@ def get_groups():
 def create_group():
     data = request.json
     group = Group()
+    return
+
+
+@api.route('/group/<group_alias>', methods=['GET'])
+@json
+def get_group():
+    data = request.json
     return
 
 

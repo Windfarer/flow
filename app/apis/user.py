@@ -1,7 +1,7 @@
 from flask import request
 
 from . import api
-from ..models.user import User
+from ..models import User
 from ..decorators import json
 
 
@@ -14,12 +14,13 @@ def user_register():
     user.email = data.email
     user.set_password(data.password)
     user.save()
-    return 'success'
+    return
 
 
 @api.route('/login', methods=['POST'])
 @json
 def user_login(data):
+
     return
 
 

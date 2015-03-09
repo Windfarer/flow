@@ -1,7 +1,7 @@
 from flask import current_app, request
 
 from . import api
-from ..models.task import Task
+from ..models import Task
 from ..decorators import json
 
 
