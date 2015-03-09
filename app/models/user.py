@@ -32,4 +32,4 @@ class User(Document):
             data = s.loads(token)
         except:
             return None
-        return User.find_one({'_id': data['id']})
+        return current_app.User.find_one({'_id': data['id']})

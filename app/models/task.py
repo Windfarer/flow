@@ -25,10 +25,11 @@ class Task(Document):
                       'deleted': False
                       }
 
-    def create_task(self, current_user):
-        if not self.assign_list:
-            self.assign_list.append(current_user)
-            return 'add yourself'
+    def one_subtask(self, subtask):
+        pass
+
+    def remove_subtask(self):
+        pass
 
     def find_by_user(self, user):
         return

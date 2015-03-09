@@ -1,3 +1,5 @@
+from flask import request
+
 from . import api
 from ..models.user import User
 from ..decorators import json
@@ -5,7 +7,8 @@ from ..decorators import json
 
 @api.route('/register', methods=['POST'])
 @json
-def user_register(data):
+def user_register():
+    data = request.json
     user = User()
     user.username = data.username
     user.email = data.email

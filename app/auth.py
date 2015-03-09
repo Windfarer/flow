@@ -9,7 +9,7 @@ auth_token = HTTPBasicAuth()
 
 @auth.verify_password
 def verify_password(user_alias, password):
-    g.user = User.find_one({'user_alias': user_alias})
+    g.user = current_app.mongodb_conn.User.find_one({'user_alias': user_alias})
     if g.user is None:
         return False
     return g.user.verify_password(password)
@@ -27,7 +27,7 @@ def unauthorized():
 @auth_token.verify_password
 def verify_auth_token(token, unused):
     if current_app.config.get('IGNORE_AUTH') is True:
-        g.user = User.find_one()
+        g.user = current_app.mongodb_conn.User.find_one()
     else:
         g.user = User.verify_auth_token(token)
     return g.user is not None

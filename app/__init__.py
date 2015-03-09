@@ -1,8 +1,13 @@
 from flask import Flask, g
 from .decorators import json, rate_limit
+from mongokit import Connection as MongoDBConn
+
 
 def create_app():
     app = Flask(__name__)
+    mongodb_conn = MongoDBConn(host=app.config.get("MONGODB_HOST"),
+                               port=app.config.get("MONGODB_PORT"))
+    app.mongodb_conn = mongodb_conn
 
     from .apis import api as api_blueprint
     app.register_blueprint(api_blueprint, url_prefix="/api")
@@ -14,6 +19,7 @@ def create_app():
         return rv
 
     from .auth import auth
+
     @app.route('/get-auth-token')
     @auth.login_required
     @json
