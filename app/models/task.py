@@ -4,6 +4,8 @@ from config import TaskStatus
 
 
 class Task(Document):
+    use_dot_notation = True
+    __collection__ = "users"
     structure = {
         'title': str,
         'description': str,

@@ -3,6 +3,8 @@ from bson.objectid import ObjectId
 
 
 class Group(Document):
+    use_dot_notation = True
+    __collection__ = "users"
     structure = {
         'name': str,
         'owner': str,

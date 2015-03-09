@@ -8,4 +8,4 @@ auth_token = HTTPBasicAuth
 
 @auth.verify_password
 def verify_password(user_alias, password):
-    g.user = User.find_one()
+    g.user = User.find_one({''})
