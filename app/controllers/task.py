@@ -1,7 +1,7 @@
-from models.task import Task
+from app.models.task import Task
 
 
-def create_task(data):
+def create_task(user_alias, data):
     task = Task()
     task.title = data.title
     task.description = data.description
@@ -11,15 +11,16 @@ def create_task(data):
     return
 
 
-def get_tasks(user):
-    tasks = Task.find_by_user(user)
-    return tasks
+def get_tasks(user_alias):
+    tasks = Task.find_by_user(user_alias)
+    resp = filter(tasks, lambda x: x.deleted)
+    return resp
 
 
-def update_task(id, data):
+def update_task(task_id, data):
     task = Task.find
     return 'updated'
 
 
-def delete_task(id):
+def delete_task(task_id):
     return 'deleted'

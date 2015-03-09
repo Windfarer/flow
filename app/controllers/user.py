@@ -1,7 +1,7 @@
-from models.user import User
+from app.models.user import User
 
 
-def create_user(data):
+def user_register(data):
     user = User()
     user.username = data.username
     user.email = data.email
@@ -10,5 +10,11 @@ def create_user(data):
     return 'success'
 
 
-def delete_user(user):
+def user_login(data):
+
+    return
+
+
+def user_logout(data):
+
     return

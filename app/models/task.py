@@ -11,12 +11,14 @@ class Task(Document):
         'end_time': datetime,
         'finish_time': datetime,
         'assign_list': list,
-        'status': TaskStatus
+        'status': TaskStatus,
+        'deleted': bool
     }
     required_fields = ['title']
     default_values = {'status': TaskStatus.todo,
                       'start_time': datetime.utcnow,
                       'end_time': datetime.utcnow,
+                      'deleted': False
                       }
 
     def create_task(self, current_user):
@@ -29,3 +31,6 @@ class Task(Document):
 
     def find_by_task_id(self, task_id):
         return self.find({'_id': task_id})
+
+    def remove(self, app_id):
+        return self.collection.remove({'app_id': app_id})
