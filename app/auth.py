@@ -10,7 +10,7 @@ auth_token = HTTPBasicAuth()
 @auth.verify_password
 def verify_password(user_alias, password):
     g.user = User.find_one({'user_alias': user_alias})
-    if g.user is None:ß
+    if g.user is None:
         return False
     return g.user.verify_password(password)
 

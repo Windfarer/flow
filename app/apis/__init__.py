@@ -14,5 +14,3 @@ def after_request(rv):
     return rv
 
 from . import group, task, user
-
-
