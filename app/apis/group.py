@@ -9,6 +9,7 @@ def get_groups(data):
     group = Group()
     return
 
+
 @api.route('/groups', methods=['POST'])
 @json
 def create_group(data):

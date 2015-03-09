@@ -9,6 +9,7 @@ api = Blueprint('api', __name__)
 def before_request():
     pass
 
+
 @api.after_request
 def after_request(rv):
     return rv

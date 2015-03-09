@@ -2,6 +2,7 @@ from . import api
 from ..models.user import User
 from ..decorators import json
 
+
 @api.route('/register', methods=['POST'])
 @json
 def user_register(data):
@@ -16,7 +17,6 @@ def user_register(data):
 @api.route('/login', methods=['POST'])
 @json
 def user_login(data):
-
     return
 
 
