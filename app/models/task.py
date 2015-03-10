@@ -12,6 +12,7 @@ class Task(Document):
         'end_time': datetime,
         'finish_time': datetime,
         'assign_list': list,
+        'groups': list,
         'finished': bool,
         'doing': bool,
         'sub_tasks': list,

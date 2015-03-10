@@ -4,7 +4,7 @@ from . import api
 from ..decorators import json
 from ..auth import auth_token
 
-
+#TODO: register validation
 @api.route('/register', methods=['POST'])
 @json
 def user_register():
@@ -16,15 +16,16 @@ def user_register():
     user.save()
     return {'res': 'success'}
 
-
+#TODO: login api
 @api.route('/login', methods=['POST'])
 @json
-def user_login(data):
+def user_login():
+
     return
 
-
+#TODO: logout api
 @auth_token.login_required
 @api.route('/logout', methods=['POST'])
 @json
-def user_logout(data):
+def user_logout():
     return

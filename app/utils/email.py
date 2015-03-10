@@ -1,1 +1,1 @@
-__author__ = 'windfarer'
+#TODO: Email supporting
