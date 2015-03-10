@@ -31,7 +31,7 @@ class Task(Document):
     def remove_subtask(self):
         pass
 
-    def find_by_user(self, user):
+    def find_by_user_alias(self, user_alias):
         return
 
     def find_by_task_id(self, task_id):

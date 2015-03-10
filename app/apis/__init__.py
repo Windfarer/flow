@@ -5,7 +5,6 @@ api = Blueprint('api', __name__)
 
 
 @api.before_request
-@auth_token.login_required
 def before_request():
     pass
 

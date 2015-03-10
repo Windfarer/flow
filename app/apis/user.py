@@ -1,7 +1,6 @@
-from flask import request
+from flask import current_app, request
 
 from . import api
-from ..models import User
 from ..decorators import json
 
 
@@ -9,18 +8,17 @@ from ..decorators import json
 @json
 def user_register():
     data = request.json
-    user = User()
-    user.username = data.username
-    user.email = data.email
-    user.set_password(data.password)
+    user = current_app.mongodb_conn.User()
+    user.username = data.get('username')
+    user.email = data.get('email')
+    user.set_password(data.get('password'))
     user.save()
-    return
+    return {'res': 'success'}
 
 
 @api.route('/login', methods=['POST'])
 @json
 def user_login(data):
-
     return
 
 
