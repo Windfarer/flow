@@ -3,8 +3,10 @@ from flask import current_app, request
 from . import api
 from ..models import Task
 from ..decorators import json
+from ..auth import auth_token
 
 
+@auth_token.login_required
 @api.route('/<user_alias>/tasks', methods=['GET'])
 @json
 def get_tasks(user_alias):
@@ -13,6 +15,7 @@ def get_tasks(user_alias):
     return resp
 
 
+@auth_token.login_required
 @api.route('/<user_alias>/tasks', methods=['POST'])
 @json
 def create_task(user_alias):
@@ -27,6 +30,7 @@ def create_task(user_alias):
     return
 
 
+@auth_token.login_required
 @api.route('/<user_alias>/task/<task_id>', methods=['PUT'])
 @json
 def update_task(user_alias, task_id):
@@ -41,6 +45,7 @@ def update_task(user_alias, task_id):
     return 'updated'
 
 
+@auth_token.login_required
 @api.route('/<user_alias>/task/<task_id>', methods=['DELETE'])
 @json
 def delete_task(user_alias, task_id):

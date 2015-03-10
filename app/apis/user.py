@@ -2,6 +2,7 @@ from flask import current_app, request
 
 from . import api
 from ..decorators import json
+from ..auth import auth_token
 
 
 @api.route('/register', methods=['POST'])
@@ -22,6 +23,7 @@ def user_login(data):
     return
 
 
+@auth_token.login_required
 @api.route('/logout', methods=['POST'])
 @json
 def user_logout(data):

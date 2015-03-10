@@ -4,8 +4,10 @@ from . import api
 from flask import request
 from ..models import Group
 from ..decorators import json
+from ..auth import auth_token
 
 
+@auth_token.login_required
 @api.route('/groups', methods=['GET'])
 @json
 def get_groups():
@@ -14,6 +16,7 @@ def get_groups():
     return
 
 
+@auth_token.login_required
 @api.route('/groups', methods=['POST'])
 @json
 def create_group():
@@ -22,6 +25,7 @@ def create_group():
     return
 
 
+@auth_token.login_required
 @api.route('/group/<group_alias>', methods=['GET'])
 @json
 def get_group():
@@ -29,6 +33,7 @@ def get_group():
     return
 
 
+@auth_token.login_required
 @api.route('/group/<group_alias>', methods=['PUT'])
 @json
 def delete_group():
@@ -36,6 +41,7 @@ def delete_group():
     return
 
 
+@auth_token.login_required
 @api.route('/group/<group_alias>', methods=['DELETE'])
 @json
 def update_group():
