@@ -6,7 +6,7 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 class User(Document):
     use_dot_notation = True
-    __collection__ = "users"
+    __collection__ = 'users'
     structure = {
         'username': str,
         'email': str,

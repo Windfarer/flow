@@ -1,5 +1,4 @@
 from flask import Blueprint
-from ..auth import auth_token
 
 api = Blueprint('api', __name__)
 

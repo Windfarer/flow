@@ -4,7 +4,7 @@ from bson.objectid import ObjectId
 
 class Group(Document):
     use_dot_notation = True
-    __collection__ = "groups"
+    __collection__ = 'groups'
     structure = {
         'name': str,
         'owner': str,

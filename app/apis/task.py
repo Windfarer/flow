@@ -18,7 +18,7 @@ def get_tasks(user_alias):
 @api.route('/<user_alias>/tasks', methods=['POST'])
 @json
 def create_task(user_alias):
-    data = request.json
+    data = request.get_json()
     task = current_app.mongodb_conn.Task()
     task.title = data.title
     task.description = data.description
@@ -33,7 +33,7 @@ def create_task(user_alias):
 @api.route('/<user_alias>/task/<task_id>', methods=['PUT'])
 @json
 def update_task(user_alias, task_id):
-    data = request.json
+    data = request.get_json()
     task = current_app.mongodb_conn.Task.find_one()
     task.title = data.title
     task.description = data.description
@@ -41,7 +41,7 @@ def update_task(user_alias, task_id):
     task.end_time = data.endtime
     task.assign_list = data.assign_list
     task.save()
-    return 'updated'
+    return {'res': 'updated'}
 
 #TODO: delete task api
 @auth_token.login_required
@@ -49,4 +49,6 @@ def update_task(user_alias, task_id):
 @json
 def delete_task(user_alias, task_id):
     task = current_app.mongodb_conn.Task.find_one()
-    return 'deleted'
+    task.deleted = True
+    task.save()
+    return {'res': 'deleted'}

@@ -11,7 +11,7 @@ from ..auth import auth_token
 @api.route('/groups', methods=['GET'])
 @json
 def get_groups():
-    data = request.json
+    data = request.get_json()
     group = Group()
     return
 
@@ -20,7 +20,7 @@ def get_groups():
 @api.route('/groups', methods=['POST'])
 @json
 def create_group():
-    data = request.json
+    data = request.get_json()
     group = Group()
     return
 
@@ -29,7 +29,7 @@ def create_group():
 @api.route('/group/<group_alias>', methods=['GET'])
 @json
 def get_group():
-    data = request.json
+    data = request.get_json()
     return
 
 
@@ -38,7 +38,7 @@ def get_group():
 @api.route('/group/<group_alias>', methods=['PUT'])
 @json
 def delete_group():
-    data = request.json
+    data = request.get_json()
     return
 
 #TODO: update group api
@@ -46,5 +46,5 @@ def delete_group():
 @api.route('/group/<group_alias>', methods=['DELETE'])
 @json
 def update_group():
-    data = request.json
+    data = request.get_json()
     return

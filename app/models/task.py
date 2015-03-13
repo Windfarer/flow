@@ -4,7 +4,7 @@ from datetime import datetime
 
 class Task(Document):
     use_dot_notation = True
-    __collection__ = "tasks"
+    __collection__ = 'tasks'
     structure = {
         'title': str,
         'description': str,
