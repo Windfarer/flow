@@ -1,4 +1,4 @@
-from flask import g, current_app, request
+from flask import current_app, request
 from . import api
 from ..decorators import json
 from ..auth import auth_token

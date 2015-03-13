@@ -3,6 +3,7 @@ from mongokit import Document
 from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
+from ..utils.validator import username_validator, email_validator
 
 class User(Document):
     use_dot_notation = True
@@ -14,6 +15,10 @@ class User(Document):
         'groups': list
     }
     required_fields = ['username', 'email', 'password_hash']
+    validators = {
+        'username': username_validator,
+        'email': email_validator
+    }
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)

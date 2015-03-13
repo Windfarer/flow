@@ -8,8 +8,8 @@ auth_token = HTTPBasicAuth()
 
 
 @auth.verify_password
-def verify_password(user_alias, password):
-    g.user = current_app.mongodb_conn.User.find_one({'user_alias': user_alias})
+def verify_password(username, password):
+    g.user = current_app.mongodb_conn.User.find_one({'username': username})
     if g.user is None:
         return False
     return g.user.verify_password(password)

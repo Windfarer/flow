@@ -1,6 +1,6 @@
 from mongokit.document import Document
 from datetime import datetime
-
+from ..utils.validator import subtask_validator
 
 class Task(Document):
     use_dot_notation = True
@@ -27,9 +27,11 @@ class Task(Document):
                       }
 
     def one_subtask(self, subtask):
+        subtask_validator(subtask)
         pass
 
     def remove_subtask(self):
+
         pass
 
     def find_by_user_alias(self, user_alias):
