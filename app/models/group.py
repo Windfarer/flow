@@ -7,8 +7,8 @@ class Group(Document):
     __collection__ = 'groups'
     structure = {
         'name': str,
-        'owner': str,
+        'owner_name': str,
         'owner_id': ObjectId,
         'user_list': list
     }
-    required_fields = ['name', 'owner', 'owner_id']
+    required_fields = ['name', 'owner_name', 'owner_id']

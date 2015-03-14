@@ -1,13 +1,13 @@
 from flask import current_app, request
 from . import api
 from ..decorators import json
-from ..auth import auth_token
 
 #TODO: register validation
-@api.route('/register', methods=['POST'])
+@api.route('/user', methods=['POST'])
 @json
-def user_register():
+def create_user():
     data = request.get_json()
+    print(data)
     user = current_app.mongodb_conn.User()
     user.username = data.get('username')
     user.email = data.get('email')
@@ -15,24 +15,15 @@ def user_register():
     user.save()
     return {'res': 'success'}
 
-#TODO: login api
+#TODO: login api --move to app layer
 @api.route('/login', methods=['POST'])
 @json
-def user_login():
+def login():
     data = request.get_json()
-    user = current_app.mongodb_conn.User.find_one(data.get('username'))
+    user = current_app.mongodb_conn.User.find_one_by_username(data.get('username'))
     if user:
         user.verify_password(data.get('password'))
     else:
         raise ValueError('user not exists')
-    return {'res': 'login success'}
+    return {'res': 'login success', 'token': user.generate_auth_token()}
     #return login result, tell front end save token to cookie
-
-
-#TODO: logout api
-@auth_token.login_required
-@api.route('/logout', methods=['POST'])
-@json
-def user_logout():
-    return {'res': 'logout success'}
-    #return logout result, tell front end remove token from cookie

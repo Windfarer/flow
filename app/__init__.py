@@ -28,12 +28,7 @@ def create_app():
         rv.headers.extend(headers)
         return rv
 
-    from .auth import auth
-
-    @app.route('/get-auth-token')
-    @auth.login_required
-    @json
-    def get_auth_token():
-        return {'token': g.user.generate_auth_token()}
+    #leave a auth entrance here
+    #app.route('auth-token...')
 
     return app

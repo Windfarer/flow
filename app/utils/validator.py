@@ -1,5 +1,6 @@
-#TODO: user validator
+from ..exceptions import ValidationError
 
+# TODO: user validator
 def username_validator(username):
     return True
 
@@ -8,6 +9,9 @@ def email_validator(email):
 
 
 #TODO: task validator
+def task_validator(task):
+    return True
+
 def subtask_validator(subtask):
     return True
 

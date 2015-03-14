@@ -2,39 +2,60 @@ from flask import current_app, request, g
 
 from . import api
 from ..decorators import json
-from ..auth import auth_token
+from ..utils.validator import task_validator
 
 #TODO: get tasks api
-@auth_token.login_required
 @api.route('/tasks', methods=['GET'])
 @json
 def get_tasks():
-    tasks = current_app.mongodb_conn.Task.find_by_user(username)
-    resp = filter(tasks, lambda x: x.deleted)
+    user_id = g.user['_id']
+    tasks = current_app.mongodb_conn.Task.find_by_user_id(user_id)
+    resp = [x for x in tasks if x.deleted is False]
     return resp
 
 
 #TODO: create task api
-@auth_token.login_required
 @api.route('/tasks', methods=['POST'])
 @json
 def create_task():
     data = request.get_json()
+    task_validator(data)
+
     task = current_app.mongodb_conn.Task()
-    task.title = data['title']
-    task.description = data['description']
-    task.start_time = data['starttime']
-    task.end_time = data['endtime']
-    task.assign_list = data['assign_list']
+    task.title = data.get['title']
+    task.description = data.get['description']
+    task.start_time = data.get['starttime']
+    task.end_time = data.get['endtime']
+    task.assign_list = data.get['assign_list']
     task.save()
-    return
+    return {'res': "success"}
+
+#TODO: create subtask
+@api.route('/task/<task_id>/subtasks', methods=['POST'])
+@json
+def create_subtask(task_id):
+    pass
+
+#TODO: remove subtask
+@api.route('/task/<task_id>/subtask/<subtask_id>', methods=['POST'])
+@json
+def remove_subtask(task_id,subtask_id):
+    pass
+
+#TODO: update subtask
+@api.route('/task/<task_id>/subtask/<subtask_id>', methods=['POST'])
+@json
+def update_subtask(task_id, subtask_id):
+    pass
+
 
 #TODO: update task api
-@auth_token.login_required
 @api.route('/task/<task_id>', methods=['PUT'])
 @json
 def update_task(task_id):
     data = request.get_json()
+    task_validator(data)
+
     task = current_app.mongodb_conn.Task.find_one()
     task.title = data['title']
     task.description = data['description']
@@ -46,7 +67,6 @@ def update_task(task_id):
 
 
 #TODO: delete task api
-@auth_token.login_required
 @api.route('/task/<task_id>', methods=['DELETE'])
 @json
 def delete_task(task_id):
