@@ -7,8 +7,15 @@ class Group(Document):
     __collection__ = 'groups'
     structure = {
         'name': str,
-        'owner_name': str,
         'owner_id': ObjectId,
-        'user_list': list
+        'user_list': list,
+        'deleted': bool
     }
-    required_fields = ['name', 'owner_name', 'owner_id']
+    required_fields = ['name', 'owner_id']
+    default_values = {
+        'deleted': False
+    }
+
+    def find_one_by_id(self, group_id):
+        return self.find_one({'_id': ObjectId(group_id)})
+

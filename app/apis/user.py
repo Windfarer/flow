@@ -1,6 +1,7 @@
-from flask import current_app, request
+from flask import current_app, request, g
 from . import api
 from ..decorators import json
+from ..auth import auth_token
 
 #TODO: register validation
 @api.route('/user', methods=['POST'])
@@ -15,6 +16,9 @@ def create_user():
     user.save()
     return {'res': 'success'}
 
+
+
+
 #TODO: login api --move to app layer
 @api.route('/login', methods=['POST'])
 @json
@@ -27,3 +31,10 @@ def login():
         raise ValueError('user not exists')
     return {'res': 'login success', 'token': user.generate_auth_token()}
     #return login result, tell front end save token to cookie
+
+@auth_token.auth_required
+@api.route('/test', methods=['GET'])
+@json
+def test():
+    print(g.user)
+    return {'res': 'res234234'}

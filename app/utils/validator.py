@@ -2,6 +2,7 @@ from ..exceptions import ValidationError
 
 # TODO: user validator
 def username_validator(username):
+
     return True
 
 def email_validator(email):
@@ -17,3 +18,5 @@ def subtask_validator(subtask):
 
 
 #TODO: group validator
+def group_validator(group):
+    return True

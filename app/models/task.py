@@ -44,9 +44,11 @@ class Task(Document):
     def find_by_user_id(self, user_id):
         return self.find({'_id': ObjectId(user_id)})
 
-    def find_by_task_id(self, task_id):
-        return self.find({'_id': task_id})
+    def find_by_id(self, task_id):
+        return self.find({'_id': ObjectId(task_id)})
 
+    def find_one_by_id(self, task_id):
+        return self.find_one({'_id': ObjectId(task_id)})
 
     def remove(self, app_id):
         return self.collection.remove({'app_id': app_id})
