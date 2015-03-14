@@ -5,7 +5,7 @@ from flask import current_app, request
 from ..models import Group
 from ..decorators import json
 from ..utils.validator import group_validator
-
+from ..auth import auth_token
 
 #TODO: get groups api
 @api.route('/groups', methods=['GET'])

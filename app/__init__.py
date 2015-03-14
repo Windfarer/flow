@@ -1,4 +1,4 @@
-from flask import Flask, g
+from flask import Flask, g, request, current_app
 from .decorators import json, rate_limit
 from mongokit import Connection as MongoDBConn
 
@@ -28,7 +28,15 @@ def create_app():
         rv.headers.extend(headers)
         return rv
 
-    #leave a auth entrance here
-    #app.route('auth-token...')
+    @app.route('/get_token', methods=['POST'])
+    @json
+    def login():
+        data = request.get_json()
+        user = current_app.mongodb_conn.User.find_one_by_username(data.get('username'))
+        if user:
+            user.verify_password(data.get('password'))
+        else:
+            raise ValueError('user not exists')
+        return {'res': 'login success', 'token': user.generate_auth_token()}
 
     return app

@@ -3,6 +3,7 @@ from flask import current_app, request, g
 from . import api
 from ..decorators import json
 from ..utils.validator import task_validator
+from ..auth import auth_token
 
 #TODO: get tasks api
 @api.route('/tasks', methods=['GET'])

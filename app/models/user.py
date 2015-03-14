@@ -43,7 +43,7 @@ class User(Document):
             data = s.loads(token)
         except:
             return None
-        return current_app.User.find_one({'_id': ObjectId(data['id'])})
+        return current_app.mongodb_conn.User.find_one({'_id': ObjectId(data['id'])})
 
     def find_one_by_username(self, username):
         return self.find_one({'username':username})
