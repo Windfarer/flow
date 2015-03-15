@@ -18,7 +18,6 @@ def create_app():
     app.mongodb_database = mongodb_database
     app.mongodb_conn = mongodb_conn
 
-
     from .apis import api as api_blueprint
     app.register_blueprint(api_blueprint, url_prefix="/api")
 
@@ -32,7 +31,7 @@ def create_app():
     @json
     def login():
         data = request.get_json()
-        user = current_app.mongodb_conn.User.find_one_by_username(data.get('username'))
+        user = current_app.mongodb_conn.User.find_one_by_email(data.get('email'))
         if user:
             user.verify_password(data.get('password'))
         else:

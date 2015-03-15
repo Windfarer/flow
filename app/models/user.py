@@ -21,6 +21,12 @@ class User(Document):
     default_values = {
         'deleted': False
     }
+    indexes = [
+        {
+            'fields': 'email',
+            'unique': True
+        },
+    ]
     validators = {
         'username': username_validator,
         'email': email_validator
@@ -45,5 +51,5 @@ class User(Document):
             return None
         return current_app.mongodb_conn.User.find_one({'_id': ObjectId(data['id'])})
 
-    def find_one_by_username(self, username):
-        return self.find_one({'username':username})
+    def find_one_by_email(self, email):
+        return self.find_one({'email':email})
