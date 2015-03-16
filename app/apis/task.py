@@ -1,8 +1,8 @@
 from flask import current_app, request, g
-
+from bson import ObjectId
 from . import api
 from ..decorators import json
-from ..utils.validator import task_validator
+from ..exceptions import ValidationError
 from ..auth import auth_token
 
 #TODO: get tasks api
@@ -26,44 +26,42 @@ def create_task():
     task.description = data.get('description')
     task.start_time = data.get('starttime')
     task.end_time = data.get('endtime')
-    task.assign_list = data.get('assign_list')
-    #TODO: assign_list?
+    task.assign_list = []
+    for item in data.get('assign_list'):
+        user_id = ObjectId(item)
+        if current_app.mongodb_conn.User.find_one({'_id': user_id}):
+            task.assign_list.append(user_id)
+        else:
+            raise ValidationError('User not found')
+    if not task.assign_list:
+        task.assign.list = g.user['_id']
     task.save()
     return {'res': "success"}
-
-# #TODO: create subtask?
-# @api.route('/task/<task_id>/subtasks', methods=['POST'])
-# @json
-# def create_subtask(task_id):
-#     task = current_app.mongodb_conn.Task.find_one_by_id(task_id)
-#     pass
-#
-# #TODO: remove subtask?
-# @api.route('/task/<task_id>/subtask/<subtask_id>', methods=['POST'])
-# @json
-# def remove_subtask(task_id,subtask_id):
-#     pass
-#
-# #TODO: update subtask?
-# @api.route('/task/<task_id>/subtask/<subtask_id>', methods=['POST'])
-# @json
-# def update_subtask(task_id, subtask_id):
-#     pass
 
 
 #TODO: update task api
 @api.route('/task/<task_id>', methods=['PUT'])
 @json
 def update_task(task_id):
+
+    #TODO: auth task manager
+
     data = request.get_json()
-    task_validator(data)
 
     task = current_app.mongodb_conn.Task.find_one_by_id(task_id)
     task.title = data.get('title')
     task.description = data.get('description')
     task.start_time = data.get('starttime')
     task.end_time = data.get('endtime')
-    task.assign_list = data('assign_list')
+    task.assign_list = []
+    for item in data.get('assign_list'):
+        user_id = ObjectId(item)
+        if current_app.mongodb_conn.User.find_one({'_id': user_id}):
+            task.assign_list.append(user_id)
+        else:
+            raise ValidationError('User not found')
+    if not task.assign_list:
+        task.assign.list = g.user['_id']
     task.save()
     return {'res': 'updated'}
 

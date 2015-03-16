@@ -7,8 +7,8 @@ class Group(Document):
     __collection__ = 'groups'
     structure = {
         'name': str,
-        'owner_id': ObjectId,
-        'user_list': list,
+        'manager_id': ObjectId,
+        'menber_list': list,
         'deleted': bool
     }
     required_fields = ['name', 'owner_id']
@@ -17,7 +17,7 @@ class Group(Document):
     }
     validators = {
         'name': text_validator,
-        'owner_id': object_id_validator
+        'manager_id': object_id_validator
     }
 
     def find_one_by_id(self, group_id):

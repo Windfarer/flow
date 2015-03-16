@@ -14,7 +14,6 @@ class User(Document):
         'username': str,
         'email': str,
         'password_hash': str,
-        'groups': list,
         'deleted': bool
     }
     required_fields = ['username', 'email', 'password_hash']
