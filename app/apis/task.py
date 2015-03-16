@@ -2,6 +2,7 @@ from flask import current_app, request, g
 from bson import ObjectId
 from . import api
 from ..decorators import json
+from ..helpers import helper_load_task_assgin_list
 from ..exceptions import ValidationError
 from ..auth import auth_token
 
@@ -26,15 +27,9 @@ def create_task():
     task.description = data.get('description')
     task.start_time = data.get('starttime')
     task.end_time = data.get('endtime')
-    task.assign_list = []
-    for item in data.get('assign_list'):
-        user_id = ObjectId(item)
-        if current_app.mongodb_conn.User.find_one({'_id': user_id}):
-            task.assign_list.append(user_id)
-        else:
-            raise ValidationError('User not found')
-    if not task.assign_list:
-        task.assign.list = g.user['_id']
+
+    helper_load_task_assgin_list(data, task)
+
     task.save()
     return {'res': "success"}
 
@@ -53,15 +48,9 @@ def update_task(task_id):
     task.description = data.get('description')
     task.start_time = data.get('starttime')
     task.end_time = data.get('endtime')
-    task.assign_list = []
-    for item in data.get('assign_list'):
-        user_id = ObjectId(item)
-        if current_app.mongodb_conn.User.find_one({'_id': user_id}):
-            task.assign_list.append(user_id)
-        else:
-            raise ValidationError('User not found')
-    if not task.assign_list:
-        task.assign.list = g.user['_id']
+
+    helper_load_task_assgin_list(data, task)
+
     task.save()
     return {'res': 'updated'}
 

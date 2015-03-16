@@ -1,12 +1,11 @@
-from flask import request, g
-from bson import ObjectId
+from flask import current_app, request, g
+
 from . import api
-from flask import current_app, request
-from ..models import Group
+
 from ..decorators import json
 from ..utils.validator import group_validator
-from ..auth import auth_token
-from ..exceptions import ValidationError
+
+from ..helpers import helper_load_group_member_list
 #TODO: get groups api
 @api.route('/groups', methods=['GET'])
 @json
@@ -26,13 +25,8 @@ def create_group():
 
     group.manager_id = g.user['_id']
 
-    group.member_list = []
-    for item in data.get('member_list'):
-        user_id = ObjectId(item)
-        if current_app.mongodb_conn.User.find_one({'_id': user_id}):
-            group.member_list.append(user_id)
-        else:
-            raise ValidationError('User not found')
+    helper_load_group_member_list(data, group)
+
     group.save()
     return {'res': 'success'}
 
@@ -55,13 +49,9 @@ def update_group(group_id):
     group = current_app.mongodb_conn.Group()
     group.name = data['name']
     group.owner_id = g.user['_id']
-    group.member_list = []
-    for item in data.get('member_list'):
-        user_id = ObjectId(item)
-        if current_app.mongodb_conn.User.find_one({'_id': user_id}):
-            group.member_list.append(user_id)
-        else:
-            raise ValidationError('User not found')
+
+    helper_load_group_member_list(data, group)
+
     group.save()
     return {'res': 'success update'}
 
