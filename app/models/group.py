@@ -1,6 +1,6 @@
 from mongokit.document import Document
 from bson.objectid import ObjectId
-
+from ..utils.validator import text_validator, object_id_validator
 
 class Group(Document):
     use_dot_notation = True
@@ -14,6 +14,10 @@ class Group(Document):
     required_fields = ['name', 'owner_id']
     default_values = {
         'deleted': False
+    }
+    validators = {
+        'name': text_validator,
+        'owner_id': object_id_validator
     }
 
     def find_one_by_id(self, group_id):

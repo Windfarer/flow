@@ -27,6 +27,18 @@ def create_app():
         rv.headers.extend(headers)
         return rv
 
+    @app.route('/register', methods=['POST'])
+    @json
+    def create_user():
+        data = request.get_json()
+
+        user = current_app.mongodb_conn.User()
+        user.username = data.get('username')
+        user.email = data.get('email')
+        user.set_password(data.get('password'))
+        user.save()
+        return {'res': 'success'}
+
     @app.route('/get_token', methods=['POST'])
     @json
     def login():

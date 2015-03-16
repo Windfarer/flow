@@ -40,7 +40,8 @@ class User(Document):
 
     def generate_auth_token(self, expires_in=3600):
         s = Serializer(current_app.config['SECRET_KEY'], expires_in=expires_in)
-        return s.dumps({'id': str(self._id)}).decode('utf-8')
+        token = s.dumps({'id': str(self._id)}).decode('utf-8')
+        return 'Bearer {}'.format(token)
 
     @staticmethod
     def verify_auth_token(token):

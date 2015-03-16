@@ -1,7 +1,7 @@
 from mongokit.document import Document
 from bson import ObjectId
 from datetime import datetime
-from ..utils.validator import subtask_validator
+from ..utils.validator import subtask_validator, text_validator, datetime_validator, object_id_validator
 
 class Task(Document):
     use_dot_notation = True
@@ -12,7 +12,7 @@ class Task(Document):
         'start_time': datetime,
         'end_time': datetime,
         'finish_time': datetime,
-        'user_id': ObjectId,
+        'owner_id': ObjectId,
         'assign_list': list,
         'groups': list,
         'finished': bool,
@@ -27,6 +27,13 @@ class Task(Document):
         'start_time': datetime.utcnow,
         'end_time': datetime.utcnow,
         'deleted': False
+    }
+    validators = {
+        'title': text_validator,
+        'description': text_validator,
+        'start_time': datetime_validator,
+        'end_time': datetime_validator,
+        'owner_id': object_id_validator
     }
 
     def one_subtask(self, data):

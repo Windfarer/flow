@@ -20,14 +20,13 @@ def get_tasks():
 @json
 def create_task():
     data = request.get_json()
-    task_validator(data)
 
     task = current_app.mongodb_conn.Task()
-    task.title = data.get['title']
-    task.description = data.get['description']
-    task.start_time = data.get['starttime']
-    task.end_time = data.get['endtime']
-    task.assign_list = data.get['assign_list']
+    task.title = data.get('title')
+    task.description = data.get('description')
+    task.start_time = data.get('starttime')
+    task.end_time = data.get('endtime')
+    task.assign_list = data.get('assign_list')
     #TODO: assign_list?
     task.save()
     return {'res': "success"}
@@ -60,11 +59,11 @@ def update_task(task_id):
     task_validator(data)
 
     task = current_app.mongodb_conn.Task.find_one_by_id(task_id)
-    task.title = data['title']
-    task.description = data['description']
-    task.start_time = data['starttime']
-    task.end_time = data['endtime']
-    task.assign_list = data['assign_list']
+    task.title = data.get('title')
+    task.description = data.get('description')
+    task.start_time = data.get('starttime')
+    task.end_time = data.get('endtime')
+    task.assign_list = data('assign_list')
     task.save()
     return {'res': 'updated'}
 
