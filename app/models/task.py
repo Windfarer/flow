@@ -58,4 +58,4 @@ class Task(Document):
         return self.find_one({'_id': ObjectId(task_id)})
 
     def remove(self, app_id):
-        return self.collection.remove({'app_id': app_id})
+        return self.remove({'app_id': app_id})

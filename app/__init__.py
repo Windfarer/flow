@@ -2,6 +2,8 @@ from flask import Flask, g, request, current_app
 from .decorators import json, rate_limit
 from mongokit import Connection as MongoDBConn
 from .exceptions import ValidationError
+
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object('config')
@@ -18,7 +20,7 @@ def create_app():
     app.mongodb_database = mongodb_database
     app.mongodb_conn = mongodb_conn
 
-    from .apis import api as api_blueprint
+    from .api_v1 import api as api_blueprint
     app.register_blueprint(api_blueprint, url_prefix="/api")
 
     @app.after_request

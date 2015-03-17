@@ -11,7 +11,7 @@ class Group(Document):
         'menber_list': list,
         'deleted': bool
     }
-    required_fields = ['name', 'owner_id']
+    required_fields = ['name', 'manager_id']
     default_values = {
         'deleted': False
     }

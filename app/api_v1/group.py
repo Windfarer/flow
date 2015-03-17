@@ -2,19 +2,21 @@ from flask import current_app, request, g
 
 from . import api
 
-from ..decorators import json
+from ..decorators import json, validate_and_preprocess_payload
 from ..utils.validator import group_validator
 
 from ..helpers import helper_load_group_member_list
-#TODO: get groups api
+
+
 @api.route('/groups', methods=['GET'])
 @json
 def get_groups():
     resp = current_app.mongodb_conn.Group.find_by_user_id(g.user['_id'])
     return {'results': resp}
 
-#TODO: create groups api
+
 @api.route('/groups', methods=['POST'])
+@validate_and_preprocess_payload('group')
 @json
 def create_group():
     data = request.get_json()
@@ -30,7 +32,7 @@ def create_group():
     group.save()
     return {'res': 'success'}
 
-#TODO: get one group api
+
 @api.route('/group/<group_id>', methods=['GET'])
 @json
 def get_one_group(group_id):
@@ -38,8 +40,8 @@ def get_one_group(group_id):
     return group
 
 
-#TODO: update a group api
 @api.route('/group/<group_id>', methods=['PUT'])
+@validate_and_preprocess_payload('group')
 @json
 def update_group(group_id):
 
@@ -55,7 +57,7 @@ def update_group(group_id):
     group.save()
     return {'res': 'success update'}
 
-#TODO: delete group api
+
 @api.route('/group/<group_id>', methods=['DELETE'])
 @json
 def delete_group(group_id):

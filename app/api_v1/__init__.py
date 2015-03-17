@@ -1,5 +1,7 @@
 from flask import Blueprint, current_app, g
+
 from ..auth import auth_token
+
 
 api = Blueprint('api', __name__)
 
@@ -12,8 +14,9 @@ def before_request():
     pass
 
 
+
 @api.after_request
 def after_request(rv):
     return rv
 
-from . import group, task, user, error
+from . import group, task, user

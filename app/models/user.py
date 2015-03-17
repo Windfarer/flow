@@ -47,7 +47,7 @@ class User(Document):
         s = Serializer(current_app.config['SECRET_KEY'])
         try:
             data = s.loads(token)
-        except:
+        except Exception:
             return None
         return current_app.mongodb_conn.User.find_one({'_id': ObjectId(data['id'])})
 

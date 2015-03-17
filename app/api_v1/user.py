@@ -8,6 +8,7 @@ from ..utils.validator import email_validator, username_validator
 def get_users():
     pass
 
+
 @api.route('/test', methods=['GET'])
 @json
 def test():

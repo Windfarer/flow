@@ -16,7 +16,7 @@ class HTTPJWTAuth(object):
         self.error_handler(default_auth_error)
 
     def get_token(self, auth):
-        data = str(auth).split(' ')  # first one is method, second one is token
+        data = str(auth).split()  # first one is method, second one is token
         return data[1]
 
     def generate_token(self, f):

@@ -27,12 +27,26 @@ def object_id_validator(object_id):
         raise ValidationError('Invalid ObjectId')
     return True
 
+
 def datetime_validator(d):
     if not isinstance(d, datetime):
         raise ValidationError('Invalid datetime')
 
 
+def task_validator(task):
+    try:
+        text_validator(task['title'])
+        text_validator(task['description'])
+        datetime_validator(task['start_time'])
+        datetime_validator(task['end_time'])
+        object_id_validator(task['owner_id'])
+    except Exception:
+        raise ValidationError('invalid data')
+    return True
+
 def subtask_validator(subtask):
+    text_validator(subtask['title'])
+
     return True
 
 
