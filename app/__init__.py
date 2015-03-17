@@ -1,4 +1,4 @@
-from flask import Flask, g, request, current_app
+from flask import Flask, g
 from .decorators import json, rate_limit
 from mongokit import Connection as MongoDBConn
 from .exceptions import ValidationError
@@ -9,7 +9,7 @@ def create_app():
     app.config.from_object('config')
 
     mongodb_database = MongoDBConn(host=app.config.get("MONGODB_HOST"),
-                               port=app.config.get("MONGODB_PORT"))
+                                   port=app.config.get("MONGODB_PORT"))
 
     mongodb_conn = mongodb_database[app.config.get("MONGODB_DATABASE")]
 
@@ -21,41 +21,16 @@ def create_app():
     app.mongodb_conn = mongodb_conn
 
     from .api_v1 import api as api_blueprint
-    app.register_blueprint(api_blueprint, url_prefix="/api")
+    from .open_api import open_api as open_api_blueprint
+
+    app.register_blueprint(api_blueprint, url_prefix="/api/v1")
+    app.register_blueprint(open_api_blueprint, url_prefix="/open_api")
+
 
     @app.after_request
     def after_request(rv):
         headers = getattr(g, "headers", {})
         rv.headers.extend(headers)
         return rv
-
-    @app.route('/register', methods=['POST'])
-    @json
-    def create_user():
-        data = request.get_json()
-        data['email'] = data['email'].lower()
-
-        if current_app.mongodb_conn.User.find_one_by_email(data['email']):
-            raise ValidationError('user is exists')
-        else:
-            user = current_app.mongodb_conn.User()
-            user.username = data.get('username')
-            user.email = data.get('email')
-            user.set_password(data.get('password'))
-            user.save()
-        return {'res': 'success'}
-
-    @app.route('/get_token', methods=['POST'])
-    @json
-    def login():
-        data = request.get_json()
-        data['email'] = data['email'].lower()
-
-        user = current_app.mongodb_conn.User.find_one_by_email(data.get('email'))
-        if user:
-            user.verify_password(data.get('password'))
-        else:
-            raise ValidationError('user not exists')
-        return {'res': 'login success', 'token': user.generate_auth_token()}
 
     return app

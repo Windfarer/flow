@@ -20,9 +20,6 @@ def get_tasks():
 def create_task():
     data = request.get_json()
     print(data)
-
-    task_validator(data)
-
     task = current_app.mongodb_conn.Task()
 
     task.title = data['title']

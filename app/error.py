@@ -1,6 +1,6 @@
 from flask import jsonify
-from . import api
-from ..exceptions import ValidationError
+from .api_v1 import api
+from .exceptions import ValidationError
 
 
 @api.app_errorhandler(ValidationError)
@@ -32,7 +32,7 @@ def not_found(e):
     return response
 
 
-@api.errorhandler(405)
+@api.app_errorhandler(405)
 def method_not_supported(e):
     response = jsonify({
         'status': 405,

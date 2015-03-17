@@ -7,9 +7,14 @@ def validate_and_preprocess_payload(payload_structrue):
         @wraps(f)
         def wrapper(*args, **kwargs):
             payload = request.get_json()
-            #validate
-            #prerpocess
-            request.json['title']='lalalla'
+            payload['test'] = 'success'
+
+            #TODO: validate
+            #TODO: prerpocess
+
+            for k, v in payload.items():
+                request.json[k] = v
+
             return f(*args, **kwargs)
         return wrapper
     return decorator
