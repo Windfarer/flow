@@ -3,22 +3,22 @@ from .api_v1 import api
 from .exceptions import ValidationError
 
 
-@api.app_errorhandler(ValidationError)
-def bad_request(e):
-    response = jsonify({'status': 400,
-                        'error': 'bad request',
-                        'message': e.args[0]})
-    response.status_code = 400
-    return response
-
-
-@api.app_errorhandler(400)
-def bad_request(e):
-    response = jsonify({'status': 400,
-                        'error': 'bad request',
-                        'message': e.args[0]})
-    response.status_code = 400
-    return response
+# @api.app_errorhandler(ValidationError)
+# def bad_request(e):
+#     response = jsonify({'status': 400,
+#                         'error': 'bad request',
+#                         'message': e.args[0]})
+#     response.status_code = 400
+#     return response
+#
+#
+# @api.app_errorhandler(400)
+# def bad_request(e):
+#     response = jsonify({'status': 400,
+#                         'error': 'bad request',
+#                         'message': e.args[0]})
+#     response.status_code = 400
+#     return response
 
 
 @api.app_errorhandler(404)
