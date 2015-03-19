@@ -8,18 +8,23 @@ class ValidationError(ValueError):
 class Structure(object):
     structure = {}
     def __init__(self, data):
-        current = None
-        try:
-            for k, v in self.structure.items():
-                current = k
-                if isinstance(v, str):
+        for k, v in self.structure.items():
+            try:
+                if v is str:
                     assert re.match(v, data[k])
-                elif isinstance(v, datetime):
+                elif v is datetime:
                     assert isinstance(datetime.fromtimestamp(data[k]), datetime)
-                elif isinstance(v, ObjectId):
+                elif v is ObjectId:
                     assert ObjectId(data[k])
-        except Exception as e:
-            raise ValidationError('validate failed: '+current)
+            except Exception:
+                raise ValidationError('validation failed: '+k)
+            # except Exception as e:
+            #     if e.args:
+            #         raise ValidationError('validate failed: '+e.args[0])
+            #     else:
+            #         raise  ValidationError('validate failed: '+k)
+
+
 
 
 class TaskStructure(Structure):
@@ -28,7 +33,6 @@ class TaskStructure(Structure):
         'description': r'^[\s\S]{1,200}$',
         'start_time': datetime,
         'end_time': datetime,
-        'owner_id': ObjectId
     }
     def __init__(self, data):
         super().__init__(data)
