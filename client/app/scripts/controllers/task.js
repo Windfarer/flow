@@ -21,6 +21,10 @@ angular.module('flowApp')
 
     $scope.submitTask = function () {
       $scope.task.$save()
+        .then(function(data) {
+          console.log(data);
+          $scope.tasks.push(data);
+        })
     };
 
   });

@@ -34,7 +34,7 @@ def create_task():
     # helper_load_task_assgin_list(data, task)
 
     task.save()
-    return {'res': "success"}
+    return task
 
 
 @api.route('/task/<task_id>', methods=['PUT'])
