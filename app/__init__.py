@@ -13,9 +13,9 @@ def create_app():
 
     mongodb_conn = mongodb_database[app.config.get("MONGODB_DATABASE")]
 
-    from .models import User, Task, Group
+    from .models import User, Task, Project
 
-    mongodb_database.register([User, Task, Group])
+    mongodb_database.register([User, Task, Project])
 
     app.mongodb_database = mongodb_database
     app.mongodb_conn = mongodb_conn

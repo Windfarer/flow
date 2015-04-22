@@ -36,9 +36,9 @@ angular
         controller: 'RegisterCtrl',
         access_level: ACCESS_LEVELS.pub
       })
-      .when('/group', {
-        templateUrl: 'views/group.html',
-        controller: 'GroupCtrl',
+      .when('/project', {
+        templateUrl: 'views/project.html',
+        controller: 'ProjectCtrl',
         access_level: ACCESS_LEVELS.user
       })
       .when('/task', {

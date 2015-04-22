@@ -9,25 +9,29 @@ from ..utils.validator import task_validator
 def get_tasks():
 
     user_id = g.user['_id']
+    print(user_id)
     tasks = current_app.mongodb_conn.Task.find_by_user_id(user_id)
     resp = [x for x in tasks if x.deleted is False]
-    return {'results': resp}
+    print(resp)
+    return resp
 
 
 @api.route('/tasks', methods=['POST'])
-@validate_and_preprocess_payload('task')
 @json
 def create_task():
+    user_id = g.user['_id']
+
     data = request.get_json()
     print(data)
     task = current_app.mongodb_conn.Task()
 
     task.title = data['title']
-    task.description = data['description']
-    task.start_time = data['starttime']
-    task.end_time = data['endtime']
-
-    helper_load_task_assgin_list(data, task)
+    task.user_id = user_id
+    # task.description = data['description']
+    # task.start_time = data['starttime']
+    # task.end_time = data['endtime']
+    #
+    # helper_load_task_assgin_list(data, task)
 
     task.save()
     return {'res': "success"}
@@ -42,11 +46,11 @@ def update_task(task_id):
 
     task = current_app.mongodb_conn.Task.find_one_by_id(task_id)
     task.title = data.get('title')
-    task.description = data.get('description')
-    task.start_time = data.get('starttime')
-    task.end_time = data.get('endtime')
+    # task.description = data.get('description')
+    # task.start_time = data.get('starttime')
+    # task.end_time = data.get('endtime')
 
-    helper_load_task_assgin_list(data, task)
+    # helper_load_task_assgin_list(data, task)
 
     task.save()
     return {'res': 'updated'}

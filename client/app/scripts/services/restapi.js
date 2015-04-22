@@ -26,15 +26,15 @@ angular.module('flowApp')
       })(),
       task: (function () {
         return $resource(api+'/task/:task_id',{
-          task_id: '@'
+          task_id: '@id'
         })
       })(),
-      groups: (function () {
-        return $resource(api+'/groups');
+      projects: (function () {
+        return $resource(api+'/projects');
       })(),
-      group: (function () {
-        return $resource(api+'/group/:group_id',{
-          group_id: '@'
+      project: (function () {
+        return $resource(api+'/project/:project_id',{
+          project_id: '@id'
         })
       })()
     };

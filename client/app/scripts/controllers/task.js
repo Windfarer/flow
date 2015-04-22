@@ -15,13 +15,12 @@ angular.module('flowApp')
       .iconSet('communication', 'img/icons/sets/communication-icons.svg', 24)
       .defaultIconSet('img/icons/sets/core-icons.svg', 24);
   })
-  .controller('TaskCtrl', function($scope, $mdDialog) {
-    $scope.tasks=[
-      {"title":"taksdfsddf",
-      "finished":false},
-      {"title":"taksdfsddf",
-        "finished":true},
-      {"title":"taksdfsddf",
-        "finished":false}
-    ]
+  .controller('TaskCtrl', function($scope, restAPI) {
+    $scope.task = new restAPI.tasks();
+    $scope.tasks = restAPI.tasks.query();
+
+    $scope.submitTask = function () {
+      $scope.task.$save()
+    };
+
   });

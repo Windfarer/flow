@@ -50,6 +50,6 @@ def subtask_validator(subtask):
     return True
 
 
-#TODO: group validator
-def group_validator(group):
+#TODO: project validator
+def project_validator(project):
     return True

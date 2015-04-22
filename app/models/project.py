@@ -2,7 +2,8 @@ from mongokit.document import Document
 from bson.objectid import ObjectId
 from ..utils.validator import text_validator, object_id_validator
 
-class Group(Document):
+
+class Project(Document):
     use_dot_notation = True
     __collection__ = 'groups'
     structure = {

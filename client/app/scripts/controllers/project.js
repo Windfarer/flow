@@ -9,7 +9,7 @@
  */
 angular.module('flowApp')
   .controller('ProjectCtrl', function ($scope) {
-    $scope.groups = [{
+    $scope.projects = [{
       avatar : '/images/60.jpeg',
       name: 'Brunch this weekend?'
     }, {

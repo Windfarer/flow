@@ -12,7 +12,7 @@ class Task(Document):
         'start_time': datetime,
         'end_time': datetime,
         'finish_time': datetime,
-        'owner_id': ObjectId,
+        'user_id': ObjectId,
         'assign_list': list,
         'groups': list,
         'finished': bool,
@@ -20,7 +20,7 @@ class Task(Document):
         'sub_tasks': list,
         'deleted': bool
     }
-    required_fields = ['title']
+    required_fields = ['title', 'user_id']
     default_values = {
         'finished': False,
         'doing': False,
@@ -30,10 +30,10 @@ class Task(Document):
     }
     validators = {
         'title': text_validator,
-        'description': text_validator,
-        'start_time': datetime_validator,
-        'end_time': datetime_validator,
-        'owner_id': object_id_validator
+        # 'description': text_validator,
+        # 'start_time': datetime_validator,
+        # 'end_time': datetime_validator,
+        # 'owner_id': object_id_validator
     }
 
     def one_subtask(self, data):
@@ -49,7 +49,7 @@ class Task(Document):
         pass
 
     def find_by_user_id(self, user_id):
-        return self.find({'_id': ObjectId(user_id)})
+        return self.find({'user_id': ObjectId(user_id)})
 
     def find_by_id(self, task_id):
         return self.find({'_id': ObjectId(task_id)})

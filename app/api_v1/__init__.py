@@ -18,5 +18,5 @@ def before_request():
 def after_request(rv):
     return rv
 
-from . import group, task, user
+from . import project, task, user
 from .. import error
