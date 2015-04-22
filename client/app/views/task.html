@@ -1,0 +1,20 @@
+<md-list>
+  <md-list-item ng-repeat="task in tasks">
+    <!--<p ng-if="chunk.divider">{{task.title}}</p>-->
+    <md-card ng-mouseover="hover = true" ng-mouseout="hover = false">
+      <md-item layout="row">
+        <div>
+          <md-checkbox ng-model="task.finished"></md-checkbox>
+        </div>
+        <div  layout="row" layout-align="start center" flex>
+          <span flex="45">{{task.title}}</span>
+          <span flex="45">{{task.title}}</span>
+          <span flex ng-if="hover">
+            <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-src="icons/ic_mode_edit_48px.svg"></md-icon>
+          </span>
+        </div>
+
+      </md-item>
+    </md-card>
+  </md-list-item>
+</md-list>

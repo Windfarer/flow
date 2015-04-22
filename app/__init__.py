@@ -1,5 +1,5 @@
-from flask import Flask, g
-from .decorators import json, rate_limit
+from flask import Flask, g, request, current_app
+from .decorators import json, rate_limit, crossdomain
 from mongokit import Connection as MongoDBConn
 from .exceptions import ValidationError
 
@@ -26,11 +26,25 @@ def create_app():
     app.register_blueprint(api_blueprint, url_prefix="/api/v1")
     app.register_blueprint(open_api_blueprint, url_prefix="/open_api")
 
+    @app.before_request
+    def app_before_request():
+        if request.method == "OPTIONS":
+            resp = current_app.make_default_options_response()
+            cors_headers = {
+                "Access-Control-Allow-Headers": "Origin, Accept, Content-Type, Authorization",
+                "Access-Control-Allow-Methods": "OPTIONS",
+                "Access-Control-Allow-Origin": "*"
+            }
+            resp.headers.extend(cors_headers)
+            return resp
+        return
 
     @app.after_request
     def after_request(rv):
         headers = getattr(g, "headers", {})
         rv.headers.extend(headers)
         return rv
+
+
 
     return app

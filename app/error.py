@@ -1,54 +1,58 @@
 from flask import jsonify
 from .api_v1 import api
 from .exceptions import ValidationError
-
+from .decorators import json
 
 @api.app_errorhandler(ValidationError)
+@json
 def bad_request(e):
-    response = jsonify({'status': 400,
-                        'error': 'bad request',
-                        'message': e.args[0]})
-    response.status_code = 400
-    return response
+    response = {
+        'status': 400,
+        'error': 'bad request',
+        'message': e.args[0]
+    }
+    return response, 400
 
 
 @api.app_errorhandler(400)
+@json
 def bad_request(e):
-    response = jsonify({'status': 400,
-                        'error': 'bad request',
-                        'message': "invalid request"})
-    response.status_code = 400
-    return response
+    response = {
+        'status': 400,
+        'error': 'bad request',
+        'message': "invalid request"
+    }
+    return response, 400
 
 
 @api.app_errorhandler(404)
+@json
 def not_found(e):
-    response = jsonify({
+    response = {
         'status': 404,
         'error': 'not found',
         'message': 'invalid resource URI'
-    })
-    response.status_code = 404
-    return response
+    }
+    return response, 404
 
 
 @api.app_errorhandler(405)
+@json
 def method_not_supported(e):
-    response = jsonify({
+    response = {
         'status': 405,
         'error': 'method not supported',
         'message': 'the method is not supported'
-    })
-    response.status_code = 405
-    return response
+    }
+    return response, 405
 
 
 @api.app_errorhandler(500)
+@json
 def internal_server_error(e):
-    response = jsonify({
+    response = {
         'status': 500,
         'error': 'internal server error',
         'message': e.args[0]
-    })
-    response.status_code = 500
-    return response
+    }
+    return response, 500

@@ -11,14 +11,17 @@ class User(Document):
     use_dot_notation = True
     __collection__ = 'users'
     structure = {
-        'username': str,
+        'nickname': str,
+        'alias': str,
         'email': str,
+        'role': int,
         'password_hash': str,
         'deleted': bool
     }
-    required_fields = ['username', 'email', 'password_hash']
+    required_fields = ['nickname', 'alias', 'email', 'password_hash']
     default_values = {
-        'deleted': False
+        'deleted': False,
+        'role': 2,
     }
     indexes = [
         {
@@ -27,7 +30,6 @@ class User(Document):
         },
     ]
     validators = {
-        'username': username_validator,
         'email': email_validator
     }
 

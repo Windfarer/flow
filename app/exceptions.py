@@ -3,7 +3,8 @@ from bson import ObjectId
 import re
 
 class ValidationError(ValueError):
-    pass
+    def __init__(self, msg):
+        print(msg)
 
 class Structure(object):
     structure = {}
@@ -17,6 +18,7 @@ class Structure(object):
                 elif v is ObjectId:
                     assert ObjectId(data[k])
             except Exception:
+
                 raise ValidationError('validation failed: '+k)
             # except Exception as e:
             #     if e.args:
