@@ -12,7 +12,6 @@ def get_tasks():
     print(user_id)
     tasks = current_app.mongodb_conn.Task.find_by_user_id(user_id)
     resp = [x for x in tasks if x.deleted is False]
-    print(resp)
     return resp
 
 
@@ -37,15 +36,15 @@ def create_task():
     return task
 
 
-@api.route('/task/<task_id>', methods=['PUT'])
-@validate_and_preprocess_payload('task')
+@api.route('/tasks/<task_id>', methods=['PUT'])
 @json
 def update_task(task_id):
 
     data = request.get_json()
-
+    print(data)
     task = current_app.mongodb_conn.Task.find_one_by_id(task_id)
     task.title = data.get('title')
+    task.done = data.get('done')
     # task.description = data.get('description')
     # task.start_time = data.get('starttime')
     # task.end_time = data.get('endtime')
@@ -53,10 +52,10 @@ def update_task(task_id):
     # helper_load_task_assgin_list(data, task)
 
     task.save()
-    return {'res': 'updated'}
+    return task
 
 
-@api.route('/task/<task_id>', methods=['DELETE'])
+@api.route('/tasks/<task_id>', methods=['DELETE'])
 @json
 def delete_task(task_id):
     task = current_app.mongodb_conn.Task.find_one_by_id(task_id)

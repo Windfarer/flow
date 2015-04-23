@@ -11,7 +11,7 @@ angular.module('flowApp')
         'response': function(resp) {
           if (resp.config.url == Config.open_api+'/login') {
             Auth.setUser(resp.data);
-            console.log("savvvvvvvvvvvvving")
+            //console.log("savvvvvvvvvvvvving")
           }
           return resp;
         },

@@ -27,7 +27,7 @@ md-card {
 
 /* Task input */
 
-md-input-container {
+md-input-container#search.md-blue-theme, md-input-container#new_task.md-blue-theme {
   padding-bottom: 0;
 }
 

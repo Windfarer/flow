@@ -8,7 +8,7 @@
  * Controller of the flowApp
  */
 angular.module('flowApp')
-  .controller('SidebarCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+  .controller('SidebarCtrl', function ($scope, Auth) {
     $scope.btns = [
       {"name":"INBOX"},
       {"name":"DOING"},

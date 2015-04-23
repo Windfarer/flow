@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" ng-app="flowApp">
   <head>
     <meta charset="utf-8">
     <title></title>
@@ -16,7 +16,7 @@
     <!-- endbuild -->
     <!--<link rel="stylesheet" href="fontello/css/iconfont.css">-->
   </head>
-  <body ng-app="flowApp" md-theme="blue" layout="column">
+  <body ng-controller="MainCtrl" md-theme="blue" layout="column">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -32,19 +32,24 @@
             <span>Flow</span>
           </h2>
           <span flex></span>
-          <md-input-container md-no-float id="search">
-            <md-icon md-svg-src="/demo-partials/input/demoIcons/icons/ic_place_24px.svg"></md-icon>
-            <input ng-model="user.address" type="text" placeholder="Address">
-          </md-input-container>
-          <md-button class="md-icon-button" aria-label="Search">
-            <md-icon md-svg-src="icons/ic_search_48px.svg"></md-icon>
-          </md-button>
+          <span ng-if="showComponent()" layout="row">
+            <md-input-container id="search" md-no-float>
+              <md-icon md-svg-src="/demo-partials/input/demoIcons/icons/ic_place_24px.svg"></md-icon>
+              <input ng-model="user.address" type="text" placeholder="Address">
+            </md-input-container>
+            <md-button class="md-icon-button" aria-label="Search">
+              <md-icon md-svg-src="icons/ic_search_48px.svg"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="More">
+              <md-icon md-svg-src="icons/ic_more_vert_48px.svg"></md-icon>
+            </md-button>
+          </span>
         </div>
       </md-toolbar>
     </div>
 
     <div flex layout="row" ng-controller="SidebarCtrl">
-      <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" class="md-whiteframe-z2" md-component-id="left">
+      <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" class="md-whiteframe-z2" md-component-id="left" ng-if="showComponent()">
           <md-list>
             <md-list-item>
             <md-list>
@@ -120,6 +125,7 @@
         <script src="scripts/services/config.js"></script>
         <script src="scripts/controllers/sidebar.js"></script>
         <script src="scripts/services/auth.js"></script>
+        <script src="scripts/controllers/main.js"></script>
         <!-- endbuild -->
 </body>
 </html>

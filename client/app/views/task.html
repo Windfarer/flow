@@ -1,25 +1,22 @@
 <md-list>
   <md-list-item>
-    <md-card ng-mouseover="hover = true" ng-mouseout="hover = false" layout-margin layout-align="start center" layout="row">
-      <md-input-container flex="90">
+    <md-card ng-mouseover="hover = true" ng-mouseout="hover = false" layout-margin layout-align="center center" layout="row">
+      <md-input-container id="new_task" flex="90">
         <label>New Task</label>
         <input ng-model="task.title" placeholder="Your task here">
       </md-input-container>
-      <span flex>
-          <md-icon class="md-secondary" ng-click="submitTask($event)" aria-label="Inbox" md-svg-src="icons/ic_inbox_48px.svg"></md-icon>
-      </span>
+      <md-button class="md-primary" ng-click="submitTask($event)" aria-label="Inbox" flex>
+        <md-icon md-svg-src="icons/ic_inbox_48px.svg"></md-icon>
+      </md-button>
     </md-card>
   </md-list-item>
-  <md-list-item ng-repeat="task in tasks">
+  <md-list-item ng-repeat="task in tasks |orderBy: '_id': true">
     <!--<p ng-if="chunk.divider">{{task.title}}</p>-->
     <md-card ng-mouseover="hover = true" ng-mouseout="hover = false" layout="row">
-        <div>
-          <md-checkbox ng-model="task.finished"></md-checkbox>
-        </div>
-        <div  layout="row" layout-align="start center" flex>
-          <span flex="45">{{task.title}}</span>
-          <span flex="45">{{task.start_time}}</span>
-          <span flex ng-if="hover">
+        <div  layout="row" layout-align="center center" flex>
+            <md-checkbox ng-model="task.done" ng-change="updateTask(task)"></md-checkbox>
+          <span flex>{{task.title}}</span>
+          <span>
             <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-src="icons/ic_mode_edit_48px.svg"></md-icon>
           </span>
         </div>

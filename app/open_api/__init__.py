@@ -37,6 +37,7 @@ def login():
     else:
         raise ValidationError('user not exists')
     return {
+        '_id': user._id,
         'email': user.email,
         'alias': user.alias,
         'token': user.generate_auth_token(),

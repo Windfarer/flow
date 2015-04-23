@@ -32,7 +32,7 @@ def create_app():
             resp = current_app.make_default_options_response()
             cors_headers = {
                 "Access-Control-Allow-Headers": "Origin, Accept, Content-Type, Authorization",
-                "Access-Control-Allow-Methods": "OPTIONS",
+                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, HEAD",
                 "Access-Control-Allow-Origin": "*"
             }
             resp.headers.extend(cors_headers)

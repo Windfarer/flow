@@ -32,14 +32,14 @@ def create_project():
     return {'res': 'success'}
 
 
-@api.route('/project/<project_id>', methods=['GET'])
+@api.route('/projects/<project_id>', methods=['GET'])
 @json
 def get_one_project(project_id):
     project = current_app.mongodb_conn.Project.find_by_id(project_id)
     return project
 
 
-@api.route('/project/<project_id>', methods=['PUT'])
+@api.route('/projects/<project_id>', methods=['PUT'])
 @json
 def update_project(project_id):
 
@@ -56,7 +56,7 @@ def update_project(project_id):
     return {'res': 'success update'}
 
 
-@api.route('/project/<project_id>', methods=['DELETE'])
+@api.route('/projects/<project_id>', methods=['DELETE'])
 @json
 def delete_project(project_id):
     project = current_app.mongodb_conn.Project.find_by_id(project_id)

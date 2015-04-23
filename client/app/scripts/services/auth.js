@@ -24,12 +24,9 @@ angular.module('flowApp')
 
     return {
       isAuthoized: function(level) {
-        console.log('current_user:');
-        console.log(_user);
-        if (!_user) {
-          return false;
-        }
-        return _user.role >= level;
+        //console.log('current_user:');
+        //console.log(_user);
+        return !_user ? false : _user.role >= level;
       },
       setUser: setUser,
       isLoggedIn: function() {

@@ -22,19 +22,17 @@ angular.module('flowApp')
         return $resource(open_api+'/register')
       })(),
       tasks: (function () {
-        return $resource(api+'/tasks');
-      })(),
-      task: (function () {
-        return $resource(api+'/task/:task_id',{
-          task_id: '@id'
+        return $resource(api+'/tasks/:task_id',{
+          task_id: '@_id'
+        },{
+          update: {
+            method: 'PUT'
+          }
         })
       })(),
       projects: (function () {
-        return $resource(api+'/projects');
-      })(),
-      project: (function () {
-        return $resource(api+'/project/:project_id',{
-          project_id: '@id'
+        return $resource(api+'/projects/:project_id',{
+          project_id: '@_id'
         })
       })()
     };

@@ -13,19 +13,17 @@ class Task(Document):
         'end_time': datetime,
         'finish_time': datetime,
         'user_id': ObjectId,
-        'assign_list': list,
-        'groups': list,
-        'finished': bool,
+        'assign_list': [ObjectId],
+        'groups': [ObjectId],
+        'done': bool,
         'doing': bool,
         'sub_tasks': list,
         'deleted': bool
     }
     required_fields = ['title', 'user_id']
     default_values = {
-        'finished': False,
+        'done': False,
         'doing': False,
-        'start_time': datetime.utcnow,
-        'end_time': datetime.utcnow,
         'deleted': False
     }
     validators = {
@@ -40,7 +38,7 @@ class Task(Document):
         subtask_validator(data)
         subtask = {
             'title': data['title'],
-            'finished': False,
+            'done': False,
             'deleted': False
         }
         pass

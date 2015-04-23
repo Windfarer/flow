@@ -48,7 +48,7 @@ def json(f):
 def make_cors_headers():
     cors_headers = {
         "Access-Control-Allow-Headers": "Origin, Accept, Content-Type, Authorization",
-        "Access-Control-Allow-Methods": "OPTIONS",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, HEAD",
         "Access-Control-Allow-Origin": "*"
     }
     return cors_headers
