@@ -8,7 +8,7 @@
  * Controller of the flowApp
  */
 angular.module('flowApp')
-  .controller('SidebarCtrl', function ($scope, Auth) {
+  .controller('SidebarCtrl', function ($scope, $location, taskFilterOption) {
     $scope.btns = [
       {"name":"INBOX"},
       {"name":"DOING"},
@@ -16,19 +16,31 @@ angular.module('flowApp')
     ];
     $scope.projects = [{
       avatar : '/images/60.jpeg',
-      name: 'ProjectA'
+      name: 'ProjectA',
+      _id: "aaaaatestid"
     }, {
       avatar : '/images/60.jpeg',
-      name: 'ProjectB'
+      name: 'ProjectA',
+      _id: "aaaaatestid"
     }, {
       avatar : '/images/60.jpeg',
-      name: 'ProjectC'
+      name: 'ProjectA',
+      _id: "aaaaatestid"
     }, {
       avatar : '/images/60.jpeg',
-      name: 'ProjectD'
+      name: 'ProjectA',
+      _id: "aaaaatestid"
     }, {
       avatar : '/images/60.jpeg',
-      name: 'ProjectE'
+      name: 'ProjectA',
+      _id: "aaaaatestid"
     }];
+    $scope.setTaskFilterOption = function(option){
+      taskFilterOption.doing = option.doing;
+      taskFilterOption.done = option.done;
+    };
 
+    $scope.goToProject = function (project) {
+      $location.path('/project/'+project._id)
+    }
   });

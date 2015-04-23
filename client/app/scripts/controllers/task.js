@@ -8,14 +8,7 @@
  * Controller of the flowApp
  */
 angular.module('flowApp')
-  .config(function($mdIconProvider) {
-    $mdIconProvider
-      .iconSet('social', 'img/icons/sets/social-icons.svg', 24)
-      .iconSet('device', 'img/icons/sets/device-icons.svg', 24)
-      .iconSet('communication', 'img/icons/sets/communication-icons.svg', 24)
-      .defaultIconSet('img/icons/sets/core-icons.svg', 24);
-  })
-  .controller('TaskCtrl', function($scope, restAPI) {
+  .controller('TaskCtrl', function($scope, restAPI, taskFilterOption) {
     $scope.task = new restAPI.tasks();
     $scope.tasks = restAPI.tasks.query();
     $scope.updateTask = function (task) {
@@ -29,5 +22,6 @@ angular.module('flowApp')
             $scope.tasks.push(data);
         })
     };
-
+    $scope.task_filter_option = taskFilterOption;
+    console.log($scope.task_filter_option);
   });

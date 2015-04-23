@@ -23,7 +23,11 @@ def create_user():
         user.email = data.get('email')
         user.set_password(data.get('password'))
         user.save()
-    return {'res': 'success'}
+    return {
+        'email': user.email,
+        'nickname': user.nickname,
+        'password': "fakepassword"
+    }
 
 
 @open_api.route('/login', methods=['POST'])
@@ -41,5 +45,5 @@ def login():
         'email': user.email,
         'alias': user.alias,
         'token': user.generate_auth_token(),
-        'role': user.role,
+        'role': user.role
     }

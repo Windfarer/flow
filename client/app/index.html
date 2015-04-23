@@ -54,20 +54,20 @@
             <md-list-item>
             <md-list>
               <md-list-item>
-                <md-button ng-click="" flex>INBOX</md-button>
+                <md-button ng-click="setTaskFilterOption({done:false,doing:false})" flex>INBOX</md-button>
               </md-list-item>
               <md-list-item>
-                <md-button ng-click="" flex>DOING</md-button>
+                <md-button ng-click="setTaskFilterOption({done:false,doing:true})" flex>DOING</md-button>
               </md-list-item>
               <md-list-item>
-                <md-button ng-click="" flex>DONE</md-button>
+                <md-button ng-click="setTaskFilterOption({done:true})" flex>DONE</md-button>
               </md-list-item>
             </md-list>
             </md-list-item>
             <md-divider></md-divider>
             <md-subheader class="md-no-sticky">Projects</md-subheader>
             <md-list-item ng-repeat="project in projects">
-              <md-button layout="row">
+              <md-button layout="row" ng-click="goToProject(project)">
                 <img ng-src="{{project.avatar}}?{{$index}}" class="avatar" alt="{{project.name}}" />
                 <div flex class="md-list-item-text">
                   <h4>{{ project.name }}</h4>
@@ -126,6 +126,7 @@
         <script src="scripts/controllers/sidebar.js"></script>
         <script src="scripts/services/auth.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/services/task_filter_option.js"></script>
         <!-- endbuild -->
 </body>
 </html>

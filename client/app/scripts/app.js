@@ -36,7 +36,7 @@ angular
         controller: 'RegisterCtrl',
         access_level: ACCESS_LEVELS.pub
       })
-      .when('/project', {
+      .when('/project/:project_id', {
         templateUrl: 'views/project.html',
         controller: 'ProjectCtrl',
         access_level: ACCESS_LEVELS.user

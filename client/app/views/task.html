@@ -10,16 +10,54 @@
       </md-button>
     </md-card>
   </md-list-item>
-  <md-list-item ng-repeat="task in tasks |orderBy: '_id': true">
-    <!--<p ng-if="chunk.divider">{{task.title}}</p>-->
-    <md-card ng-mouseover="hover = true" ng-mouseout="hover = false" layout="row">
-        <div  layout="row" layout-align="center center" flex>
+  <md-list-item ng-repeat="task in tasks | filter:task_filter_option |orderBy: '_id': true ">
+
+    <md-card ng-mouseover="hover = true" ng-mouseout="hover = false" layout="row" layout-margin>
+        <div  layout="row" layout-align="start center" flex>
             <md-checkbox ng-model="task.done" ng-change="updateTask(task)"></md-checkbox>
           <span flex>{{task.title}}</span>
           <span>
             <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-src="icons/ic_mode_edit_48px.svg"></md-icon>
           </span>
         </div>
+    </md-card>
+
+    <md-card ng-mouseover="hover = true" ng-mouseout="hover = false" layout="column" layout-padding>
+      <div  layout="row" layout-align="center center">
+        <md-checkbox ng-model="task.done" ng-change="updateTask(task)"></md-checkbox>
+        <h2 flex>{{task.title}}</h2>
+      </div>
+      <md-list flex>
+        <md-subheader class="md-no-sticky">Description:</md-subheader>
+        <md-list-item>{{task.description}}</md-list-item>
+        <md-subheader>Deadline:</md-subheader>
+        <md-list-item>{{task.end_time}}</md-list-item>
+      </md-list>
+    </md-card>
+
+    <md-card ng-mouseover="hover = true" ng-mouseout="hover = false" layout="column" layout-padding>
+      <div  layout="row" layout-align="center center">
+        <md-checkbox ng-model="task.done" ng-change="updateTask(task)"></md-checkbox>
+        <md-input-container flex="60">
+          <label>Task</label>
+          <input type="text" ng-model="task.title" ng-change="updateTask(task)">
+        </md-input-container>
+        <md-input-container flex>
+          <label>Deadline</label>
+          <input type="date" ng-model="task.endtime" ng-change="updateTask(task)">
+        </md-input-container>
+      </div>
+      <md-list flex>
+        <md-list-item>
+          <md-input-container flex>
+            <label>Description</label>
+            <textarea type="text" ng-model="task.description" ng-change="updateTask(task)"></textarea>
+          </md-input-container>
+        </md-list-item>
+        <md-list-item>
+
+        </md-list-item>
+      </md-list>
     </md-card>
   </md-list-item>
 </md-list>
