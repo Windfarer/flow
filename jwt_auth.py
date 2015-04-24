@@ -28,7 +28,7 @@ class HTTPJWTAuth(object):
         return f
 
     def authenticate_header(self):
-        return 'Bearer {}'.format(self.token)
+        return "Bearer {}".format(self.token)
 
     def authenticate_token(self, token):
         if self.verify_token_callback(token):
@@ -38,8 +38,8 @@ class HTTPJWTAuth(object):
     def auth_required(self, f):
         @wraps(f)
         def wrapper(*args, **kwargs):
-            auth = request.headers.get('Authorization')
-            if request.method != 'OPTIONS':   # avoid 401 when request method is OPTIONS
+            auth = request.headers.get("Authorization")
+            if request.method != "OPTIONS":   # avoid 401 when request method is OPTIONS
                 if auth:
                     token = self.get_token(auth)
                 else:
@@ -57,8 +57,8 @@ class HTTPJWTAuth(object):
             if type(res) is str:
                 res = make_response(res)
                 res.status_code = 401
-            if 'Authorization' not in res.headers.keys():
-                res.headers['Authorization'] = self.authenticate_header()
+            if "Authorization" not in res.headers.keys():
+                res.headers["Authorization"] = self.authenticate_header()
             return res
         self.auth_error_callback = wrapper
         return wrapper

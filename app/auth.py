@@ -11,7 +11,7 @@ auth_token = HTTPJWTAuth()
 
 @auth.verify_password
 def verify_password(username, password):
-    g.user = current_app.mongodb_conn.User.find_one({'username': username})
+    g.user = current_app.mongodb_conn.User.find_one({"username": username})
     if g.user is None:
         return False
     return g.user.verify_password(password)
@@ -19,16 +19,16 @@ def verify_password(username, password):
 
 @auth.error_handler
 def unauthorized():
-    response = jsonify({'status': 401,
-                        'error': 'unauthorized',
-                        'message': 'please authenticate'})
+    response = jsonify({"status": 401,
+                        "error": "unauthorized",
+                        "message": "please authenticate"})
     response.status_code = 401
     return response
 
 
 @auth_token.verify_token
 def verify_auth_token(token):
-    if current_app.config.get('IGNORE_AUTH') is True:
+    if current_app.config.get("IGNORE_AUTH") is True:
         g.user = current_app.mongodb_conn.User.find_one()
     else:
         g.user = User.verify_auth_token(token)
@@ -37,9 +37,9 @@ def verify_auth_token(token):
 
 @auth_token.error_handler
 def unauthorized_token():
-    response = jsonify({'status': 401,
-                        'error': 'unauthorized',
-                        'message': 'please send your authentication token'})
+    response = jsonify({"status": 401,
+                        "error": "unauthorized",
+                        "message": "please send your authentication token"})
     response.status_code = 401
     return response
 

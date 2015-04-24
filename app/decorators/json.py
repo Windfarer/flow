@@ -8,9 +8,9 @@ from datetime import date, datetime
 class CustomJSONEncoder(JSONEncoder):
     def default(self, obj):
         if isinstance(obj, datetime):
-            return obj.strftime('%Y-%m-%d %H:%M:%S')
+            return obj.strftime("%Y-%m-%d %H:%M:%S")
         elif isinstance(obj, date):
-            return obj.strftime('%Y-%m-%d')
+            return obj.strftime("%Y-%m-%d")
         elif isinstance(obj, ObjectId):
             return str(obj)
         else:

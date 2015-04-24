@@ -7,9 +7,9 @@ from .decorators import json
 @json
 def bad_request(e):
     response = {
-        'status': 400,
-        'error': 'bad request',
-        'message': e.args[0]
+        "status": 400,
+        "error": "bad request",
+        "message": e.args[0]
     }
     return response, 400
 
@@ -18,9 +18,9 @@ def bad_request(e):
 @json
 def bad_request(e):
     response = {
-        'status': 400,
-        'error': 'bad request',
-        'message': "invalid request"
+        "status": 400,
+        "error": "bad request",
+        "message": "invalid request"
     }
     return response, 400
 
@@ -29,9 +29,9 @@ def bad_request(e):
 @json
 def not_found(e):
     response = {
-        'status': 404,
-        'error': 'not found',
-        'message': 'invalid resource URI'
+        "status": 404,
+        "error": "not found",
+        "message": "invalid resource URI"
     }
     return response, 404
 
@@ -40,9 +40,9 @@ def not_found(e):
 @json
 def method_not_supported(e):
     response = {
-        'status': 405,
-        'error': 'method not supported',
-        'message': 'the method is not supported'
+        "status": 405,
+        "error": "method not supported",
+        "message": "the method is not supported"
     }
     return response, 405
 
@@ -51,8 +51,8 @@ def method_not_supported(e):
 @json
 def internal_server_error(e):
     response = {
-        'status': 500,
-        'error': 'internal server error',
-        'message': e.args[0]
+        "status": 500,
+        "error": "internal server error",
+        "message": e.args[0]
     }
     return response, 500

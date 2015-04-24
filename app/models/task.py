@@ -5,41 +5,39 @@ from ..utils.validator import subtask_validator, text_validator, datetime_valida
 
 class Task(Document):
     use_dot_notation = True
-    __collection__ = 'tasks'
+    __collection__ = "tasks"
     structure = {
-        'title': str,
-        'description': str,
-        'start_time': datetime,
-        'end_time': datetime,
-        'finish_time': datetime,
-        'user_id': ObjectId,
-        'assign_list': [ObjectId],
-        'groups': [ObjectId],
-        'done': bool,
-        'doing': bool,
-        'sub_tasks': list,
-        'deleted': bool
+        "title": str,
+        "description": str,
+        "start_time": datetime,
+        "deadline": datetime,
+        "finish_time": datetime,
+        "user_id": ObjectId,
+        "assign_list": [ObjectId],
+        "groups": [ObjectId],
+        "status": int,
+        "sub_tasks": list,
+        "deleted": int
     }
-    required_fields = ['title', 'user_id']
+    required_fields = ["title", "user_id"]
     default_values = {
-        'done': False,
-        'doing': False,
-        'deleted': False
+        "status": 0,
+        "deleted": 0
     }
     validators = {
-        'title': text_validator,
-        # 'description': text_validator,
-        # 'start_time': datetime_validator,
-        # 'end_time': datetime_validator,
-        # 'owner_id': object_id_validator
+        "title": text_validator,
+        # "description": text_validator,
+        # "start_time": datetime_validator,
+        # "end_time": datetime_validator,
+        # "owner_id": object_id_validator
     }
 
     def one_subtask(self, data):
         subtask_validator(data)
         subtask = {
-            'title': data['title'],
-            'done': False,
-            'deleted': False
+            "title": data["title"],
+            "done": False,
+            "deleted": False
         }
         pass
 
@@ -47,13 +45,13 @@ class Task(Document):
         pass
 
     def find_by_user_id(self, user_id):
-        return self.find({'user_id': ObjectId(user_id)})
+        return self.find({"user_id": ObjectId(user_id)})
 
     def find_by_id(self, task_id):
-        return self.find({'_id': ObjectId(task_id)})
+        return self.find({"_id": ObjectId(task_id)})
 
     def find_one_by_id(self, task_id):
-        return self.find_one({'_id': ObjectId(task_id)})
+        return self.find_one({"_id": ObjectId(task_id)})
 
     def remove(self, app_id):
-        return self.remove({'app_id': app_id})
+        return self.remove({"app_id": app_id})

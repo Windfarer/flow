@@ -3,13 +3,13 @@ from . import api
 from ..decorators import json
 
 
-@api.route('/users')
+@api.route("/users")
 def get_users():
     pass
 
 
-@api.route('/test', methods=['GET'])
+@api.route("/test", methods=["GET"])
 @json
 def test():
     print(g.user)
-    return {'res': 'res234234'}
+    return {"res": "res234234"}

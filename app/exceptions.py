@@ -19,22 +19,22 @@ class Structure(object):
                     assert ObjectId(data[k])
             except Exception:
 
-                raise ValidationError('validation failed: '+k)
+                raise ValidationError("validation failed: "+k)
             # except Exception as e:
             #     if e.args:
-            #         raise ValidationError('validate failed: '+e.args[0])
+            #         raise ValidationError("validate failed: "+e.args[0])
             #     else:
-            #         raise  ValidationError('validate failed: '+k)
+            #         raise  ValidationError("validate failed: "+k)
 
 
 
 
 class TaskStructure(Structure):
     structure = {
-        'title': r'^.{1,255}$',
-        'description': r'^[\s\S]{1,200}$',
-        'start_time': datetime,
-        'end_time': datetime,
+        "title": r"^.{1,255}$",
+        "description": r"^[\s\S]{1,200}$",
+        "start_time": datetime,
+        "end_time": datetime,
     }
     def __init__(self, data):
         super().__init__(data)
@@ -43,8 +43,8 @@ class TaskStructure(Structure):
 
 class GroupStructure(Structure):
     structure = {
-        'name': str,
-        'manager_id': ObjectId,
+        "name": str,
+        "manager_id": ObjectId,
     }
     def __init__(self, data):
         super().__init__(data)
