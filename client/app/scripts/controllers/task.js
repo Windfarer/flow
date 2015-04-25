@@ -11,8 +11,11 @@ angular.module('flowApp')
   .controller('TaskCtrl', function($scope, restAPI) {
     $scope.task_status = {"status": 0};
     $scope.task = new restAPI.tasks();
-    $scope.tasks = restAPI.tasks.query();
-
+    //$scope.tasks = restAPI.tasks.query();
+    restAPI.tasks.query().$promise.then(function(data){
+      console.log(data);
+      $scope.tasks=data;
+    });
     $scope.changeStatusFilter = function(status) {
       console.log("change to:"+status);
       $scope.task_status = {"status": status};

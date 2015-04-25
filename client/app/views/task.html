@@ -1,20 +1,20 @@
 <div>
   <md-content class="md-padding">
-    <md-tabs md-dynamic-height>
+    <md-tabs md-dynamic-height md-no-pagination>
       <md-tab label="inbox" md-on-select="changeStatusFilter(0)">
-        <md-content class="md-padding">
+        <md-tab-body>
           <ng-include src="'/task_list.html'"></ng-include>
-        </md-content>
+        </md-tab-body>
       </md-tab>
       <md-tab label="doing" md-on-select="changeStatusFilter(1)">
-        <md-content class="md-padding">
+        <md-tab-body>
           <ng-include src="'/task_list.html'"></ng-include>
-        </md-content>
+        </md-tab-body>
       </md-tab>
       <md-tab label="done" md-on-select="changeStatusFilter(2)">
-        <md-content class="md-padding">
+        <md-tab-body>
           <ng-include src="'/task_list.html'"></ng-include>
-        </md-content>
+        </md-tab-body>
       </md-tab>
     </md-tabs>
   </md-content>
