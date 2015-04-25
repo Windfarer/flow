@@ -1,0 +1,83 @@
+<md-list id="task_list">
+  <md-list-item>
+    <md-card ng-mouseover="hover = true" ng-mouseout="hover = false" layout-margin layout-align="center center" layout="row">
+      <md-input-container id="new_task" flex="90">
+        <label>New Task</label>
+        <input ng-model="task.title" placeholder="Your task here">
+      </md-input-container>
+      <md-button class="md-primary" ng-click="submitTask($event)" aria-label="Inbox" flex>
+        <md-icon md-svg-src="icons/ic_inbox_48px.svg"></md-icon>
+      </md-button>
+    </md-card>
+  </md-list-item>
+  <md-list-item ng-repeat="task in tasks |filter: task_status |orderBy: '_id': true">
+
+    <md-card ng-mouseover="hover = true" ng-mouseout="hover = false" layout="row" layout-margin>
+      <div  layout="row" layout-align="start center" flex>
+        <md-checkbox ng-model="task.status" ng-change="updateTask(task)" ng-true-value="2" ng-false-value="0"></md-checkbox>
+        <span flex>{{task.title}}</span>
+          <span>
+            <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-src="icons/ic_mode_edit_48px.svg"></md-icon>
+          </span>
+      </div>
+    </md-card>
+
+    <md-card ng-mouseover="hover = true" ng-mouseout="hover = false" layout="column" layout-padding>
+      <div  layout="row" layout-align="center center">
+        <md-checkbox ng-model="task.status" ng-change="updateTask(task)" ng-true-value="2" ng-false-value="0"></md-checkbox>
+        <h2 flex>{{task.title}}</h2>
+      </div>
+      <md-list flex>
+        <md-subheader class="md-no-sticky">Description:</md-subheader>
+        <md-list-item>{{task.description}}</md-list-item>
+        <md-subheader>Deadline:</md-subheader>
+        <md-list-item>{{task.end_time}}</md-list-item>
+        <md-subheader>Assignees:</md-subheader>
+        <md-list-item>
+          <md-list flex>
+          </md-list>
+        </md-list-item>
+        <md-subheader>Sub Tasks:</md-subheader>
+        <md-list-item>
+          <md-list flex>
+          </md-list>
+        </md-list-item>
+      </md-list>
+    </md-card>
+
+    <md-card ng-mouseover="hover = true" ng-mouseout="hover = false" layout="column" layout-padding>
+      <div  layout="row" layout-align="center center">
+        <md-checkbox ng-model="task.status" ng-change="updateTask(task)" ng-true-value="2" ng-false-value="0"></md-checkbox>
+        <md-input-container flex="60">
+          <label>Task</label>
+          <input type="text" ng-model="task.title" ng-change="updateTask(task)">
+        </md-input-container>
+        <md-input-container flex>
+          <label>Deadline</label>
+          <input type="date" ng-model="task.endtime" ng-change="updateTask(task)">
+        </md-input-container>
+      </div>
+      <md-list flex>
+        <md-list-item>
+          <md-input-container flex>
+            <label>Description</label>
+            <textarea type="text" ng-model="task.description" ng-change="updateTask(task)"></textarea>
+          </md-input-container>
+        </md-list-item>
+        <md-list-item>
+
+        </md-list-item>
+        <md-subheader>Assignees:</md-subheader>
+        <md-list-item>
+          <md-list flex>
+          </md-list>
+        </md-list-item>
+        <md-subheader>Sub Tasks:</md-subheader>
+        <md-list-item>
+          <md-list flex>
+          </md-list>
+        </md-list-item>
+      </md-list>
+    </md-card>
+  </md-list-item>
+</md-list>

@@ -51,19 +51,6 @@
     <div flex layout="row" ng-controller="SidebarCtrl">
       <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" class="md-whiteframe-z2" md-component-id="left" ng-if="showComponent()">
           <md-list>
-            <md-list-item>
-            <md-list>
-              <md-list-item>
-                <md-button  flex>INBOX</md-button>
-              </md-list-item>
-              <md-list-item>
-                <md-button  flex>DOING</md-button>
-              </md-list-item>
-              <md-list-item>
-                <md-button  flex>DONE</md-button>
-              </md-list-item>
-            </md-list>
-            </md-list-item>
             <md-divider></md-divider>
             <md-subheader class="md-no-sticky">Projects</md-subheader>
             <md-list-item ng-repeat="project in projects">

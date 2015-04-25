@@ -34,12 +34,12 @@ angular
         controller: 'RegisterCtrl',
         access_level: ACCESS_LEVELS.pub
       })
-      .when('/project/:project_id/task/:task_status', {
+      .when('/project/:project_id/task', {
         templateUrl: 'views/task.html',
         controller: 'TaskCtrl',
         access_level: ACCESS_LEVELS.user
       })
-      .when('/task/:task_status', {
+      .when('/task', {
         templateUrl: 'views/task.html',
         controller: 'TaskCtrl',
         access_level: ACCESS_LEVELS.user
@@ -60,6 +60,6 @@ angular
         access_level: ACCESS_LEVELS.pub
       })
       .otherwise({
-        redirectTo: '/task/inbox'
+        redirectTo: '/task'
       });
   });

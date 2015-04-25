@@ -16,6 +16,9 @@ md-content#main.md-blue-theme {
   background-color: #ececec;
 }
 
+md-content.md-padding.md-blue-theme {
+  background-color: #ececec;
+}
 /*md-input-container#search.md-blue-theme {*/
   /*padding-bottom: 0;*/
 /*}*/
