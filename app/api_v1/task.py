@@ -11,7 +11,7 @@ def get_tasks():
     user_id = g.user["_id"]
     print(user_id)
     tasks = current_app.mongodb_conn.Task.find_by_user_id(user_id)
-    resp = [x for x in tasks if x.deleted is False]
+    resp = [make_response_task(x) for x in tasks if not x.deleted]
     return resp
 
 
@@ -24,16 +24,11 @@ def create_task():
     print(data)
     task = current_app.mongodb_conn.Task()
 
-    task.title = data["title"]
+    task.title = data.get("title")
     task.user_id = user_id
-    # task.description = data["description"]
-    # task.start_time = data["starttime"]
-    # task.end_time = data["endtime"]
-    #
-    # helper_load_task_assgin_list(data, task)
-
     task.save()
-    return task
+
+    return make_response_task(task)
 
 
 @api.route("/tasks/<task_id>", methods=["PUT"])
@@ -44,15 +39,17 @@ def update_task(task_id):
     print(data)
     task = current_app.mongodb_conn.Task.find_one_by_id(task_id)
     task.title = data.get("title")
-    task.done = data.get("done")
-    # task.description = data.get("description")
-    # task.start_time = data.get("starttime")
-    # task.end_time = data.get("endtime")
-
-    # helper_load_task_assgin_list(data, task)
+    task.description = data.get("description")
+    task.status = data.get("status")
+    task.deadline = data.get("deadline")
+    task.start_time = data.get("start_time")
+    task.finish_time = data.get("finish_time")
+    task.project = data.get("project")
+    task.assignees = data.get("assignees")
+    task.sub_tasks = data.get("sub_tasks")
 
     task.save()
-    return task
+    return make_response_task(task)
 
 
 @api.route("/tasks/<task_id>", methods=["DELETE"])
@@ -61,14 +58,19 @@ def delete_task(task_id):
     task = current_app.mongodb_conn.Task.find_one_by_id(task_id)
     task.deleted = True
     task.save()
-    return {"res": "deleted"}
+    return {"_id": task._id}
 
 
-def task_response(data):
+def make_response_task(data):
     return {
+        "id": data.get("_id"),
         "title": data.get("title"),
         "description": data.get("description"),
         "status": data.get("status"),
+        "deadline": data.get("deadline"),
         "start_time": data.get("start_time"),
-
+        "finish_time": data.get("finish_time"),
+        "assignees": data.get("assignees"),
+        "sub_tasks": data.get("sub_tasks"),
+        "project": data.get("project"),
     }

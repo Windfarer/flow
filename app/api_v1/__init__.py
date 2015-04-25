@@ -19,4 +19,4 @@ def after_request(rv):
     return rv
 
 from . import project, task, user
-from .. import error
+from .. import error_handlers

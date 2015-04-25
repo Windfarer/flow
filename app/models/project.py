@@ -8,17 +8,18 @@ class Project(Document):
     __collection__ = "groups"
     structure = {
         "name": str,
-        "manager_id": ObjectId,
-        "menber_list": list,
+        "owner_id": ObjectId,
+        "managers": [ObjectId],
+        "menbers": [ObjectId],
         "deleted": int
     }
-    required_fields = ["name", "manager_id"]
+    required_fields = ["name", "owner_id"]
     default_values = {
         "deleted": 0
     }
     validators = {
         "name": text_validator,
-        "manager_id": object_id_validator
+        # "manager_id": object_id_validator
     }
 
     def find_one_by_id(self, group_id):

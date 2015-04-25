@@ -2,6 +2,7 @@ from flask import jsonify, g, current_app
 from flask.ext.httpauth import HTTPBasicAuth
 
 from .models.user import User
+from .decorators import json
 from jwt_auth import HTTPJWTAuth
 
 
@@ -18,12 +19,14 @@ def verify_password(username, password):
 
 
 @auth.error_handler
+@json
 def unauthorized():
-    response = jsonify({"status": 401,
-                        "error": "unauthorized",
-                        "message": "please authenticate"})
-    response.status_code = 401
-    return response
+    response = {
+        "status": 401,
+        "error": "unauthorized",
+        "message": "please authenticate"
+    }
+    return response, 401
 
 
 @auth_token.verify_token
@@ -36,10 +39,12 @@ def verify_auth_token(token):
 
 
 @auth_token.error_handler
+@json
 def unauthorized_token():
-    response = jsonify({"status": 401,
-                        "error": "unauthorized",
-                        "message": "please send your authentication token"})
-    response.status_code = 401
-    return response
+    response = {
+        "status": 401,
+        "error": "unauthorized",
+        "message": "please send your authentication token"
+    }
+    return response, 401
 

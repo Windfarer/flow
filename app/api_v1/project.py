@@ -21,7 +21,7 @@ def create_project():
     data = request.get_json()
     project_validator(data)
 
-    project = current_app.mongodb_conn.Group()
+    project = current_app.mongodb_conn.Project()
     project.name = data["name"]
 
     project.manager_id = g.user["_id"]
@@ -46,9 +46,10 @@ def update_project(project_id):
     data = request.get_json()
     project_validator(data)
 
-    project = current_app.mongodb_conn.Group()
-    project.name = data["name"]
-    project.owner_id = g.user["_id"]
+    project = current_app.mongodb_conn.Project()
+    project.title = data.get("title")
+    project.title = data.get("")
+    project.title = data.get("title")
 
     helper_load_project_member_list(data, project)
 
@@ -63,3 +64,15 @@ def delete_project(project_id):
     project.deleted = True
     project.save()
     return {"res": "success delete"}
+
+
+def make_response_project(data):
+    return {
+        "id": data.get("_id"),
+        "name": data.get("name"),
+        "owner_id": data.get("owner_id"),
+        "managers": data.get("managers"),
+        "menbers": data.get("members"),
+        "deleted": data.get("deleted"),
+    }
+

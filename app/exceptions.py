@@ -1,10 +1,13 @@
 from datetime import datetime
 from bson import ObjectId
+from werkzeug.exceptions import NotFound
 import re
 
 class ValidationError(ValueError):
     def __init__(self, msg):
         print(msg)
+
+
 
 class Structure(object):
     structure = {}

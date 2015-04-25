@@ -8,7 +8,7 @@
  * Controller of the flowApp
  */
 angular.module('flowApp')
-  .controller('SidebarCtrl', function ($scope, $location, taskFilterOption) {
+  .controller('SidebarCtrl', function ($scope, $location) {
     $scope.btns = [
       {"name":"INBOX"},
       {"name":"DOING"},
@@ -35,10 +35,6 @@ angular.module('flowApp')
       name: 'ProjectA',
       _id: "aaaaatestid"
     }];
-    $scope.setTaskFilterOption = function(option){
-      taskFilterOption.doing = option.doing;
-      taskFilterOption.done = option.done;
-    };
 
     $scope.goToProject = function (project) {
       $location.path('/project/'+project._id)

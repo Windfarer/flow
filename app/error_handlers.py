@@ -1,4 +1,3 @@
-from flask import jsonify
 from .api_v1 import api
 from .exceptions import ValidationError
 from .decorators import json

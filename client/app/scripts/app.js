@@ -21,11 +21,9 @@ angular
   ])
   .config(function ($routeProvider, ACCESS_LEVELS) {
     $routeProvider
-      .when('/', {
-        templateUrl: 'views/task.html',
-        controller: 'TaskCtrl',
-        access_level: ACCESS_LEVELS.user
-      })
+      //.when('/', {
+      //  redirectTo: '/task/'
+      //})
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
@@ -36,14 +34,19 @@ angular
         controller: 'RegisterCtrl',
         access_level: ACCESS_LEVELS.pub
       })
+      .when('/project/:project_id/task/:task_status', {
+        templateUrl: 'views/task.html',
+        controller: 'TaskCtrl',
+        access_level: ACCESS_LEVELS.user
+      })
+      .when('/task/:task_status', {
+        templateUrl: 'views/task.html',
+        controller: 'TaskCtrl',
+        access_level: ACCESS_LEVELS.user
+      })
       .when('/project/:project_id', {
         templateUrl: 'views/project.html',
         controller: 'ProjectCtrl',
-        access_level: ACCESS_LEVELS.user
-      })
-      .when('/task', {
-        templateUrl: 'views/task.html',
-        controller: 'TaskCtrl',
         access_level: ACCESS_LEVELS.user
       })
       .when('/user', {
@@ -57,6 +60,6 @@ angular
         access_level: ACCESS_LEVELS.pub
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/task/inbox'
       });
   });

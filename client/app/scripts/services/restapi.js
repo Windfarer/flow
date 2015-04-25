@@ -23,7 +23,7 @@ angular.module('flowApp')
       })(),
       tasks: (function () {
         return $resource(api+'/tasks/:task_id',{
-          task_id: '@_id'
+          task_id: '@id'
         },{
           update: {
             method: 'PUT'
@@ -32,7 +32,7 @@ angular.module('flowApp')
       })(),
       projects: (function () {
         return $resource(api+'/projects/:project_id',{
-          project_id: '@_id'
+          project_id: '@id'
         })
       })()
     };

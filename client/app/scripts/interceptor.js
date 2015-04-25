@@ -6,7 +6,7 @@ angular.module('flowApp')
   })
 
   .config(function($httpProvider){
-    var intercepter = function($q, $rootScope, Auth, Config){
+    var intercepter = function($q, $rootScope, Auth, Config, $location){
       return {
         'response': function(resp) {
           if (resp.config.url == Config.open_api+'/login') {
@@ -16,9 +16,11 @@ angular.module('flowApp')
           return resp;
         },
         'responseError': function(rejection) {
+          console.log(rejection);
           switch(rejection.status) {
             case 401:
               if (rejection.config.url !== Config.open_api+'/login')
+                Auth.logout();
                 console.log("login_required");
                 $rootScope.$broadcast('auth:loginRequired');
               break;

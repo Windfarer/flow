@@ -2,7 +2,7 @@ from flask import Blueprint, request, current_app
 import uuid
 
 from ..decorators import json
-from ..exceptions import ValidationError
+from ..exceptions import ValidationError, NotFound
 
 open_api = Blueprint("open_api", __name__)
 
@@ -39,7 +39,7 @@ def login():
     if user:
         user.verify_password(data.get("password"))
     else:
-        raise ValidationError("user not exists")
+        raise NotFound("user not exists")
     return {
         "_id": user._id,
         "email": user.email,

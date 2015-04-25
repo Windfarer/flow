@@ -13,8 +13,8 @@ class Task(Document):
         "deadline": datetime,
         "finish_time": datetime,
         "user_id": ObjectId,
-        "assign_list": [ObjectId],
-        "groups": [ObjectId],
+        "assignees": [ObjectId],
+        "project": ObjectId,
         "status": int,
         "sub_tasks": list,
         "deleted": int
@@ -33,12 +33,6 @@ class Task(Document):
     }
 
     def one_subtask(self, data):
-        subtask_validator(data)
-        subtask = {
-            "title": data["title"],
-            "done": False,
-            "deleted": False
-        }
         pass
 
     def remove_subtask(self):
