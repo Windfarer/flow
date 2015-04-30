@@ -10,18 +10,17 @@
       </md-button>
     </md-card>
   </md-list-item>
-
-  <md-list-item ng-repeat="task in tasks">
-    
-    <md-card ng-mouseover="hover = true" ng-mouseout="hover = false" layout="row" layout-margin>
-      <div  layout="row" layout-align="start center" flex>
-        <md-checkbox ng-model="task.status" ng-change="updateTask(task)" ng-true-value="2" ng-false-value="0"></md-checkbox>
-        <span flex>{{task.title}}</span>
-          <span>
-            <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-src="icons/ic_mode_edit_48px.svg"></md-icon>
-          </span>
-      </div>
-    </md-card>
-
-  </md-list-item>
+</md-list>
+<md-list>
+    <md-list-item ng-repeat="task in tasks | limitTo:10">
+      <md-card ng-mouseover="hover = true" ng-mouseout="hover = false" layout="row" layout-margin>
+        <div  layout="row" layout-align="start center" flex>
+          <md-checkbox ng-model="task.status" ng-change="updateTask(task)" ng-true-value="2" ng-false-value="0"></md-checkbox>
+          <span flex>{{task.title}}</span>
+              <span>
+                <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-src="icons/ic_mode_edit_48px.svg"></md-icon>
+              </span>
+        </div>
+      </md-card>
+    </md-list-item>
 </md-list>

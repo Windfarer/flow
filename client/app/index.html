@@ -8,67 +8,40 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="bower_components/materialize/bin/materialize.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
-    <!--<link rel="stylesheet" href="fontello/css/iconfont.css">-->
   </head>
-  <body ng-controller="MainCtrl" md-theme="blue" layout="column">
+  <body ng-controller="MainCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div layout="row">
-      <md-toolbar ng-controller="ToolbarCtrl">
-        <div class="md-toolbar-tools">
-          <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleLeft()" hide-gt-sm>
-            <md-icon md-svg-src="icons/ic_menu_36px.svg"></md-icon>
-          </md-button>
-          <h2>
-            <span>Flow</span>
-          </h2>
-          <span flex></span>
-          <span ng-if="showComponent()" layout="row">
-            <md-input-container id="search" md-no-float>
-              <md-icon md-svg-src="/demo-partials/input/demoIcons/icons/ic_place_24px.svg"></md-icon>
-              <input ng-model="user.address" type="text" placeholder="Address">
-            </md-input-container>
-            <md-button class="md-icon-button" aria-label="Search">
-              <md-icon md-svg-src="icons/ic_search_48px.svg"></md-icon>
-            </md-button>
-            <md-button class="md-icon-button" aria-label="More">
-              <md-icon md-svg-src="icons/ic_more_vert_48px.svg"></md-icon>
-            </md-button>
-          </span>
-        </div>
-      </md-toolbar>
-    </div>
 
-    <div flex layout="row" ng-controller="SidebarCtrl">
-      <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" class="md-whiteframe-z2" md-component-id="left" ng-if="showComponent()">
-          <md-list>
-            <md-divider></md-divider>
-            <md-subheader class="md-no-sticky">Projects</md-subheader>
-            <md-list-item ng-repeat="project in projects">
-              <md-button layout="row" ng-click="goToProject(project)">
-                <img ng-src="{{project.avatar}}?{{$index}}" class="avatar" alt="{{project.name}}" />
-                <div flex class="md-list-item-text">
-                  <h4>{{ project.name }}</h4>
-                </div>
-              </md-button>
-            </md-list-item>
-          </md-list>
-      </md-sidenav>
-      <div flex class="content">
-        <md-content layout="row" layout-padding layout-align="top center" id="main">
-          <ng-view flex></ng-view>
-        </md-content>
+
+    <!-- Navbar goes here -->
+    <nav>
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12">
+            <a href="#!" class="brand-logo">Flow</a>
+            <ul class="right hide-on-med-and-down">
+              <li><a ng-href="sass.html"><i class="mdi-action-search"></i></a></li>
+              <li><a ng-href="user"><i class="mdi-navigation-more-vert"></i></a></li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
+    </nav>
+
+    <ng-view></ng-view>
+
+
+
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -84,16 +57,15 @@
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/angular-aria/angular-aria.js"></script>
-    <script src="bower_components/angular-material/angular-material.js"></script>
     <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/materialize/bin/materialize.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -101,7 +73,6 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/run.js"></script>
         <script src="scripts/interceptor.js"></script>
-        <script src="scripts/controllers/toolbar.js"></script>
         <script src="scripts/controllers/login.js"></script>
         <script src="scripts/controllers/register.js"></script>
         <script src="scripts/controllers/project.js"></script>

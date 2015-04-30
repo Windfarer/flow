@@ -11,8 +11,9 @@ from ..helpers import helper_load_project_member_list
 @api.route("/projects", methods=["GET"])
 @json
 def get_projects():
-    resp = current_app.mongodb_conn.Project.find_by_user_id(g.user["_id"])
-    return {"results": resp}
+    projects = current_app.mongodb_conn.Project.find_by_user_id(g.user["_id"])
+    resp = [make_response_project(project) for project in projects]
+    return resp
 
 
 @api.route("/projects", methods=["POST"])
@@ -29,14 +30,14 @@ def create_project():
     helper_load_project_member_list(data, project)
 
     project.save()
-    return {"res": "success"}
+    return make_response_project(project)
 
 
 @api.route("/projects/<project_id>", methods=["GET"])
 @json
 def get_one_project(project_id):
     project = current_app.mongodb_conn.Project.find_by_id(project_id)
-    return project
+    return make_response_project(project)
 
 
 @api.route("/projects/<project_id>", methods=["PUT"])
@@ -54,7 +55,7 @@ def update_project(project_id):
     helper_load_project_member_list(data, project)
 
     project.save()
-    return {"res": "success update"}
+    return make_response_project(project)
 
 
 @api.route("/projects/<project_id>", methods=["DELETE"])

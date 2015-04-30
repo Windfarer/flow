@@ -9,6 +9,19 @@
  */
 angular.module('flowApp')
   .controller('TaskCtrl', function($scope, restAPI) {
+    $('.collapsible').collapsible({
+      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
+
+    $scope.isActive = 'test1';
+    $('ul.tabs').tabs();
+    $scope.changeActive = function (option) {
+      $scope.isActive = option;
+      $('ul.tabs').tabs('select_tab', option);
+    };
+
+
+
     $scope.task_status = {"status": 0};
     $scope.task = new restAPI.tasks();
     //$scope.tasks = restAPI.tasks.query();

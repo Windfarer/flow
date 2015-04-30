@@ -8,10 +8,10 @@
  * Controller of the flowApp
  */
 angular.module('flowApp')
-  .controller('UserCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('UserCtrl', function ($scope, restAPI) {
+    $scope.user = restAPI.user.get();
+
+    $scope.saveUser = function() {
+      $scope.project.update()
+    }
   });
