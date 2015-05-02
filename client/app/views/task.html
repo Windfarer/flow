@@ -1,68 +1,21 @@
-<div class="row">
-  <div class="col s12 m4 l3" ng-controller="SidebarCtrl">
-    <ul id="sidebar_left">
-      <li ng-repeat="project in projects"><a ng-click="">First Sidebar Link</a></li>
-    </ul>
-    <div class="collection">
-      <a class="collection-item" ng-click="goToPersonal()">Personal</a>
-    </div>
-    <div class="collection">
-      <div class="collection-header"><h5>First Names</h5></div>
-      <a class="collection-item" ng-repeat="project in projects" ng-click="goToProject(project)">{{project.name}}</a>
-      <a ng-click="createProject()" class="collection-item">Create New Project</a>
-    </div>
-    sidebar
-  </div>
+<md-tabs md-selected="data.selectedIndex" flex>
+  <md-tab id="tab1">
+    <md-tab-label>INBOX</md-tab-label>
+    <md-tab-body>
+      <md-content ng-include="'taskcard.html'"></md-content>
+    </md-tab-body>
+  </md-tab>
+  <md-tab id="tab2">
+    <md-tab-label>DOING</md-tab-label>
+    <md-tab-body>
+      <md-content ng-include="'taskcard.html'"></md-content>
+    </md-tab-body>
+  </md-tab>
 
-  <div class="col s12 m8 l9">
-    <div class="row">
-      <div class="col s12">
-        <ul class="tabs">
-          <li class="tab col s3"><a ng-click="changeActive('test1')">INBOX</a></li>
-          <li class="tab col s3"><a ng-click="changeActive('test2')">DOING</a></li>
-          <li class="tab col s3"><a ng-click="changeActive('test3')">DONE</a></li>
-        </ul>
-      </div>
-      <div id="test1" class="col s12" ng-if="isActive==='test1'">Test 1</div>
-      <div id="test2" class="col s12" ng-if="isActive==='test2'">Test 2</div>
-      <div id="test3" class="col s12" ng-if="isActive==='test3'">Test 3</div>
-    </div>
-    <div class="row">
-      <div class="col s12">
-        <div class="card-panel task-card">
-          <div class="row">
-            <form class="col s12">
-              <div class="row task-card-row">
-                <div class="input-field col s11">
-                  <input type="text" id="new_task" class="validate" ng-model="task.title">
-                  <label for="new_task">New Task</label>
-                </div>
-                <div class="input-field col s1">
-                  <a class="waves-effect waves-teal btn-flat new-task-btn" ng-click="submitTask"><i class="mdi-content-add"></i></a>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col s12">
-        <ul class="collapsible popout" data-collapsible="accordion">
-          <li ng-repeat="task in tasks">
-            <div class="collapsible-header">
-              <form action="#">
-                <p>
-                  <input type="checkbox" ng-model="task.status" ng-change="updateTask(task)" ng-true-value="2" ng-false-value="0" id="{{task.id}}"/>
-                  <label for="{{task.id}}">{{task.title}}</label>
-                </p>
-              </form>
-            </div>
-            <div class="collapsible-body"><p>{{task}}</p></div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
+  <md-tab id="tab3">
+    <md-tab-label>DONE</md-tab-label>
+    <md-tab-body>
+      <md-content ng-include="'taskcard.html'"></md-content>
+    </md-tab-body>
+  </md-tab>
+</md-tabs>

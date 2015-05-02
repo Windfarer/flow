@@ -77,6 +77,7 @@ def make_response_task(data):
         "project": data.get("project"),
     }
 
+
 def helper_load_task_assgin_list(data, task):
     task.menber_list = []
     for item in data.get("assign_list"):

@@ -9,17 +9,10 @@
  */
 angular.module('flowApp')
   .controller('TaskCtrl', function($scope, restAPI) {
-    $scope.isActive = 'test1';
-    $('ul.tabs').tabs();
-    $scope.changeActive = function (option) {
-      $scope.isActive = option;
-      $('ul.tabs').tabs('select_tab', option);
-    };
 
     $scope.task_status = {"status": 0};
     $scope.task = new restAPI.tasks();
     $scope.tasks = restAPI.tasks.query();
-    //$scope.tasks = [{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'},{title: 'aaaaa',description:'bbbbb'}];
 
     $scope.changeStatusFilter = function(status) {
       console.log("change to:"+status);

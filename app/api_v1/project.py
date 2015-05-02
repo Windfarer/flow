@@ -19,14 +19,15 @@ def get_projects():
 @json
 def create_project():
     data = request.get_json()
-    project_validator(data)
+    # project_validator(data)
 
     project = current_app.mongodb_conn.Project()
     project.name = data["name"]
+    project.owner_id = g.user["_id"]
     project.manager_id = g.user["_id"]
 
     helper_load_project_member_list(data, project)
-
+    print(project)
     project.save()
     return make_response_project(project)
 
@@ -34,7 +35,7 @@ def create_project():
 @api.route("/projects/<project_id>", methods=["GET"])
 @json
 def get_one_project(project_id):
-    project = current_app.mongodb_conn.Project.find_by_id(project_id)
+    project = current_app.mongodb_conn.Project.find_one_by_id(project_id)
     return make_response_project(project)
 
 
@@ -75,15 +76,16 @@ def make_response_project(data):
 
 
 def helper_load_project_member_list(data, project):
-    project.member_list = []
-    for user_id in data.get("member_list"):
+    project.members = []
+    if data.get("members"):
+        for user_id in data.get("members"):
 
-        if current_app.mongodb_conn.User.find_one({"_id": ObjectId(user_id)}):
-            project.member_list.append(user_id)
-        else:
-            raise ValidationError("User not found")
-    if g.user["_id"] not in project.member_list:
-        project.member_list = g.user["_id"]
+            if current_app.mongodb_conn.User.find_one({"_id": ObjectId(user_id)}):
+                project.members.append(user_id)
+            else:
+                raise ValidationError("User not found")
+    if g.user["_id"] not in project.members:
+        project.members.append(g.user["_id"])
     return
 
 

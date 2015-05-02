@@ -16,9 +16,15 @@ angular
     'ngRoute',
     'ngTouch',
     'ngMessages',
-    'ui.materialize'
+    'ngMaterial'
   ])
-  .config(function ($routeProvider, ACCESS_LEVELS) {
+  .config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('blue')
+    .primaryPalette('blue')
+    .accentPalette('red');
+  })
+
+.config(function ($routeProvider, ACCESS_LEVELS) {
     $routeProvider
       //.when('/', {
       //  redirectTo: '/task/'
@@ -38,12 +44,12 @@ angular
         controller: 'TaskCtrl',
         access_level: ACCESS_LEVELS.user
       })
-      .when('/project/:project_id', {
+      .when('/task/project/:project_id', {
         templateUrl: 'views/task.html',
         controller: 'TaskCtrl',
         access_level: ACCESS_LEVELS.user
       })
-      .when('/project/:project_id/:action', {
+      .when('/project/:project_id', {
         templateUrl: 'views/project.html',
         controller: 'ProjectCtrl',
         access_level: ACCESS_LEVELS.user

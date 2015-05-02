@@ -9,11 +9,12 @@
  */
 angular.module('flowApp')
   .controller('SidebarCtrl', function ($scope, $location, restAPI) {
-    $scope.me =["myOwn"];
     $scope.projects = restAPI.projects.query();
-
-    $scope.goToProject = function (project) {
+    $scope.editProject = function (project) {
       $location.path('/project/'+project.id)
+    };
+    $scope.goToProject = function (project) {
+      $location.path('/task/project/'+project.id)
     };
     $scope.goToPersonal = function () {
       $location.path('/task')

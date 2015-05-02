@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('flowApp')
 
   .constant('ACCESS_LEVELS', {

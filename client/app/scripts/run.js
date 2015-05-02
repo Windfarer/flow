@@ -1,3 +1,4 @@
+'use strict';
 angular.module('flowApp')
   .run(function($rootScope, $location, Auth, ACCESS_LEVELS) {
     $rootScope.$on("$routeChangeStart", function(evt, next, curr) {
