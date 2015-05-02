@@ -25,3 +25,5 @@ class Project(Document):
     def find_one_by_id(self, group_id):
         return self.find_one({"_id": ObjectId(group_id)})
 
+    def find_by_user_id(self, user_id):
+        return self.find({"members": ObjectId(user_id)})

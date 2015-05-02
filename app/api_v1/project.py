@@ -1,11 +1,10 @@
 from flask import current_app, request, g
+from bson import ObjectId
 
 from . import api
-
+from ..exceptions import ValidationError
 from ..decorators import json
 from ..utils.validator import project_validator
-
-from ..helpers import helper_load_project_member_list
 
 
 @api.route("/projects", methods=["GET"])
@@ -24,7 +23,6 @@ def create_project():
 
     project = current_app.mongodb_conn.Project()
     project.name = data["name"]
-
     project.manager_id = g.user["_id"]
 
     helper_load_project_member_list(data, project)
@@ -48,9 +46,7 @@ def update_project(project_id):
     project_validator(data)
 
     project = current_app.mongodb_conn.Project()
-    project.title = data.get("title")
-    project.title = data.get("")
-    project.title = data.get("title")
+    project.name = data.get("name")
 
     helper_load_project_member_list(data, project)
 
@@ -62,9 +58,9 @@ def update_project(project_id):
 @json
 def delete_project(project_id):
     project = current_app.mongodb_conn.Project.find_by_id(project_id)
-    project.deleted = True
+    project.deleted = 1
     project.save()
-    return {"res": "success delete"}
+    return {"_id": project._id}
 
 
 def make_response_project(data):
@@ -76,4 +72,18 @@ def make_response_project(data):
         "menbers": data.get("members"),
         "deleted": data.get("deleted"),
     }
+
+
+def helper_load_project_member_list(data, project):
+    project.member_list = []
+    for user_id in data.get("member_list"):
+
+        if current_app.mongodb_conn.User.find_one({"_id": ObjectId(user_id)}):
+            project.member_list.append(user_id)
+        else:
+            raise ValidationError("User not found")
+    if g.user["_id"] not in project.member_list:
+        project.member_list = g.user["_id"]
+    return
+
 

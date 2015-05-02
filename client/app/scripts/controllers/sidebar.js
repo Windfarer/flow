@@ -14,5 +14,12 @@ angular.module('flowApp')
 
     $scope.goToProject = function (project) {
       $location.path('/project/'+project.id)
-    }
+    };
+    $scope.goToPersonal = function () {
+      $location.path('/task')
+    };
+    $scope.createProject = function () {
+      $location.path("/project/new");
+    };
+
   });

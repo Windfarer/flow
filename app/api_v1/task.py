@@ -1,8 +1,10 @@
 from flask import current_app, request, g
+from bson import ObjectId
 from . import api
 from ..decorators import json, validate_and_preprocess_payload
-from ..helpers import helper_load_task_assgin_list
-from ..utils.validator import task_validator
+
+from ..exceptions import ValidationError
+
 
 @api.route("/tasks", methods=["GET"])
 @json
@@ -56,7 +58,7 @@ def update_task(task_id):
 @json
 def delete_task(task_id):
     task = current_app.mongodb_conn.Task.find_one_by_id(task_id)
-    task.deleted = True
+    task.deleted = 1
     task.save()
     return {"_id": task._id}
 
@@ -74,3 +76,15 @@ def make_response_task(data):
         "sub_tasks": data.get("sub_tasks"),
         "project": data.get("project"),
     }
+
+def helper_load_task_assgin_list(data, task):
+    task.menber_list = []
+    for item in data.get("assign_list"):
+        user_id = ObjectId(item)
+        if current_app.mongodb_conn.User.find_one({"_id": user_id}):
+            task.assign_list.append(user_id)
+        else:
+            raise ValidationError("User not found")
+    if g.user["_id"] not in task.assign_list:
+        task.assign.list = g.user["_id"]
+    return

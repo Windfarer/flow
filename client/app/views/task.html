@@ -1,14 +1,20 @@
 <div class="row">
-
-  <div class="col s12 m4 l3"> <!-- Note that "m4 l3" was added -->
-    <ul id="slide-out" class="side-nav">
-      <li><a href="#!">First Sidebar Link</a></li>
-      <li><a href="#!">Second Sidebar Link</a></li>
+  <div class="col s12 m4 l3" ng-controller="SidebarCtrl">
+    <ul id="sidebar_left">
+      <li ng-repeat="project in projects"><a ng-click="">First Sidebar Link</a></li>
     </ul>
-    <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+    <div class="collection">
+      <a class="collection-item" ng-click="goToPersonal()">Personal</a>
+    </div>
+    <div class="collection">
+      <div class="collection-header"><h5>First Names</h5></div>
+      <a class="collection-item" ng-repeat="project in projects" ng-click="goToProject(project)">{{project.name}}</a>
+      <a ng-click="createProject()" class="collection-item">Create New Project</a>
+    </div>
+    sidebar
   </div>
 
-  <div class="col s12 m8 l9"> <!-- Note that "m8 l9" was added -->
+  <div class="col s12 m8 l9">
     <div class="row">
       <div class="col s12">
         <ul class="tabs">
@@ -42,7 +48,7 @@
     </div>
     <div class="row">
       <div class="col s12">
-        <ul class="collapsible" data-collapsible="accordion">
+        <ul class="collapsible popout" data-collapsible="accordion">
           <li ng-repeat="task in tasks">
             <div class="collapsible-header">
               <form action="#">
@@ -52,18 +58,11 @@
                 </p>
               </form>
             </div>
-            <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+            <div class="collapsible-body"><p>{{task}}</p></div>
           </li>
         </ul>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
 

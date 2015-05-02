@@ -15,7 +15,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngTouch',
-    'ngMessages'
+    'ngMessages',
+    'ui.materialize'
   ])
   .config(function ($routeProvider, ACCESS_LEVELS) {
     $routeProvider
@@ -38,6 +39,11 @@ angular
         access_level: ACCESS_LEVELS.user
       })
       .when('/project/:project_id', {
+        templateUrl: 'views/task.html',
+        controller: 'TaskCtrl',
+        access_level: ACCESS_LEVELS.user
+      })
+      .when('/project/:project_id/:action', {
         templateUrl: 'views/project.html',
         controller: 'ProjectCtrl',
         access_level: ACCESS_LEVELS.user
