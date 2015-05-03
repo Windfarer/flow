@@ -11,7 +11,7 @@ from ..exceptions import ValidationError
 def get_tasks():
 
     user_id = g.user["_id"]
-    print(user_id)
+
     project = request.args.get("project")
     status = int(request.args.get("status")) if request.args.get("status") else 0
     if project:
@@ -29,14 +29,16 @@ def get_tasks():
 @api.route("/tasks", methods=["POST"])
 @json
 def create_task():
-    user_id = g.user["_id"]
-
     data = request.get_json()
-    print(data)
-    task = current_app.mongodb_conn.Task()
+    user_id = g.user["_id"]
+    project = request.args.get("project")
 
+    task = current_app.mongodb_conn.Task()
     task.title = data.get("title")
     task.user_id = user_id
+    if project:
+        task.project = ObjectId(project)
+
     task.save()
 
     return make_response_task(task)
@@ -55,7 +57,6 @@ def update_task(task_id):
     task.deadline = data.get("deadline")
     task.start_time = data.get("start_time")
     task.finish_time = data.get("finish_time")
-    task.project = data.get("project")
     task.assignees = data.get("assignees")
     task.sub_tasks = data.get("sub_tasks")
 

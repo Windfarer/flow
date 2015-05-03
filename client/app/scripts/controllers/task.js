@@ -27,9 +27,9 @@ angular.module('flowApp')
       task.$update();
     };
     $scope.submitTask = function () {
-      $scope.task.$save()
+      $scope.task.$save({project:project_id})
         .then(function(data) {
-            $scope.task = new restAPI.tasks();
+            $scope.task = new restAPI.tasks({project:project_id});
             $scope.tasks.push(data);
         })
     };
