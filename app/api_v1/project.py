@@ -46,7 +46,7 @@ def update_project(project_id):
     data = request.get_json()
     project_validator(data)
 
-    project = current_app.mongodb_conn.Project()
+    project = current_app.mongodb_conn.Project.find_one({'_id': ObjectId(project_id)})
     project.name = data.get("name")
 
     helper_load_project_member_list(data, project)
@@ -65,12 +65,16 @@ def delete_project(project_id):
 
 
 def make_response_project(data):
+    members = []
+    for member in data.get("members"):
+        user = current_app.mongodb_conn.User.find_one({'_id': member})
+        members.append(user.email)
     return {
         "id": data.get("_id"),
         "name": data.get("name"),
         "owner_id": data.get("owner_id"),
         "managers": data.get("managers"),
-        "menbers": data.get("members"),
+        "members": members,
         "deleted": data.get("deleted"),
     }
 
@@ -78,10 +82,10 @@ def make_response_project(data):
 def helper_load_project_member_list(data, project):
     project.members = []
     if data.get("members"):
-        for user_id in data.get("members"):
-
-            if current_app.mongodb_conn.User.find_one({"_id": ObjectId(user_id)}):
-                project.members.append(user_id)
+        for user_email in data.get("members"):
+            user = current_app.mongodb_conn.User.find_one_by_email(user_email)
+            if user:
+                project.members.append(user._id)
             else:
                 raise ValidationError("User not found")
     if g.user["_id"] not in project.members:

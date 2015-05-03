@@ -8,14 +8,19 @@
       <md-icon md-svg-icon="icons/ic_inbox_48px.svg"></md-icon>
     </md-button>
   </md-card>
-  <md-card flex layout="row" ng-repeat="task in tasks.inbox">
-    <md-checkbox ng-model="task.status"
-                 aria-label="Checkbox"
-                 ng-true-value="2"
-                 ng-false-value="0"
-                 ng-change="updateTask(task)">
-    </md-checkbox>
-    <p>{{task.title}}</p>
+  <md-card flex layout="column" ng-repeat="task in tasks.inbox">
+    <div layout="row">
+      <md-checkbox ng-model="task.status"
+                   aria-label="Checkbox"
+                   ng-true-value="2"
+                   ng-false-value="0"
+                   ng-change="updateTask(task)">
+      </md-checkbox>
+      <p>{{task.title}}</p>
+    </div>
+    <md-list flex>
+      <md-list-item>ddddd</md-list-item>
+    </md-list>
   </md-card>
 </div>
 

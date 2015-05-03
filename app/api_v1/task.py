@@ -14,12 +14,14 @@ def get_tasks():
     print(user_id)
     project = request.args.get("project")
     status = int(request.args.get("status")) if request.args.get("status") else 0
-
-    tasks = current_app.mongodb_conn.Task.find({"user_id": ObjectId(user_id),
-                                                "status": status,
-                                                "project": ObjectId(project)
-                                                })
-
+    if project:
+        tasks = current_app.mongodb_conn.Task.find({"status": status,
+                                                    "project": ObjectId(project)
+                                                    })
+    else:
+        tasks = current_app.mongodb_conn.Task.find({"user_id": ObjectId(user_id),
+                                                    "status": status,
+                                                    })
     resp = [make_response_task(x) for x in tasks]
     return resp
 

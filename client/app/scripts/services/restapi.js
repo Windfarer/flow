@@ -33,6 +33,10 @@ angular.module('flowApp')
       projects: (function () {
         return $resource(api+'/projects/:project_id',{
           project_id: '@id'
+        },{
+          update: {
+            method: 'PUT'
+          }
         })
       })()
     };

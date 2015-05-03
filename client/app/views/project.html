@@ -4,7 +4,17 @@
     <label>Project Name</label>
     <input ng-model="project.name" type="text" required>
   </md-input-container>
+  <div layout="row">
+    <md-input-container flex="40">
+      <label>Add Member</label>
+      <input ng-model="email" type="email" required>
+    </md-input-container>
+    <md-button class="md-icon-button" aria-label="Favorite" ng-click="insertMemberEmail()">
+      <md-icon md-svg-icon="icons/ic_add_circle_outline_48px.svg"></md-icon>
+    </md-button>
+  </div>
 
+{{project}}
   <md-button class="md-raised md-primary" ng-click="saveProject()" ng-disabled="!project.name">Submit</md-button>
 </md-content>
 

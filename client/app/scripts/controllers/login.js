@@ -10,6 +10,9 @@
 angular.module('flowApp')
   .controller('LoginCtrl', function ($location, $scope, restAPI) {
     $scope.user = new restAPI.login();
+    $scope.goToRegister = function () {
+      $location.path("/register");
+    };
     $scope.submit = function () {
       $scope.user.$save()
         .then(function (data){

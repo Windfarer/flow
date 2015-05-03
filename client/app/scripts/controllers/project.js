@@ -25,4 +25,7 @@ angular.module('flowApp')
         $scope.project.$update()
       }
     };
+    $scope.insertMemberEmail = function () {
+      $scope.project.members.push($scope.email);
+    }
   });

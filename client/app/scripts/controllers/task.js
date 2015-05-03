@@ -9,14 +9,14 @@
  */
 angular.module('flowApp')
   .controller('TaskCtrl', function($scope, $routeParams, restAPI) {
-    var project = $routeParams.project_id;
+    var project_id = $routeParams.project_id;
 
     $scope.task_status = {"status": 0};
     $scope.task = new restAPI.tasks();
     $scope.tasks = {
-      inbox: restAPI.tasks.query({status:0}),
-      doing: restAPI.tasks.query({status:1}),
-      done: restAPI.tasks.query({status:2})
+      inbox: restAPI.tasks.query({status:0, project:project_id}),
+      doing: restAPI.tasks.query({status:1, project:project_id}),
+      done: restAPI.tasks.query({status:2, project:project_id})
     };
     $scope.changeStatusFilter = function(status) {
       console.log("change to:"+status);
