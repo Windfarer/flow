@@ -16,11 +16,13 @@ def get_tasks():
     status = int(request.args.get("status")) if request.args.get("status") else 0
     if project:
         tasks = current_app.mongodb_conn.Task.find({"status": status,
-                                                    "project": ObjectId(project)
+                                                    "project": ObjectId(project),
+                                                    "deleted": 0
                                                     })
     else:
         tasks = current_app.mongodb_conn.Task.find({"user_id": ObjectId(user_id),
                                                     "status": status,
+                                                    "deleted": 0
                                                     })
     resp = [make_response_task(x) for x in tasks]
     return resp
@@ -73,7 +75,7 @@ def delete_task(task_id):
     task = current_app.mongodb_conn.Task.find_one_by_id(task_id)
     task.deleted = 1
     task.save()
-    return {"_id": task._id}
+    return {"delete": task.deleted}
 
 
 def make_response_task(data):

@@ -26,6 +26,9 @@ angular.module('flowApp')
       console.log(task);
       task.$update();
     };
+    $scope.deleteTask = function (task) {
+      task.$delete();
+    };
     $scope.submitTask = function () {
       $scope.task.$save({project:project_id})
         .then(function(data) {
