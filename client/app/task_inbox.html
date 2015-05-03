@@ -9,16 +9,29 @@
     </md-button>
   </md-card>
   <md-card flex layout="column" ng-repeat="task in tasks.inbox">
-    <div layout="row">
+    <div layout="row" tabindex="-1" ng-click="task.expanded = !task.expanded">
       <md-checkbox ng-model="task.status"
                    aria-label="Checkbox"
                    ng-true-value="2"
                    ng-false-value="0"
                    ng-change="updateTask(task)">
       </md-checkbox>
-      <p>{{task.title}}</p>
+      <p flex>{{task.title}}</p>
+      <md-button class="md-icon-button" aria-label="More" ng-if="task.expanded">
+        <md-icon md-svg-icon="icons/ic_mode_edit_48px.svg"></md-icon>
+      </md-button>
     </div>
-
+    <div ng-if="task.expanded">
+      <md-input-container>
+        <label>Description</label>
+        <textarea ng-model="task.deadline"></textarea>
+      </md-input-container>
+      <md-input-container>
+        <label>Deadline</label>
+        <input ng-model="task.deadline" type="date">
+      </md-input-container>
+    </div>
   </md-card>
+
 </div>
 

@@ -33,5 +33,7 @@ angular.module('flowApp')
             $scope.tasks.push(data);
         })
     };
-
+    $scope.toogleTask = function () {
+      console.log("hi");
+    }
   });
