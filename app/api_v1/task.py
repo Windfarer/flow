@@ -12,8 +12,15 @@ def get_tasks():
 
     user_id = g.user["_id"]
     print(user_id)
-    tasks = current_app.mongodb_conn.Task.find_by_user_id(user_id)
-    resp = [make_response_task(x) for x in tasks if not x.deleted]
+    project = request.args.get("project")
+    status = int(request.args.get("status")) if request.args.get("status") else 0
+
+    tasks = current_app.mongodb_conn.Task.find({"user_id": ObjectId(user_id),
+                                                "status": status,
+                                                "project": ObjectId(project)
+                                                })
+
+    resp = [make_response_task(x) for x in tasks]
     return resp
 
 
@@ -49,6 +56,9 @@ def update_task(task_id):
     task.project = data.get("project")
     task.assignees = data.get("assignees")
     task.sub_tasks = data.get("sub_tasks")
+
+    if task.status == 0 and task.deadline:
+        task.status = 1
 
     task.save()
     return make_response_task(task)

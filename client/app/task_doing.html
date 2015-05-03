@@ -8,7 +8,7 @@
       <md-icon md-svg-icon="icons/ic_inbox_48px.svg"></md-icon>
     </md-button>
   </md-card>
-  <md-card flex layout="row" ng-repeat="task in tasks">
+  <md-card flex layout="row" ng-repeat="task in tasks.doing">
     <md-checkbox ng-model="task.status"
                  aria-label="Checkbox"
                  ng-true-value="2"

@@ -1,0 +1,21 @@
+<div layout="column" layout-fill layout-padding>
+  <md-card flex layout="row">
+    <md-input-container id="task_input" flex>
+      <label>New Task</label>
+      <input ng-model="task.title">
+    </md-input-container>
+    <md-button class="md-icon-button" aria-label="New Task" ng-click="submitTask()" ng-disabled="!task.title">
+      <md-icon md-svg-icon="icons/ic_inbox_48px.svg"></md-icon>
+    </md-button>
+  </md-card>
+  <md-card flex layout="row" ng-repeat="task in tasks.inbox">
+    <md-checkbox ng-model="task.status"
+                 aria-label="Checkbox"
+                 ng-true-value="2"
+                 ng-false-value="0"
+                 ng-change="updateTask(task)">
+    </md-checkbox>
+    <p>{{task.title}}</p>
+  </md-card>
+</div>
+
