@@ -63,7 +63,7 @@ def update_task(task_id):
     if data.get("assignees"):
         task.assignees = []
         for item in data.get("assignees"):
-            task.assignees.append(ObjectId(item.id))
+            task.assignees.append(ObjectId(item.get("id")))
 
     task.sub_tasks = data.get("sub_tasks")
 
@@ -84,6 +84,14 @@ def delete_task(task_id):
 
 
 def make_response_task(data):
+    assignees = []
+    for item in data.get("assignees"):
+        user = current_app.mongodb_conn.User.find_one({'_id': item})
+        assignees.append({
+            'id': user._id,
+            'nickname': user.nickname,
+            'email': user.email
+        })
     return {
         "id": data.get("_id"),
         "title": data.get("title"),
@@ -92,7 +100,7 @@ def make_response_task(data):
         "deadline": data.get("deadline"),
         "start_time": data.get("start_time"),
         "finish_time": data.get("finish_time"),
-        "assignees": data.get("assignees"),
+        "assignees": assignees,
         "sub_tasks": data.get("sub_tasks"),
         "project": data.get("project"),
     }
@@ -100,7 +108,7 @@ def make_response_task(data):
 
 def helper_load_task_assgin_list(data, task):
     task.menber_list = []
-    for item in data.get("assign_list"):
+    for item in data.get("assignees"):
         user_id = ObjectId(item)
         if current_app.mongodb_conn.User.find_one({"_id": user_id}):
             task.assign_list.append(user_id)
