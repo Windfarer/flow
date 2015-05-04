@@ -8,7 +8,7 @@
       <md-icon md-svg-icon="icons/ic_inbox_48px.svg"></md-icon>
     </md-button>
   </md-card>
-  <md-card flex layout="column" ng-repeat="task in tasks.inbox" ng-if="!task.delete==1">
+  <md-card flex layout="column" ng-repeat="task in tasks.inbox | orderBy: 'id':true" ng-if="!task.delete==1">
     <div layout="row" tabindex="-1" ng-click="task.expanded = !task.expanded">
       <md-checkbox ng-model="task.status"
                    aria-label="Checkbox"
@@ -21,7 +21,7 @@
         <md-icon md-svg-icon="icons/ic_mode_edit_48px.svg"></md-icon>
       </md-button>
     </div>
-    <div ng-if="task.expanded">
+    <div>
       <md-input-container>
         <label>Description</label>
         <textarea ng-model="task.description"></textarea>
@@ -29,7 +29,11 @@
       <md-input-container>
         <label>Deadline</label>
         <input ng-model="task.deadline" type="date">
+        {{task}}
       </md-input-container>
+      <md-contact-chips ng-model="task.assignees" md-contacts="querySearch($query)" md-contact-name="name" md-contact-email="email" filter-selected="true" placeholder="To">
+      </md-contact-chips>
+
       <div layout="row">
         <md-button class="md-primary" ng-click="updateTask(task)" aria-label="Update Task">Update</md-button>
         <div flex></div>
@@ -41,4 +45,3 @@
   </md-card>
 
 </div>
-

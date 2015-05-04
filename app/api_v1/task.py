@@ -1,5 +1,6 @@
 from flask import current_app, request, g
 from bson import ObjectId
+from datetime import datetime
 from . import api
 from ..decorators import json, validate_and_preprocess_payload
 
@@ -25,6 +26,7 @@ def get_tasks():
                                                     "deleted": 0
                                                     })
     resp = [make_response_task(x) for x in tasks]
+    print(resp)
     return resp
 
 
@@ -56,9 +58,9 @@ def update_task(task_id):
     task.title = data.get("title")
     task.description = data.get("description")
     task.status = data.get("status")
-    task.deadline = data.get("deadline")
-    task.start_time = data.get("start_time")
-    task.finish_time = data.get("finish_time")
+    if data.get("deadline"):
+        task.deadline = datetime.strptime(data.get("deadline"), "%Y-%m-%dT%H:%M:%S.%fZ")
+
     task.assignees = data.get("assignees")
     task.sub_tasks = data.get("sub_tasks")
 

@@ -8,7 +8,8 @@ from datetime import date, datetime
 class CustomJSONEncoder(JSONEncoder):
     def default(self, obj):
         if isinstance(obj, datetime):
-            return obj.strftime("%Y-%m-%d %H:%M:%S")
+            # return obj.strftime("%Y-%m-%d %H:%M:%S")
+            return obj.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
         elif isinstance(obj, date):
             return obj.strftime("%Y-%m-%d")
         elif isinstance(obj, ObjectId):
@@ -36,7 +37,7 @@ def json(f):
         if status:
             status_code = status
         rv = make_response(dumps(rv, cls=CustomJSONEncoder), status_code, {"Content-Type": "application/json"})
-
+        print(rv.data)
         if headers is not None:
             rv.headers.extend(headers)
         rv.headers.extend(make_cors_headers())

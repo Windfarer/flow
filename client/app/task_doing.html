@@ -8,14 +8,38 @@
       <md-icon md-svg-icon="icons/ic_inbox_48px.svg"></md-icon>
     </md-button>
   </md-card>
-  <md-card flex layout="row" ng-repeat="task in tasks.doing">
-    <md-checkbox ng-model="task.status"
-                 aria-label="Checkbox"
-                 ng-true-value="2"
-                 ng-false-value="0"
-                 ng-change="updateTask(task)">
-    </md-checkbox>
-    <p>{{task.title}}</p>
+  <md-card flex layout="column" ng-repeat="task in tasks.inbox | orderBy: 'id':true" ng-if="!task.delete==1">
+    <div layout="row" tabindex="-1" ng-click="task.expanded = !task.expanded">
+      <md-checkbox ng-model="task.status"
+                   aria-label="Checkbox"
+                   ng-true-value="2"
+                   ng-false-value="0"
+                   ng-change="updateTask(task)">
+      </md-checkbox>
+      <p flex>{{task.title}}</p>
+      <md-button class="md-icon-button" aria-label="More" ng-if="task.expanded">
+        <md-icon md-svg-icon="icons/ic_mode_edit_48px.svg"></md-icon>
+      </md-button>
+    </div>
+    <div ng-if="task.expanded">
+      <md-input-container>
+        <label>Description</label>
+        <textarea ng-model="task.description"></textarea>
+      </md-input-container>
+      <md-input-container>
+        <label>Deadline</label>
+        <input ng-model="task.deadline" type="date">
+        {{task}}
+      </md-input-container>
+      <div layout="row">
+        <md-button class="md-primary" ng-click="updateTask(task)" aria-label="Update Task">Update</md-button>
+        <div flex></div>
+        <md-button ng-click="deleteTask(task)" aria-label="Delete Task">
+          <md-icon md-svg-icon="icons/ic_delete_48px.svg"></md-icon>
+        </md-button>
+      </div>
+    </div>
   </md-card>
+
 </div>
 

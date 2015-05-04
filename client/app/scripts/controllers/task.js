@@ -8,8 +8,11 @@
  * Controller of the flowApp
  */
 angular.module('flowApp')
-  .controller('TaskCtrl', function($scope, $routeParams, restAPI) {
+  .controller('TaskCtrl', function($scope, $routeParams, restAPI, $timeout, $q) {
     var project_id = $routeParams.project_id;
+    if (project_id) {
+      $scope.project = restAPI.projects.get({project_id: project_id});
+    }
 
     $scope.task_status = {"status": 0};
     $scope.task = new restAPI.tasks();
@@ -33,10 +36,21 @@ angular.module('flowApp')
       $scope.task.$save({project:project_id})
         .then(function(data) {
             $scope.task = new restAPI.tasks({project:project_id});
-            $scope.tasks.push(data);
+            $scope.tasks.inbox.push(data);
         })
     };
-    $scope.toogleTask = function () {
-      console.log("hi");
-    }
+
+    var createFilterFor = function (query) {
+      var lowercaseQuery = angular.lowercase(query);
+
+      return function filterFn(contact) {
+        console.log(contact);
+        return (contact.name.indexOf(lowercaseQuery) != -1);
+      };
+    };
+    $scope.querySearch = function (query) {
+      var results = query ? $scope.project.members.filter(createFilterFor(query)) : [];
+      console.log(results);
+      return results;
+    };
   });
