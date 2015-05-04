@@ -68,7 +68,11 @@ def make_response_project(data):
     members = []
     for member in data.get("members"):
         user = current_app.mongodb_conn.User.find_one({'_id': member})
-        members.append(user.email)
+        members.append({
+            'id': user._id,
+            'nickname': user.nickname,
+            'email': user.email
+        })
     return {
         "id": data.get("_id"),
         "name": data.get("name"),

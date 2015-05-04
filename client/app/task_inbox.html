@@ -21,7 +21,7 @@
         <md-icon md-svg-icon="icons/ic_mode_edit_48px.svg"></md-icon>
       </md-button>
     </div>
-    <div>
+    <div ng-if="task.expanded">
       <md-input-container>
         <label>Description</label>
         <textarea ng-model="task.description"></textarea>
@@ -31,7 +31,7 @@
         <input ng-model="task.deadline" type="date">
         {{task}}
       </md-input-container>
-      <md-contact-chips ng-model="task.assignees" md-contacts="querySearch($query)" md-contact-name="name" md-contact-email="email" filter-selected="true" placeholder="To">
+      <md-contact-chips ng-model="task.assignees" md-contacts="querySearch($query)" md-contact-name="nickname" md-contact-email="email" filter-selected="true" placeholder="To">
       </md-contact-chips>
 
       <div layout="row">
@@ -43,5 +43,5 @@
       </div>
     </div>
   </md-card>
-
+{{project}}
 </div>

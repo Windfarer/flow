@@ -45,7 +45,7 @@ angular.module('flowApp')
 
       return function filterFn(contact) {
         console.log(contact);
-        return (contact.name.indexOf(lowercaseQuery) != -1);
+        return (contact.nickname.indexOf(lowercaseQuery) != -1);
       };
     };
     $scope.querySearch = function (query) {

@@ -61,7 +61,11 @@ def update_task(task_id):
     if data.get("deadline"):
         task.deadline = datetime.strptime(data.get("deadline"), "%Y-%m-%dT%H:%M:%S.%fZ")
 
-    task.assignees = data.get("assignees")
+    if data.get("assignees"):
+        task.assignees = []
+        for item in data.get("assignees"):
+            task.assignees.append(ObjectId(item.id))
+
     task.sub_tasks = data.get("sub_tasks")
 
     if task.status == 0 and task.deadline:
