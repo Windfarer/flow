@@ -26,7 +26,6 @@ def get_tasks():
                                                     "deleted": 0
                                                     })
     resp = [make_response_task(x) for x in tasks]
-    print(resp)
     return resp
 
 

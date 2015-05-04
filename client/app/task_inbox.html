@@ -26,12 +26,32 @@
         <label>Description</label>
         <textarea ng-model="task.description"></textarea>
       </md-input-container>
+      <div layout="row">
+        <md-input-container flex>
+          <label>New Sub-task</label>
+          <input ng-model="task.newsubtask.title">
+        </md-input-container>
+        <md-button class="md-icon-button" aria-label="New Sub-task" ng-click="AddSubTask(task)" ng-disabled="!task.newsubtask">
+          <md-icon md-svg-icon="icons/ic_add_circle_outline_48px.svg"></md-icon>
+        </md-button>
+      </div>
+      <md-list>
+        <md-list-item ng-repeat="subtask in task.sub_tasks">
+          <md-checkbox ng-model="subtask.status"
+                       aria-label="SubTask Checkbox"
+                       ng-true-value="2"
+                       ng-false-value="0"
+                       ng-change="updateTask(task)">
+          </md-checkbox>
+          <p>{{subtask.title}}</p>
+        </md-list-item>
+      </md-list>
+
       <md-input-container>
         <label>Deadline</label>
         <input ng-model="task.deadline" type="date">
-        {{task}}
       </md-input-container>
-      <md-contact-chips ng-model="task.assignees" md-contacts="querySearch($query)" md-contact-name="nickname" md-contact-email="email" filter-selected="true" placeholder="To">
+      <md-contact-chips ng-model="task.assignees" md-contacts="querySearch($query)" md-contact-name="nickname" md-contact-email="email" filter-selected="true" placeholder="Assignees">
       </md-contact-chips>
 
       <div layout="row">
@@ -43,5 +63,5 @@
       </div>
     </div>
   </md-card>
-{{project}}
+
 </div>

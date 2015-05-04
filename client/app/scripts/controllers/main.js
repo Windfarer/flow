@@ -8,8 +8,15 @@
  * Controller of the flowApp
  */
 angular.module('flowApp')
-  .controller('MainCtrl', function ($scope ,Auth) {
+  .controller('MainCtrl', function ($scope, Auth, $location) {
     $scope.showComponent = function () {
       return Auth.isLoggedIn();
+    };
+    $scope.goToUserProfile = function () {
+      $location.path('/user')
+    };
+    $scope.logout = function () {
+      Auth.logout();
+      $location.path("/landing");
     };
   });

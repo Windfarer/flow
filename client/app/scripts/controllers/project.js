@@ -8,7 +8,7 @@
  * Controller of the flowApp
  */
 angular.module('flowApp')
-  .controller('ProjectCtrl', function ($scope,$routeParams ,restAPI) {
+  .controller('ProjectCtrl', function ($scope, $routeParams ,restAPI) {
     $scope.isNew = $routeParams.project_id === 'new';
     if ($scope.isNew) {
       $scope.project = new restAPI.projects();
@@ -27,5 +27,9 @@ angular.module('flowApp')
     };
     $scope.insertMemberEmail = function () {
       $scope.project.members.push({email:$scope.email});
-    }
+      $scope.project.$update();
+    };
+    $scope.removeMember = function (member) {
+      console.log("remove member");
+    };
   });

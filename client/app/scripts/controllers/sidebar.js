@@ -22,5 +22,4 @@ angular.module('flowApp')
     $scope.createProject = function () {
       $location.path("/project/new");
     };
-
   });

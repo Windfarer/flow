@@ -40,6 +40,14 @@ angular.module('flowApp')
         })
     };
 
+    $scope.AddSubTask = function (task) {
+      if (!task.sub_tasks){
+        task.sub_tasks = [];
+      }
+      task.sub_tasks.push({title:task.newsubtask.title, status:0});
+      task.newsubtask.title = "";
+    };
+
     var createFilterFor = function (query) {
       var lowercaseQuery = angular.lowercase(query);
 
