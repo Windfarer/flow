@@ -4,12 +4,18 @@
       <label>New Task</label>
       <input ng-model="task.title">
     </md-input-container>
-    <md-button class="md-icon-button" aria-label="New Task" ng-click="submitTask()" ng-disabled="!task.title">
+    <md-button class="md-icon-button"
+               aria-label="New Task"
+               ng-click="submitTask()"
+               ng-disabled="!task.title">
       <md-icon md-svg-icon="icons/ic_inbox_48px.svg"></md-icon>
     </md-button>
   </md-card>
-  <md-card flex layout="column" ng-repeat="task in tasks.inbox | orderBy: 'id':true" ng-if="!task.delete==1">
-    <div layout="row" tabindex="-1" ng-click="task.expanded = !task.expanded">
+  <md-card flex layout="column"
+           ng-repeat="task in tasks.inbox | orderBy: 'id':true"
+           ng-if="task.deleted!==1">
+    <div layout="row" tabindex="-1"
+         ng-click="task.expanded = !task.expanded">
       <md-checkbox ng-model="task.status"
                    aria-label="Checkbox"
                    ng-true-value="2"
@@ -31,12 +37,16 @@
           <label>New Sub-task</label>
           <input ng-model="task.newsubtask.title">
         </md-input-container>
-        <md-button class="md-icon-button" aria-label="New Sub-task" ng-click="AddSubTask(task)" ng-disabled="!task.newsubtask">
+        <md-button class="md-icon-button"
+                   aria-label="New Sub-task"
+                   ng-click="addSubTask(task)"
+                   ng-disabled="!task.newsubtask">
           <md-icon md-svg-icon="icons/ic_add_circle_outline_48px.svg"></md-icon>
         </md-button>
       </div>
       <md-list>
-        <md-list-item ng-repeat="subtask in task.sub_tasks">
+        <md-list-item ng-repeat="subtask in task.sub_tasks"
+                      ng-if="subtask.deleted !== 1">
           <md-checkbox ng-model="subtask.status"
                        aria-label="SubTask Checkbox"
                        ng-true-value="2"
@@ -44,6 +54,10 @@
                        ng-change="updateTask(task)">
           </md-checkbox>
           <p>{{subtask.title}}</p>
+            <md-icon class="md-secondary"
+                     aria-label="Delete Sub-task"
+                     md-svg-icon="icons/ic_remove_circle_outline_48px.svg"
+                     ng-click="deleteSubTask($index, task)"></md-icon>
         </md-list-item>
       </md-list>
 
@@ -51,17 +65,24 @@
         <label>Deadline</label>
         <input ng-model="task.deadline" type="date">
       </md-input-container>
-      <md-contact-chips ng-model="task.assignees" md-contacts="querySearch($query)" md-contact-name="nickname" md-contact-email="email" filter-selected="true" placeholder="Assignees">
+      <md-contact-chips ng-model="task.assignees"
+                        md-contacts="querySearch($query)"
+                        md-contact-name="nickname"
+                        md-contact-email="email"
+                        filter-selected="true"
+                        placeholder="Assignees">
       </md-contact-chips>
 
       <div layout="row">
-        <md-button class="md-primary" ng-click="updateTask(task)" aria-label="Update Task">Update</md-button>
+        <md-button class="md-primary"
+                   ng-click="updateTask(task)"
+                   aria-label="Update Task">Update</md-button>
         <div flex></div>
-        <md-button ng-click="deleteTask(task)" aria-label="Delete Task">
+        <md-button ng-click="deleteTask(task)"
+                   aria-label="Delete Task">
           <md-icon md-svg-icon="icons/ic_delete_48px.svg"></md-icon>
         </md-button>
       </div>
     </div>
   </md-card>
-
 </div>

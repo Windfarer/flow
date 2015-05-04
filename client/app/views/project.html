@@ -2,19 +2,30 @@
   <h2>Login</h2>
   <md-input-container>
     <label>Project Name</label>
-    <input ng-model="project.name" type="text" required>
+    <input ng-model="project.name"
+           type="text" required>
   </md-input-container>
   <div layout="row">
     <md-input-container flex="40">
       <label>Add Member</label>
-      <input ng-model="email" type="email" required>
+      <input ng-model="email"
+             type="email" required>
     </md-input-container>
-    <md-button class="md-icon-button" aria-label="Favorite" ng-click="insertMemberEmail()">
+    <md-button class="md-icon-button"
+               aria-label="Favorite"
+               ng-click="insertMemberEmail()">
       <md-icon md-svg-icon="icons/ic_add_circle_outline_48px.svg"></md-icon>
     </md-button>
   </div>
-
+  <md-list>
+    <md-list-item ng-repeat="member in project.members">
+      <p>{{member.nickname}}</p>
+      <p>{{member.email}}</p>
+    </md-list-item>
+  </md-list>
 {{project}}
-  <md-button class="md-raised md-primary" ng-click="saveProject()" ng-disabled="!project.name">Submit</md-button>
+  <md-button class="md-raised md-primary"
+             ng-click="saveProject()"
+             ng-disabled="!project.name">Submit</md-button>
 </md-content>
 

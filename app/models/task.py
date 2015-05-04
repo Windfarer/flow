@@ -16,7 +16,7 @@ class Task(Document):
         "assignees": [ObjectId],
         "project": ObjectId,
         "status": int,
-        "sub_tasks": [{"status": int, "title": str}],
+        "sub_tasks": [{"status": int, "title": str, "deleted": int}],
         "deleted": int
     }
     required_fields = ["title", "user_id"]

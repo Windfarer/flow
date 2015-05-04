@@ -40,12 +40,16 @@ angular.module('flowApp')
         })
     };
 
-    $scope.AddSubTask = function (task) {
+    $scope.addSubTask = function (task) {
       if (!task.sub_tasks){
         task.sub_tasks = [];
       }
-      task.sub_tasks.push({title:task.newsubtask.title, status:0});
+      task.sub_tasks.push({title:task.newsubtask.title, status:0, deleted:0});
       task.newsubtask.title = "";
+    };
+    $scope.deleteSubTask = function (index, task) {
+      console.log("remove",index);
+      task.sub_tasks[index].deleted = 1;
     };
 
     var createFilterFor = function (query) {

@@ -80,7 +80,7 @@ def delete_task(task_id):
     task = current_app.mongodb_conn.Task.find_one_by_id(task_id)
     task.deleted = 1
     task.save()
-    return {"delete": task.deleted}
+    return {"deleted": task.deleted}
 
 
 def make_response_task(data):
