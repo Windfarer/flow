@@ -8,7 +8,7 @@
  * Controller of the flowApp
  */
 angular.module('flowApp')
-  .controller('MainCtrl', function ($scope, Auth, $location) {
+  .controller('MainCtrl', function ($scope, Auth, $location, $mdSidenav, $mdUtil, $log) {
     $scope.showComponent = function () {
       return Auth.isLoggedIn();
     };
@@ -19,4 +19,12 @@ angular.module('flowApp')
       Auth.logout();
       $location.path("/landing");
     };
+    $scope.toggleSidebar = buildToggler('sidebar');
+    function buildToggler(navID) {
+      var debounceFn =  $mdUtil.debounce(function(){
+        $mdSidenav(navID)
+          .toggle()
+      },300);
+      return debounceFn;
+    }
   });
