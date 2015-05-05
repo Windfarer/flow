@@ -65,4 +65,12 @@ angular.module('flowApp')
       console.log(results);
       return results;
     };
+
+  })
+.filter('dateFilter', function() {
+    return function (task) {
+      console.log(task);
+      task.deadline = new Date(task[0].deadline*1000);
+      return task
+    }
   });

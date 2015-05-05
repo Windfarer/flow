@@ -2,7 +2,7 @@ import functools
 from flask import make_response
 from json import JSONEncoder, dumps
 from bson import ObjectId
-from datetime import date, datetime
+from datetime import date, datetime, time
 
 
 class CustomJSONEncoder(JSONEncoder):
@@ -10,7 +10,8 @@ class CustomJSONEncoder(JSONEncoder):
         if isinstance(obj, datetime):
             # return obj.strftime("%Y-%m-%d %H:%M:%S")
             # return obj.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
-            return obj.strftime("%Y-%m-%d")
+            # return obj.strftime("%Y-%m-%d")
+            return obj.timestamp()
         elif isinstance(obj, date):
             return obj.strftime("%Y-%m-%d")
         elif isinstance(obj, ObjectId):
