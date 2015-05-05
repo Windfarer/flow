@@ -17,7 +17,7 @@ angular.module('flowApp')
     };
     $scope.logout = function () {
       Auth.logout();
-      $location.path("/landing");
+      $location.path("/login");
     };
     $scope.toggleSidebar = buildToggler('sidebar');
     function buildToggler(navID) {

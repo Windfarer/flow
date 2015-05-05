@@ -45,10 +45,17 @@
             <label>Keyword</label>
             <input ng-model="search">
           </md-input-container>
+        <md-button class="md-icon-button"
+                   aria-label="User Profile"
+                   ng-show="showComponent()">
+          <md-icon md-svg-icon="icons/ic_settings_applications_48px.svg"
+                   ng-click="goToUserProfile()"></md-icon>
+        </md-button>
           <md-button class="md-icon-button"
                      aria-label="More"
                      ng-show="showComponent()">
-            <md-icon md-svg-icon="icons/ic_more_vert_48px.svg"></md-icon>
+            <md-icon md-svg-icon="icons/ic_exit_to_app_48px.svg"
+              ng-click="logout()"></md-icon>
           </md-button>
       </div>
     </md-toolbar>

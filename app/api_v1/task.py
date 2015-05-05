@@ -52,7 +52,6 @@ def create_task():
 def update_task(task_id):
 
     data = request.get_json()
-    print(data)
     task = current_app.mongodb_conn.Task.find_one_by_id(task_id)
     task.title = data.get("title")
     task.description = data.get("description")

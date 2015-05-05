@@ -8,8 +8,8 @@
  * Controller of the flowApp
  */
 angular.module('flowApp')
-  .controller('UserCtrl', function ($scope, restAPI) {
-    $scope.user = restAPI.user.get();
+  .controller('UserCtrl', function ($scope, restAPI, Auth) {
+    $scope.user = restAPI.user.get({user_id:Auth.getId()});
 
     $scope.saveUser = function() {
       $scope.project.update()

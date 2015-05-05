@@ -1,5 +1,6 @@
 <md-content layout-padding>
-  <h2>Login</h2>
+  <h2 ng-if="isNew">Create A New Project</h2>
+  <h2 ng-if="!isNew">Project</h2>
   <md-input-container>
     <label>Project Name</label>
     <input ng-model="project.name"

@@ -85,7 +85,6 @@ def make_response_project(data):
 
 def helper_load_project_member_list(data, project):
     project.members = []
-    print(data)
     if data.get("members"):
         for user in data.get("members"):
             user = current_app.mongodb_conn.User.find_one_by_email(user.get("email"))

@@ -21,6 +21,11 @@ angular.module('flowApp')
       register: (function() {
         return $resource(open_api+'/register')
       })(),
+      user: (function() {
+        return $resource(open_api+'/users/:user_id',{
+          user_id: '@'
+        })
+      })(),
       tasks: (function () {
         return $resource(api+'/tasks/:task_id',{
           task_id: '@id'

@@ -1,6 +1,7 @@
 from flask import Blueprint, current_app, g
 
 from ..auth import auth_token
+from ..decorators import json
 
 
 api = Blueprint("api", __name__)

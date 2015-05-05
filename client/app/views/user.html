@@ -1,0 +1,21 @@
+<md-content layout-padding>
+  <h2 >User Profile</h2>
+  <md-input-container>
+    <label>Nickname</label>
+    <input ng-model="user.name"
+           type="text" required>
+  </md-input-container>
+  <md-input-container flex="40">
+    <label>Email</label>
+    <input ng-model="user.email"
+           type="email" required>
+  </md-input-container>
+  <md-button class="md-raised md-primary"
+             ng-click="saveProject()"
+             ng-disabled="!project.name">Submit</md-button>
+  <div flex></div>
+  <md-button
+    ng-click="deleteProject()"
+    ng-disabled="!project.name">Delete Project</md-button>
+</md-content>
+
