@@ -8,7 +8,7 @@
  * Controller of the flowApp
  */
 angular.module('flowApp')
-  .controller('LoginCtrl', function ($location, $scope, restAPI, Auth, $cookieStore) {
+  .controller('LoginCtrl', function ($location, $scope, restAPI, Auth, $cookieStore, $mdToast) {
     $scope.user = new restAPI.login();
     $scope.goToRegister = function () {
       $location.path("/register");
@@ -21,6 +21,8 @@ angular.module('flowApp')
           console.log(data);
           $location.path('/')
         }, function (err) {
+          var msg = err.data.message ? err.data.message : "login failed";
+          $mdToast.showSimple(msg);
           console.log("login failed");
           console.log(err);
         })

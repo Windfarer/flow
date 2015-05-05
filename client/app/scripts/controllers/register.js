@@ -18,8 +18,11 @@ angular.module('flowApp')
         .then(function (data){
           console.log("register success");
           console.log(data);
+          $mdToast.showSimple("register success");
           $location.path('/login')
         }, function (err) {
+          var msg = err.data.message ? err.data.message : "register failed";
+          $mdToast.showSimple(msg);
           console.log("register failed");
           console.log(err);
         })

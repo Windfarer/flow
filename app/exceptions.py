@@ -3,10 +3,15 @@ from bson import ObjectId
 from werkzeug.exceptions import NotFound
 import re
 
+
 class ValidationError(ValueError):
     def __init__(self, msg):
         print(msg)
 
+
+class UserNotFound(NotFound):
+    def __init__(self, msg):
+        print(msg)
 
 
 class Structure(object):

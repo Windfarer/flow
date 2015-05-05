@@ -1,5 +1,5 @@
 from .api_v1 import api
-from .exceptions import ValidationError
+from .exceptions import ValidationError, UserNotFound
 from .decorators import json
 
 @api.app_errorhandler(ValidationError)
@@ -24,16 +24,26 @@ def bad_request(e):
     return response, 400
 
 
+@api.app_errorhandler(UserNotFound)
+@json
+def not_found(e):
+    response = {
+        "status": 404,
+        "error": "not found",
+        "message": e.args[0]
+    }
+    return response, 404
+
+
 @api.app_errorhandler(404)
 @json
 def not_found(e):
     response = {
         "status": 404,
         "error": "not found",
-        "message": "invalid resource URI"
+        "message": "resource URI not found"
     }
     return response, 404
-
 
 @api.app_errorhandler(405)
 @json

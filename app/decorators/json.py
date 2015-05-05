@@ -9,7 +9,8 @@ class CustomJSONEncoder(JSONEncoder):
     def default(self, obj):
         if isinstance(obj, datetime):
             # return obj.strftime("%Y-%m-%d %H:%M:%S")
-            return obj.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+            # return obj.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+            return obj.strftime("%Y-%m-%d")
         elif isinstance(obj, date):
             return obj.strftime("%Y-%m-%d")
         elif isinstance(obj, ObjectId):

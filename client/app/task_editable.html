@@ -12,10 +12,11 @@
     </md-button>
   </md-card>
   <md-card flex layout="column"
-           ng-repeat="task in tasks.inbox | orderBy: 'id':true | filter:{$: search}"
+           ng-repeat="task in tasks.doing | orderBy: 'id':true | filter:{$: search}"
            ng-if="task.deleted!==1">
     <div layout="row" tabindex="-1"
          ng-click="task.expanded = !task.expanded">
+      {{task}}
       <md-checkbox ng-model="task.status"
                    aria-label="Checkbox"
                    ng-true-value="2"
@@ -63,7 +64,7 @@
 
       <md-input-container>
         <label>Deadline</label>
-        <input ng-model="task.deadline" type="date">
+        <input ng-model="task.deadline" ng-init="Date().parse(task.deadline)" type="date">
       </md-input-container>
       <md-contact-chips ng-model="task.assignees"
                         md-contacts="querySearch($query)"
