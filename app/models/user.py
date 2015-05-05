@@ -51,7 +51,9 @@ class User(Document):
             data = s.loads(token)
         except Exception:
             return None
-        return current_app.mongodb_conn.User.find_one({"_id": ObjectId(data["id"])})
+        return current_app.mongodb_conn.User.find_one({"_id": ObjectId(data["id"]),
+                                                       "deleted": 0})
 
     def find_one_by_email(self, email):
-        return self.find_one({"email":email})
+        return self.find_one({"email":email,
+                              "deleted": 0})

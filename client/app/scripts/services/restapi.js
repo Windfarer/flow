@@ -22,8 +22,12 @@ angular.module('flowApp')
         return $resource(open_api+'/register')
       })(),
       user: (function() {
-        return $resource(open_api+'/users/:user_id',{
-          user_id: '@'
+        return $resource(api+'/users/:user_id',{
+          user_id: '@user_id'
+        },{
+          update: {
+            method: 'PUT'
+          }
         })
       })(),
       tasks: (function () {

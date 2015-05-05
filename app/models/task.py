@@ -32,20 +32,17 @@ class Task(Document):
         # "owner_id": object_id_validator
     }
 
-    def one_subtask(self, data):
-        pass
-
-    def remove_subtask(self):
-        pass
-
     def find_by_user_id(self, user_id):
-        return self.find({"user_id": ObjectId(user_id)})
+        return self.find({"user_id": ObjectId(user_id),
+                          "deleted": 0})
 
     def find_by_id(self, task_id):
-        return self.find({"_id": ObjectId(task_id)})
+        return self.find({"_id": ObjectId(task_id),
+                          "deleted": 0})
 
     def find_one_by_id(self, task_id):
-        return self.find_one({"_id": ObjectId(task_id)})
+        return self.find_one({"_id": ObjectId(task_id),
+                              "deleted": 0})
 
-    def remove(self, app_id):
-        return self.remove({"app_id": app_id})
+    # def remove(self, app_id):
+    #     return self.remove({"app_id": app_id})

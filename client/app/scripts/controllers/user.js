@@ -12,6 +12,9 @@ angular.module('flowApp')
     $scope.user = restAPI.user.get({user_id:Auth.getId()});
 
     $scope.saveUser = function() {
-      $scope.project.update()
-    }
+      $scope.user.$update()
+    };
+    $scope.deleteUser = function() {
+      $scope.user.$delete();
+    };
   });

@@ -37,13 +37,15 @@ def login():
     data["email"] = data["email"].lower()
     user = current_app.mongodb_conn.User.find_one_by_email(data.get("email"))
     if user:
-        user.verify_password(data.get("password"))
+        if user.verify_password(data.get("password")):
+            return {
+                "_id": user._id,
+                "email": user.email,
+                "alias": user.alias,
+                "token": user.generate_auth_token(),
+                "role": user.role
+            }
+        else:
+            raise ValidationError("Wrong password")
     else:
-        raise NotFound("user not exists")
-    return {
-        "_id": user._id,
-        "email": user.email,
-        "alias": user.alias,
-        "token": user.generate_auth_token(),
-        "role": user.role
-    }
+        raise NotFound("User is not exists")
