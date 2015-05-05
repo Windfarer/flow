@@ -1,17 +1,21 @@
-<h2>Login</h2>
-  <md-input-container>
-    <label>Email</label>
-    <input ng-model="user.email"
-           type="email"
-           ng-pattern="/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/" required>
-  </md-input-container>
-  <md-input-container>
-    <label>Password</label>
-    <input ng-model="user.password"
-           type="password" required>
-  </md-input-container>
-  <md-button class="md-raised md-primary"
-             ng-click="submit()"
-             ng-disabled="!user.email || !user.password">Go</md-button>
-  <md-button ng-click="goToRegister()">Reigister</md-button>
+<div layout="row" layout-align="center center">
+  <div flex="50">
+    <h2>Login</h2>
+    <md-input-container>
+      <label>Email</label>
+      <input ng-model="user.email"
+             type="email"
+             ng-pattern="/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/" required>
+    </md-input-container>
+    <md-input-container>
+      <label>Password</label>
+      <input ng-model="user.password"
+             type="password" required>
+    </md-input-container>
+    <md-button class="md-raised md-primary"
+               ng-click="submit()"
+               ng-disabled="!user.email || !user.password">Go</md-button>
+    <md-button ng-click="goToRegister()">Reigister</md-button>
 
+  </div>
+</div>

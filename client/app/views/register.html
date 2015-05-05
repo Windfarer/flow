@@ -1,18 +1,22 @@
-<h2>Register</h2>
-  <md-input-container>
-    <label>Email</label>
-    <input ng-model="user.email"
-           type="email" required>
-  </md-input-container>
-  <md-input-container>
-    <label>Nickname</label>
-    <input ng-model="user.nickname" required>
-  </md-input-container>
-  <md-input-container>
-    <label>Password</label>
-    <input ng-model="user.password"
-           type="password" required>
-  </md-input-container>
-  <md-button class="md-raised md-primary"
-             ng-click="submit()">Submit</md-button>
+<div layout="row" layout-align="center center">
+  <div flex="50">
+    <h2>Register</h2>
+      <md-input-container>
+        <label>Email</label>
+        <input ng-model="user.email"
+               type="email" required>
+      </md-input-container>
+      <md-input-container>
+        <label>Nickname</label>
+        <input ng-model="user.nickname" required>
+      </md-input-container>
+      <md-input-container>
+        <label>Password</label>
+        <input ng-model="user.password"
+               type="password" required>
+      </md-input-container>
+      <md-button class="md-raised md-primary"
+                 ng-click="submit()">Submit</md-button>
+    </div>
+</div>
 

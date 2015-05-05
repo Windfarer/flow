@@ -1,4 +1,4 @@
-from flask import jsonify, g, current_app
+from flask import jsonify, g, current_app, request
 from flask.ext.httpauth import HTTPBasicAuth
 
 from .models.user import User
@@ -31,6 +31,7 @@ def unauthorized():
 
 @auth_token.verify_token
 def verify_auth_token(token):
+    print(request.headers)
     if current_app.config.get("IGNORE_AUTH") is True:
         g.user = current_app.mongodb_conn.User.find_one()
     else:

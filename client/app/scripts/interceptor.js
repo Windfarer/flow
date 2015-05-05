@@ -11,19 +11,19 @@ angular.module('flowApp')
     var intercepter = function($q, $rootScope, Auth, Config, $location){
       return {
         'response': function(resp) {
-          if (resp.config.url == Config.open_api+'/login') {
+          if (resp.config.url === Config.open_api+'/login') {
+            console.log(resp);
             Auth.setUser(resp.data);
-            //console.log("savvvvvvvvvvvvving")
           }
           return resp;
         },
         'responseError': function(rejection) {
-          console.log(rejection);
           switch(rejection.status) {
             case 401:
               if (rejection.config.url !== Config.open_api+'/login')
                 Auth.logout();
                 console.log("login_required");
+                $location.path("login");
                 $rootScope.$broadcast('auth:loginRequired');
               break;
             case 403:
@@ -47,14 +47,16 @@ angular.module('flowApp')
       .interceptors.push(intercepter);
   })
 
+
   .config(function($httpProvider) {
     var intercepter = function($q, $rootScope, Auth) {
       return {
         'request': function(req) {
-          req.params = req.params || {};
-          if (Auth.isAuthoized() && !req.params.token) {
-            req.params.token = Auth.getToken();
+          req.headers = req.headers || {};
+          if (Auth.isLoggedIn() && !req.headers.Authorization) {
+            req.headers.Authorization = Auth.getToken();
           }
+
           return req;
         },
         'requestError': function(reqErr) {

@@ -26,9 +26,9 @@ angular
 
 .config(function ($routeProvider, ACCESS_LEVELS) {
     $routeProvider
-      //.when('/', {
-      //  redirectTo: '/task/'
-      //})
+      .when('/', {
+        redirectTo: '/task'
+      })
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
@@ -65,6 +65,7 @@ angular
         access_level: ACCESS_LEVELS.pub
       })
       .otherwise({
-        redirectTo: '/task',
+        redirectTo: '/',
+        access_level: ACCESS_LEVELS.user
       });
   });

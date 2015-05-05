@@ -36,18 +36,20 @@
           <span>Flow</span>
         </h2>
         <span flex></span>
-        <md-button class="md-icon-button"
-                   aria-label="Favorite">
-          <md-icon md-svg-icon="icons/ic_search_48px.svg"></md-icon>
-        </md-button>
-        <md-input-container>
-          <label>Keyword</label>
-          <input ng-model="search">
-        </md-input-container>
-        <md-button class="md-icon-button"
-                   aria-label="More">
-          <md-icon md-svg-icon="icons/ic_more_vert_48px.svg"></md-icon>
-        </md-button>
+          <md-button class="md-icon-button"
+                     aria-label="Favorite"
+                     ng-show="showComponent()">
+            <md-icon md-svg-icon="icons/ic_search_48px.svg"></md-icon>
+          </md-button>
+          <md-input-container ng-show="showComponent()">
+            <label>Keyword</label>
+            <input ng-model="search">
+          </md-input-container>
+          <md-button class="md-icon-button"
+                     aria-label="More"
+                     ng-show="showComponent()">
+            <md-icon md-svg-icon="icons/ic_more_vert_48px.svg"></md-icon>
+          </md-button>
       </div>
     </md-toolbar>
 
@@ -55,8 +57,10 @@
     <section flex layout="row">
       <md-sidenav flex class="md-sidenav-left md-whiteframe-z2"
                   md-component-id="sidebar"
-                  md-is-locked-open="$mdMedia('gt-md')">
-          <md-list ng-controller="SidebarCtrl" flex>
+                  md-is-locked-open="$mdMedia('gt-md')"
+                  ng-if="showComponent()">
+          <md-list ng-controller="SidebarCtrl"
+                   flex>
             <md-list-item ng-click="goToPersonal()">
               <md-icon md-svg-icon="icons/ic_person_48px.svg"></md-icon>
               <p>Personal</p>
@@ -77,8 +81,8 @@
             </md-list-item>
             </md-list>
       </md-sidenav>
-      <md-content ng-view flex layout="column">
-      </md-content>
+      <div ng-view flex layout="column">
+      </div>
     </section>
 
 
