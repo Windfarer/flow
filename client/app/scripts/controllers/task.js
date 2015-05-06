@@ -9,22 +9,24 @@
  */
 angular.module('flowApp')
   .controller('TaskCtrl', function($scope, $routeParams, restAPI, $timeout, $q) {
+    $scope.item_limit = 10;
+
     var project_id = $routeParams.project_id;
+    console.log(project_id);
     if (project_id) {
       $scope.project = restAPI.projects.get({project_id: project_id});
     }
 
-    $scope.task_status = {"status": 0};
+    $scope.tasks =  restAPI.tasks.query({project:project_id});
     $scope.task = new restAPI.tasks();
-    $scope.tasks = {
-      inbox: restAPI.tasks.query({status:0, project:project_id}),
-      doing: restAPI.tasks.query({status:1, project:project_id}),
-      done: restAPI.tasks.query({status:2, project:project_id})
-    };
-    $scope.changeStatusFilter = function(status) {
-      console.log("change to:"+status);
-      $scope.task_status = {"status": status};
-    };
+    $scope.task_status = 0;
+
+    //$scope.tasks = {
+    //  inbox: restAPI.tasks.query({status:0, project:project_id}),
+    //  doing: restAPI.tasks.query({status:1, project:project_id}),
+    //  done: restAPI.tasks.query({status:2, project:project_id})
+    //};
+
     $scope.updateTask = function (task) {
       console.log(task);
       task.$update();
@@ -33,11 +35,18 @@ angular.module('flowApp')
       task.$delete();
     };
     $scope.submitTask = function () {
-      $scope.task.$save({project:project_id})
-        .then(function(data) {
-            $scope.task = new restAPI.tasks({project:project_id});
-            $scope.tasks.inbox.push(data);
-        })
+        console.log($scope.task);
+        $scope.task.$save({project:project_id})
+          .then(function(data) {
+            if (project_id){
+              $scope.task = new restAPI.tasks({project:project_id});
+            }
+            else {
+              $scope.task = new restAPI.tasks();
+            }
+            $scope.tasks.push(data);
+          })
+
     };
 
     $scope.addSubTask = function (task) {

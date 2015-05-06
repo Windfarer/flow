@@ -1,18 +1,18 @@
 <md-tabs md-selected="data.selectedIndex" flex>
-  <md-tab id="tab1">
+  <md-tab id="tab1" md-on-select="task_status=0">
     <md-tab-label>INBOX</md-tab-label>
     <md-tab-body>
       <div ng-include="'task_editable.html'"></div>
     </md-tab-body>
   </md-tab>
-  <md-tab id="tab2">
+  <md-tab id="tab2" md-on-select="task_status=1">
     <md-tab-label>DOING</md-tab-label>
     <md-tab-body>
       <div ng-include="'task_editable.html'"></div>
     </md-tab-body>
   </md-tab>
 
-  <md-tab id="tab3">
+  <md-tab id="tab3" md-on-select="task_status=2">
     <md-tab-label>DONE</md-tab-label>
     <md-tab-body>
       <div ng-include="'task_editable.html'"></div>

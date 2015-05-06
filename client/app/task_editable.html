@@ -1,18 +1,20 @@
 <div layout="column" layout-fill layout-padding>
   <md-card flex layout="row">
-    <md-input-container id="task_input" flex>
-      <label>New Task</label>
-      <input ng-model="task.title">
-    </md-input-container>
-    <md-button class="md-icon-button"
-               aria-label="New Task"
-               ng-click="submitTask()"
-               ng-disabled="!task.title">
-      <md-icon md-svg-icon="icons/ic_inbox_48px.svg"></md-icon>
-    </md-button>
+    <form flex layout="row" name="new_task">
+      <md-input-container id="task_input" flex>
+        <label>New Task</label>
+        <input ng-model="task.title">
+      </md-input-container>
+      <md-button class="md-icon-button"
+                 aria-label="New Task"
+                 ng-click="submitTask()"
+                 ng-disabled="!task.title">
+        <md-icon md-svg-icon="icons/ic_inbox_48px.svg"></md-icon>
+      </md-button>
+    </form>
   </md-card>
   <md-card flex layout="column"
-           ng-repeat="task in tasks.doing | orderBy: 'id':true | filter:{$: search}"
+           ng-repeat="task in tasks | orderBy: 'id':true | limitTo: item_limit  | filter:{$: search} | filter: {status: task_status}"
            ng-if="task.deleted!==1">
     <div layout="row" tabindex="-1"
          ng-click="task.expanded = !task.expanded">
@@ -56,6 +58,7 @@
           <p>{{subtask.title}}</p>
             <md-icon class="md-secondary"
                      aria-label="Delete Sub-task"
+                     class="md-icon-button"
                      md-svg-icon="icons/ic_remove_circle_outline_48px.svg"
                      ng-click="deleteSubTask($index, task)"></md-icon>
         </md-list-item>
