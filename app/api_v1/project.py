@@ -60,10 +60,17 @@ def update_project(project_id):
 @api.route("/projects/<project_id>", methods=["DELETE"])
 @json
 def delete_project(project_id):
+
     project = current_app.mongodb_conn.Project.find_by_id(project_id)
-    project.deleted = 1
-    project.save()
-    return {"_id": project._id}
+    if project.owner_id == g.user['_id']:
+        project.deleted = 1
+        project.save()
+        return {
+            "_id": project._id,
+            "deleted": 1
+        }
+    else:
+        raise ValidationError("No permission")
 
 
 def make_response_project(data):
