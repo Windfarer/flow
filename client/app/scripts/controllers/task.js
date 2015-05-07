@@ -9,7 +9,7 @@
  */
 angular.module('flowApp')
   .controller('TaskCtrl', function($scope, $routeParams, restAPI, $timeout, $q) {
-    $scope.item_limit = 10;
+    $scope.item_limit = 8;
 
     var project_id = $routeParams.project_id;
     console.log(project_id);

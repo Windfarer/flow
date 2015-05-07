@@ -14,7 +14,7 @@
     </form>
   </md-card>
   <md-card flex layout="column"
-           ng-repeat="task in tasks | orderBy: 'id':true | limitTo: item_limit  | filter:{$: search} | filter: {status: task_status}"
+           ng-repeat="task in (filterResult = (tasks | orderBy: 'id':true | filter:{$: search} | filter: {status: task_status})) | limitTo: item_limit"
            ng-if="task.deleted!==1">
     <div layout="row" tabindex="-1"
          ng-click="task.expanded = !task.expanded">
@@ -88,4 +88,5 @@
       </div>
     </div>
   </md-card>
+  <md-button ng-show="filterResult.length > item_limit" ng-click="item_limit=item_limit+8">Show More</md-button>
 </div>
