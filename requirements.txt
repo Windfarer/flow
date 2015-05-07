@@ -1,0 +1,4 @@
+Flask==0.10.1
+itsdangerous==0.24
+pymongo==2.7.1
+mongokit-py3==0.9.1.1
