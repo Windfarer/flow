@@ -1,6 +1,6 @@
 HOST = "127.0.0.1"
 PORT = 20010
-MONGODB_HOST = "localhost"
+MONGODB_HOST = "192.168.1.100"
 MONGODB_PORT = 27017
 MONGODB_DATABASE = "flow"
 SECRET_KEY = "delvelop_sercet"
