@@ -3,7 +3,6 @@ from .decorators import json, rate_limit, crossdomain
 from mongokit import Connection as MongoDBConn
 from .exceptions import ValidationError
 
-
 def create_app():
     app = Flask(__name__)
     app.config.from_object('config')
@@ -44,7 +43,6 @@ def create_app():
         headers = getattr(g, "headers", {})
         rv.headers.extend(headers)
         return rv
-
 
 
     return app

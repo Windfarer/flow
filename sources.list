@@ -1,0 +1,5 @@
+deb http://mirrors.163.com/ubuntu/ trusty main multiverse restricted universe
+deb http://mirrors.163.com/ubuntu/ trusty-security main multiverse restricted universe
+deb http://mirrors.163.com/ubuntu/ trusty-updates main multiverse restricted universe
+deb http://mirrors.163.com/ubuntu/ trusty-proposed universe restricted multiverse main
+deb http://mirrors.163.com/ubuntu/ trusty-backports main multiverse restricted universe

@@ -7,3 +7,6 @@ dist
 bower_components
 nohup.out
 .idea
+gunicorn.access.log
+gunicorn.error.log
+gunicorn.pid
