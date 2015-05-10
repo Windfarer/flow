@@ -9,6 +9,6 @@
  */
 angular.module('flowApp')
   .constant('Config', {
-    api: "http://192.168.59.103:20010/api/v1",
-    open_api: "http://192.168.59.103:20010/open_api"
+    api: "http://127.0.0.1:5000/api/v1",
+    open_api: "http://127.0.0.1:5000/open_api"
   });
