@@ -8,7 +8,7 @@ angular.module('flowApp')
   })
 
   .config(function($httpProvider){
-    var intercepter = function($q, $rootScope, Auth, Config, $location){
+    var interceptor = function($q, $rootScope, Auth, Config, $location){
       return {
         'response': function(resp) {
           if (resp.config.url === Config.open_api+'/login') {
@@ -44,12 +44,12 @@ angular.module('flowApp')
       }
     };
     $httpProvider
-      .interceptors.push(intercepter);
+      .interceptors.push(interceptor);
   })
 
 
   .config(function($httpProvider) {
-    var intercepter = function($q, $rootScope, Auth) {
+    var interceptor = function($q, $rootScope, Auth) {
       return {
         'request': function(req) {
           req.headers = req.headers || {};
@@ -65,5 +65,5 @@ angular.module('flowApp')
       }
     };
     $httpProvider
-      .interceptors.push(intercepter);
+      .interceptors.push(interceptor);
   });
