@@ -30,7 +30,7 @@
         <md-button class="md-icon-button" aria-label="Settings"
                    hide-gt-md
                    ng-click="toggleSidebar()">
-          <md-icon md-svg-icon="icons/ic_menu_36px.svg"></md-icon>
+          <md-icon md-svg-icon="images/icons/ic_menu_36px.svg"></md-icon>
         </md-button>
         <h2>
           <span>Flow</span>
@@ -39,7 +39,7 @@
           <md-button class="md-icon-button"
                      aria-label="Favorite"
                      ng-show="showComponent()">
-            <md-icon md-svg-icon="icons/ic_search_48px.svg"></md-icon>
+            <md-icon md-svg-icon="images/icons/ic_search_48px.svg"></md-icon>
           </md-button>
           <md-input-container ng-show="showComponent()">
             <label>Keyword</label>
@@ -48,13 +48,13 @@
         <md-button class="md-icon-button"
                    aria-label="User Profile"
                    ng-show="showComponent()">
-          <md-icon md-svg-icon="icons/ic_settings_applications_48px.svg"
+          <md-icon md-svg-icon="images/icons/ic_settings_applications_48px.svg"
                    ng-click="goToUserProfile()"></md-icon>
         </md-button>
           <md-button class="md-icon-button"
                      aria-label="More"
                      ng-show="showComponent()">
-            <md-icon md-svg-icon="icons/ic_exit_to_app_48px.svg"
+            <md-icon md-svg-icon="images/icons/ic_exit_to_app_48px.svg"
               ng-click="logout()"></md-icon>
           </md-button>
       </div>
@@ -69,21 +69,21 @@
           <md-list ng-controller="SidebarCtrl"
                    flex>
             <md-list-item ng-click="goToPersonal()">
-              <md-icon md-svg-icon="icons/ic_person_48px.svg"></md-icon>
+              <md-icon md-svg-icon="images/icons/ic_person_48px.svg"></md-icon>
               <p>Personal</p>
             </md-list-item>
             <md-subheader class="md-no-sticky">Projects</md-subheader>
             <md-list-item ng-repeat="project in projects"
                           ng-click="goToProject(project)">
               <p>{{ project.name }}</p>
-              <md-icon md-svg-icon="icons/ic_settings_48px.svg"
+              <md-icon md-svg-icon="images/icons/ic_settings_48px.svg"
                        ng-click="editProject(project)"
                        aria-label="Edit Project"
                        class="md-secondary">
               </md-icon>
             </md-list-item>
             <md-list-item ng-click="createProject()">
-              <md-icon md-svg-icon="icons/ic_add_box_48px.svg"></md-icon>
+              <md-icon md-svg-icon="images/icons/ic_add_box_48px.svg"></md-icon>
               <p>Create Project</p>
             </md-list-item>
             </md-list>

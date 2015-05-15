@@ -1,18 +1,20 @@
 <div layout="column" layout-fill layout-padding>
   <md-card flex layout="row">
-    <md-input-container id="task_input" flex>
-      <label>New Task</label>
-      <input ng-model="task.title">
-    </md-input-container>
-    <md-button class="md-icon-button"
-               aria-label="New Task"
-               ng-click="submitTask()"
-               ng-disabled="!task.title">
-      <md-icon md-svg-icon="icons/ic_inbox_48px.svg"></md-icon>
-    </md-button>
+    <form flex layout="row" name="new_task">
+      <md-input-container id="task_input" flex>
+        <label>New Task</label>
+        <input ng-model="task.title">
+      </md-input-container>
+      <md-button class="md-icon-button"
+                 aria-label="New Task"
+                 ng-click="submitTask()"
+                 ng-disabled="!task.title">
+        <md-icon md-svg-icon="images/icons/ic_inbox_48px.svg"></md-icon>
+      </md-button>
+    </form>
   </md-card>
   <md-card flex layout="column"
-           ng-repeat="task in tasks.inbox | orderBy: 'id':true"
+           ng-repeat="task in (filterResult = (tasks | orderBy: 'id':true | filter:{$: search} | filter: {status: task_status})) | limitTo: item_limit"
            ng-if="task.deleted!==1">
     <div layout="row" tabindex="-1"
          ng-click="task.expanded = !task.expanded">
@@ -24,7 +26,7 @@
       </md-checkbox>
       <p flex>{{task.title}}</p>
       <md-button class="md-icon-button" aria-label="More" ng-if="task.expanded">
-        <md-icon md-svg-icon="icons/ic_mode_edit_48px.svg"></md-icon>
+        <md-icon md-svg-icon="images/images/icons/ic_mode_edit_48px.svg"></md-icon>
       </md-button>
     </div>
     <div ng-if="task.expanded">
@@ -41,7 +43,7 @@
                    aria-label="New Sub-task"
                    ng-click="addSubTask(task)"
                    ng-disabled="!task.newsubtask">
-          <md-icon md-svg-icon="icons/ic_add_circle_outline_48px.svg"></md-icon>
+          <md-icon md-svg-icon="images/icons/ic_add_circle_outline_48px.svg"></md-icon>
         </md-button>
       </div>
       <md-list>
@@ -56,14 +58,15 @@
           <p>{{subtask.title}}</p>
           <md-icon class="md-secondary"
                    aria-label="Delete Sub-task"
-                   md-svg-icon="icons/ic_remove_circle_outline_48px.svg"
+                   class="md-icon-button"
+                   md-svg-icon="images/icons/ic_remove_circle_outline_48px.svg"
                    ng-click="deleteSubTask($index, task)"></md-icon>
         </md-list-item>
       </md-list>
 
       <md-input-container>
         <label>Deadline</label>
-        <input ng-model="task.deadline" type="date">
+        <input ng-model="task.deadline">
       </md-input-container>
       <md-contact-chips ng-model="task.assignees"
                         md-contacts="querySearch($query)"
@@ -80,9 +83,10 @@
         <div flex></div>
         <md-button ng-click="deleteTask(task)"
                    aria-label="Delete Task">
-          <md-icon md-svg-icon="icons/ic_delete_48px.svg"></md-icon>
+          <md-icon md-svg-icon="images/icons/ic_delete_48px.svg"></md-icon>
         </md-button>
       </div>
     </div>
   </md-card>
+  <md-button ng-show="filterResult.length > item_limit" ng-click="item_limit=item_limit+8">Show More</md-button>
 </div>
