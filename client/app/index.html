@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-controller="MainCtrl" md-theme="blue" layout="column">
+  <body class="ng-cloak" ng-controller="MainCtrl" md-theme="blue" layout="column">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -25,7 +25,7 @@
 
     <!-- Navbar goes here -->
 
-    <md-toolbar class="md-whiteframe-z2">
+    <md-toolbar class="md-whiteframe-z2" ng-cloak>
       <div class="md-toolbar-tools">
         <md-button class="md-icon-button" aria-label="Settings"
                    hide-gt-md
@@ -62,7 +62,7 @@
 
 
     <section flex layout="row">
-      <md-sidenav flex class="md-sidenav-left md-whiteframe-z2""
+      <md-sidenav flex class="md-sidenav-left md-whiteframe-z2"
                   md-component-id="sidebar"
                   md-is-locked-open="$mdMedia('gt-md')"
                   ng-if="showComponent()">
