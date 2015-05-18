@@ -16,9 +16,9 @@ angular.module('flowApp')
     $scope.submit = function () {
       $scope.user.$save()
         .then(function (data){
-          //Auth.setUser(data);
-          //console.log("login success");
-          console.log(data);
+          Auth.setUser(data);
+          console.log("login success");
+
           $location.path('/')
         }, function (err) {
           var msg = err.data.message ? err.data.message : "login failed";

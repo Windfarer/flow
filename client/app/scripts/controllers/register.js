@@ -8,7 +8,7 @@
  * Controller of the flowApp
  */
 angular.module('flowApp')
-  .controller('RegisterCtrl', function ($location, $scope, restAPI) {
+  .controller('RegisterCtrl', function ($location, $scope, restAPI, $mdToast) {
     $scope.user = new restAPI.register();
     $scope.goToLogin = function () {
       $location.path("/login");
