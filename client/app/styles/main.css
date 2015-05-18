@@ -1,6 +1,9 @@
+[ng-cloak] {display: none;}
+
 md-input-container#task_input.md-blue-theme {
   padding-bottom: 0;
 }
+
 [ng-click] {
   user-select: none!important;
   cursor: pointer;
