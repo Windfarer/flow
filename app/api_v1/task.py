@@ -60,7 +60,8 @@ def update_task(task_id):
     task.description = data.get("description")
     task.status = data.get("status")
     if data.get("deadline"):
-        task.deadline = datetime.strptime(data.get("deadline"), "%Y-%m-%dT%H:%M:%S.%fZ")
+        # task.deadline = datetime.strptime(data.get("deadline"), "%Y-%m-%dT%H:%M:%S.%fZ")
+        task.deadline = datetime.strptime(data.get("deadline"), "%Y-%m-%d")
 
     if data.get("assignees"):
         task.assignees = []

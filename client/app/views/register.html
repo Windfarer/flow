@@ -16,8 +16,8 @@
                type="password" required>
       </md-input-container>
       <md-button class="md-raised md-primary"
-                 ng-click="submit()">Submit</md-button>
-      <md-button ng-click="goToRegister()">Reigister</md-button>
+                 ng-click="submit()" ng-disabled="!user.email || !user.nickname || !user.password">Submit</md-button>
+      <md-button ng-click="goToLogin()">Login</md-button>
     </form>
 
 </div>

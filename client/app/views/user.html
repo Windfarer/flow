@@ -22,10 +22,9 @@
   </md-input-container>
   <md-button class="md-raised md-primary"
              ng-click="saveUser()"
-             ng-disabled="!user.nickname">Submit</md-button>
+             ng-disabled="!user.nickname || !user.email">Submit</md-button>
   <div flex></div>
   <md-button
-    ng-click="deleteProject()"
-    ng-disabled="!project.name">Delete Account</md-button>
+    ng-click="deleteUser()" class="md-warn">Delete Account</md-button>
 </md-content>
 
