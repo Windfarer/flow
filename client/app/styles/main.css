@@ -8,3 +8,7 @@ md-input-container#task_input.md-blue-theme {
   user-select: none!important;
   cursor: pointer;
 }
+
+.md-contact-chips .md-chips .md-chip .md-contact-avatar img {
+    width: 32px;
+}

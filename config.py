@@ -5,6 +5,7 @@ PORT = 20010
 MONGODB_HOST = "127.0.0.1"
 MONGODB_PORT = 27017
 MONGODB_DATABASE = "flow"
+UPLOAD_FOLDER = "uploads"
 SECRET_KEY = "delvelop_sercet"
 IGNORE_AUTH = False
 DEBUG = False

@@ -22,7 +22,7 @@
     <md-list-item ng-repeat="member in project.members">
       <p>{{member.nickname}}</p>
       <p>{{member.email}}</p>
-      <md-icon class="md-secondary"
+      <md-icon class=""
                aria-label="Delete Sub-task"
                md-svg-icon="images/icons/ic_remove_circle_outline_48px.svg"
                ng-click="removeMember($index)"></md-icon>
@@ -34,6 +34,7 @@
   <div flex></div>
   <md-button
              ng-click="deleteProject()"
-             ng-disabled="!project.name">Delete Project</md-button>
+             ng-disabled="!project.name"
+             ng-if="!isNew">Delete Project</md-button>
 </md-content>
 

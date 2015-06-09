@@ -26,7 +26,7 @@
       </md-checkbox>
       <p flex>{{task.title}}</p>
       <md-button class="md-icon-button" aria-label="More" ng-if="task.expanded">
-        <md-icon md-svg-icon="images/images/icons/ic_mode_edit_48px.svg"></md-icon>
+        <md-icon md-svg-icon="images/icons/ic_mode_edit_48px.svg"></md-icon>
       </md-button>
     </div>
     <div ng-if="task.expanded">
@@ -52,8 +52,7 @@
           <md-checkbox ng-model="subtask.status"
                        aria-label="SubTask Checkbox"
                        ng-true-value="2"
-                       ng-false-value="0"
-                       ng-change="updateTask(task)">
+                       ng-false-value="0">
           </md-checkbox>
           <p>{{subtask.title}}</p>
             <md-icon class="md-secondary"
@@ -72,8 +71,10 @@
                         md-contacts="querySearch($query)"
                         md-contact-name="nickname"
                         md-contact-email="email"
+                        md-contact-image="avatar"
                         filter-selected="true"
-                        placeholder="Assignees">
+                        placeholder="Assignees"
+                        ng-if="isProject">
       </md-contact-chips>
 
       <div layout="row">

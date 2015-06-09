@@ -10,9 +10,10 @@ def get_user(user_id):
     user = g.user
 
     return {
-        'user_id': user._id,
-        'nickname': user.nickname,
-        'email': user.email
+        "user_id": user._id,
+        "nickname": user.nickname,
+        "email": user.email,
+        "avatar": "/images/default-avatar.png"
     }
 
 @api.route("/users/<user_id>", methods=["PUT"])

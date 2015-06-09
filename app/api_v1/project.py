@@ -46,9 +46,10 @@ def update_project(project_id):
     data = request.get_json()
 
     project = current_app.mongodb_conn.Project.find_one({'_id': ObjectId(project_id)})
-
-    if g.user["_id"] != project.owner_id or g.user["_id"] not in project.managers:
+    print(g.user["_id"], project.owner_id)
+    if g.user["_id"] != project.owner_id and g.user["_id"] not in project.managers:
         raise ValidationError("No permission")
+
     project.name = data.get("name")
 
     helper_load_project_member_list(data, project)
@@ -80,7 +81,8 @@ def make_response_project(data):
         members.append({
             'id': user._id,
             'nickname': user.nickname,
-            'email': user.email
+            'email': user.email,
+            "avatar": "/images/default-avatar.png"
         })
     return {
         "id": data.get("_id"),

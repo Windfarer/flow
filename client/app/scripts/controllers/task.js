@@ -13,8 +13,10 @@ angular.module('flowApp')
 
     var project_id = $routeParams.project_id;
     console.log(project_id);
+    $scope.isProject = false;
     if (project_id) {
       $scope.project = restAPI.projects.get({project_id: project_id});
+      $scope.isProject = true;
     }
 
     $scope.tasks =  restAPI.tasks.query({project:project_id});
@@ -71,7 +73,6 @@ angular.module('flowApp')
     };
     $scope.querySearch = function (query) {
       var results = query ? $scope.project.members.filter(createFilterFor(query)) : [];
-      console.log(results);
       return results;
     };
 

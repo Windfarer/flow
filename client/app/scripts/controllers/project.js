@@ -33,7 +33,8 @@ angular.module('flowApp')
       $scope.project.members.push({email:$scope.email});
       $scope.project.$update();
     };
-    $scope.removeMember = function (member) {
-      console.log("remove member");
+    $scope.removeMember = function (index) {
+      console.log("remove member",index);
+      $scope.project.members.splice(index,1);
     };
   });

@@ -29,7 +29,8 @@
       <div class="md-toolbar-tools">
         <md-button class="md-icon-button" aria-label="Settings"
                    hide-gt-md
-                   ng-click="toggleSidebar()">
+                   ng-click="toggleSidebar()"
+                   ng-if="showComponent()">
           <md-icon md-svg-icon="images/icons/ic_menu_36px.svg"></md-icon>
         </md-button>
         <h2>
